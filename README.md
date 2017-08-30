@@ -13,6 +13,9 @@ Arborator Draft is a script to visualize your dependency trees in an html file. 
 ### Add the script at the bottom
 
 ```
+// d3js CDN
+<script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
+// Arborator Draft
 <script language="JavaScript" type="text/javascript" src="arborator-draft.js"></script>
 ```
 
@@ -20,7 +23,7 @@ Arborator Draft is a script to visualize your dependency trees in an html file. 
 
 ```
 <script>
-new ArboratorPlugin(); // Start
+new ArboratorDraft(); // Start
 </script>
 ```
 
@@ -39,7 +42,7 @@ var options = {
     pathHeight : 23, // height of syntactic paths
     format : {sid : 0, id : 0, word : 1, lemma : 2, pos : 3, head : 6, deprel : 7} // entry format
 };
-new ArboratorPlugin(options); // Start
+new ArboratorDraft(options); // Start
 </script>
 ```
 
