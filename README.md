@@ -1,6 +1,8 @@
-# arborator-draft
+# arborator-draft (work in progress)
 
 Visualization tool for syntactic dependency trees.
+
+**WORK IN PROGRESS**
 
 ## Description
 
