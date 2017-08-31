@@ -19,6 +19,7 @@
     posIndex = 3;
     headIndex = 6;
     labelIndex = 7;
+    displayAllAtOnce = false;
 
     this.ArboratorDraft = function (options) {
         if(options.hasOwnProperty('labelColor')){labelColor = options['labelColor']}
@@ -30,6 +31,7 @@
         
         if(options.hasOwnProperty('pathWidth')){pathWidth = options['pathWidth']}
         if(options.hasOwnProperty('pathWidth')){distanceHeight = options['pathHeight']}
+        if(options.hasOwnProperty('pathWidth')){displayAllAtOnce = options['displayAllAtOnce']}
 
         if(options.hasOwnProperty('format')){sidIndex = options['format']['sid']}
         if(options.hasOwnProperty('format')){idIndex = options['format']['id']}
@@ -215,21 +217,16 @@
         var sid = conll_line[sidIndex];
         var indexA = conll_line[idIndex]; // the dependent's point
         var indexH = conll_line[headIndex]; // the head's point (for determining rotation)
-        if (y_or_z === 'y') {
-            var pathAB = [4, -8], // right point of arrow
-                pathAC = [0, -6], // center dip
-                pathAD = [-4, -8]; // left point of arrow
-        } else {
-            var pathAB = [2, 4], // right point of arrow
-                pathAC = [0, 3], // center dip
-                pathAD = [-2, 4]; // left point of arrow
-        };
+        var pathAB = [4, -8], // right point of arrow
+            pathAC = [0, -6], // center dip
+            pathAD = [-4, -8]; // left point of arrow
         
         var horizAnchors = yHorizAnchors;
 
         var pointA = [horizAnchors[sid][indexA], y_coordinate];
         if (indexA === '0' || indexH === '0') {
-            pointA = [NaN, NaN];
+            // pointA = [NaN, NaN];
+            pointA = [0, 0];
         };
         var pointB = [pointA[0] + pathAB[0], pointA[1] + pathAB[1]];
         var pointC = [pointA[0] + pathAC[0], pointA[1] + pathAC[1]];
@@ -239,14 +236,9 @@
         var distance = Math.abs(Number(indexA) - Number(indexH));
         degrees = degrees - 1 / 10 * distance;
         if (Number(indexA) < Number(indexH)) {
-            if (y_or_z === 'z') {
-                degrees = "-" + degrees;
-            };
             var rotation = 'rotate(' + degrees + ' ' + pointA[0] + ' ' + pointA[1] + ')';
         } else {
-            if (y_or_z === 'y') {
-                degrees = "-" + degrees;
-            };
+            degrees = "-" + degrees;
             var rotation = 'rotate(' + degrees + ' ' + pointA[0] + ' ' + pointA[1] + ')';
         };
         return [pointsArrow, rotation];
@@ -365,8 +357,8 @@
             .attr("style", "display:list-item;")
             .attr("width", function (d) {
                 var width = getWidth(d.conll_y_array) + 100;
-                if (width < 800) {
-                    width = 800;
+                if (width < 10) {
+                    width = 10;
                 };
                 return width;
             })
@@ -459,10 +451,9 @@
             .attr("text-anchor", "middle")
             .text(function (dd, i) { return dd[posIndex]; });
 
+
         // insert arrow paths 
-
         var paths=[]
-
         paths.push(resultsEachY.append("path")
             .attr("d", function (dd, i) {
                 var sid = dd[sidIndex];
@@ -472,28 +463,25 @@
             .attr("fill", "none")
             .attr("stroke", pathColor)
             .attr("stroke-width", pathWidth));
-        console.log("pathq", paths);
 
-        // insert arrow shapes 
-        resultsEachY.filter(function (dd, i) {
-            return dd[headIndex] != 0;
-        }).append("polygon")
+
+        // insert arrow shapes         
+        resultsEachY.append("polygon")
             .attr("points", function (dd, i) {
                 var sid = dd[sidIndex];
-
                 var arrowInfo = getArrow(dd, yHeights[sid] - 10, 'y');
-                // console.log("sid", dd[1])
-                // stackdict[dd[1]] = 
                 return arrowInfo[0];
             })
             .attr("fill", arrowColor);
+
+        // console.log("paths", paths);
             
 
         // insert relation label
         resultsEachY.append("text")
             .attr("x", function (dd, i) {
                 var sid = dd[sidIndex];
-                console.log("kkk",i,paths.length,paths[i]);
+                // console.log("kkk",i,paths[0].length,paths[0][i], paths[0]);
                 var labelAnchor = getLabelAnchor(dd, yHeights[sid] - 14)[0];
                 if (isNaN(labelAnchor)) {
                     labelAnchor = 0;
@@ -512,11 +500,6 @@
                 var label = dd[labelIndex];
                 var wid = dd[idIndex];
                 var hid = dd[headIndex];
-                // if (Number(wid) > Number(hid)) {
-                //     label = label;
-                // } else {
-                //     label = label;
-                // };
                 if (label.search(/root|ROOT/) > -1) {
                     label = '';
                 };
@@ -528,7 +511,7 @@
             // })
             ;
 
-            console.log( "path", resultsEachY.select("path") );
+            // console.log( "path", resultsEachY.select("path") );
 
         // el = resultsEachY.select("text");
         // console.log(el.text());
@@ -553,14 +536,15 @@
         document.getElementById(id).style.height = "100%";
         document.getElementById(id).style.width = "100%";
         document.getElementById(id).style.margin = "10px";
+        document.getElementById(id).style.display = "block";
         // document.getElementById(id).style.overflowY = "auto";
         var dataElement = formatElement(document.getElementById(id), id);
-        console.log(dataElement);
+        // console.log(dataElement);
 
         idIndex++; wordIndex++; lemmaIndex++; headIndex++; labelIndex++; posIndex++;
 
         threeData = setSentence([dataElement]);
-        console.log("threeData", threeData);
+        // console.log("threeData", threeData);
         sentData = threeData[0];
         yHorizAnchors = threeData[1];
 
@@ -599,15 +583,39 @@
 
     ArboratorDraft.prototype.transformConllTags = function () {
         var list = document.getElementsByTagName("conll");
+        var listDivs = []
         var idrange = list.length;
         for (var i = 0; i < list.length; i++) {
             list[i].setAttribute("id", "test" + i);
+            list[i].setAttribute("style", "display: none;");
+            // list[i].setAttribute("class", "loader");
         }
-        for (var i = 0; i < idrange; i++) {
-            drawConll("test" + i);
-            idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
-            console.log(i, "/", list.length);
+
+        
+        if(displayAllAtOnce){
+            for (var i = 0; i < idrange; i++) {
+                drawConll("test" + i);
+                idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
+            }
+        }else{
+            var i = 0;  
+            function myLoop (range) {
+            setTimeout(function () {  
+
+                drawConll("test" + i);
+                console.log("test"+i);
+                idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
+
+                i++;                
+                if (i < range) {          
+                    myLoop(range);          
+                }                        
+            }, 10)
+            }
+            
+            myLoop(idrange);
         }
+    
     }
 
 }());
