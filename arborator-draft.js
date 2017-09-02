@@ -22,24 +22,24 @@
     displayAllAtOnce = false;
 
     this.ArboratorDraft = function (options) {
-        if(options.hasOwnProperty('labelColor')){labelColor = options['labelColor']}
-        if(options.hasOwnProperty('arrowColor')){arrowcolor = options['arrow Color']}
-        if(options.hasOwnProperty('wordColor')){wordColor = options['wordColor']}
-        if(options.hasOwnProperty('lemmaColor')){lemmaColor = options['lemmaColor']}
-        if(options.hasOwnProperty('posColor')){posColor = options['posColor']}
-        if(options.hasOwnProperty('pathColor')){pathColor = options['pathColor']}
-        
-        if(options.hasOwnProperty('pathWidth')){pathWidth = options['pathWidth']}
-        if(options.hasOwnProperty('pathWidth')){distanceHeight = options['pathHeight']}
-        if(options.hasOwnProperty('pathWidth')){displayAllAtOnce = options['displayAllAtOnce']}
+        if (options.hasOwnProperty('labelColor')) { labelColor = options['labelColor'] }
+        if (options.hasOwnProperty('arrowColor')) { arrowcolor = options['arrow Color'] }
+        if (options.hasOwnProperty('wordColor')) { wordColor = options['wordColor'] }
+        if (options.hasOwnProperty('lemmaColor')) { lemmaColor = options['lemmaColor'] }
+        if (options.hasOwnProperty('posColor')) { posColor = options['posColor'] }
+        if (options.hasOwnProperty('pathColor')) { pathColor = options['pathColor'] }
 
-        if(options.hasOwnProperty('format')){sidIndex = options['format']['sid']}
-        if(options.hasOwnProperty('format')){idIndex = options['format']['id']}
-        if(options.hasOwnProperty('format')){wordIndex = options['format']['word']}
-        if(options.hasOwnProperty('format')){lemmaIndex = options['format']['lemma']}
-        if(options.hasOwnProperty('format')){posIndex = options['format']['pos']}
-        if(options.hasOwnProperty('format')){headIndex = options['format']['head']}
-        if(options.hasOwnProperty('format')){labelIndex = options['format']['deprel']}
+        if (options.hasOwnProperty('pathWidth')) { pathWidth = options['pathWidth'] }
+        if (options.hasOwnProperty('pathWidth')) { distanceHeight = options['pathHeight'] }
+        if (options.hasOwnProperty('pathWidth')) { displayAllAtOnce = options['displayAllAtOnce'] }
+
+        if (options.hasOwnProperty('format')) { sidIndex = options['format']['sid'] }
+        if (options.hasOwnProperty('format')) { idIndex = options['format']['id'] }
+        if (options.hasOwnProperty('format')) { wordIndex = options['format']['word'] }
+        if (options.hasOwnProperty('format')) { lemmaIndex = options['format']['lemma'] }
+        if (options.hasOwnProperty('format')) { posIndex = options['format']['pos'] }
+        if (options.hasOwnProperty('format')) { headIndex = options['format']['head'] }
+        if (options.hasOwnProperty('format')) { labelIndex = options['format']['deprel'] }
 
         this.transformConllTags();
     }
@@ -197,7 +197,7 @@
             var pointA = [horizAnchors[sid][indexA], y_coordinate];
             var pointH = [horizAnchors[sid][indexH] - 6, y_coordinate + 5];
         };
-        
+
         var pointMid_y_coordinate = pointA[1] - distanceHeight * distance;
 
         var pointMid1 = [pointA[0] + ((pointH[0] - pointA[0]) / 16), pointMid_y_coordinate];
@@ -220,7 +220,7 @@
         var pathAB = [4, -8], // right point of arrow
             pathAC = [0, -6], // center dip
             pathAD = [-4, -8]; // left point of arrow
-        
+
         var horizAnchors = yHorizAnchors;
 
         var pointA = [horizAnchors[sid][indexA], y_coordinate];
@@ -274,9 +274,9 @@
     };
 
 
-    function getLabelAnchorNew(arc, conll_line){
+    function getLabelAnchorNew(arc, conll_line) {
         var label = conll_line[labelIndex]
-        
+
     }
 
     function getAlignmentPoints(conll_line, y_base_coordinate) {
@@ -347,7 +347,7 @@
         d3.select(conllId)
             .append("div")
             .attr("style", "display:inline; overflow-x:auto;");
-        
+
 
         var results = d3.select(conllId)
             .selectAll('svg')
@@ -453,7 +453,7 @@
 
 
         // insert arrow paths 
-        var paths=[]
+        var paths = []
         paths.push(resultsEachY.append("path")
             .attr("d", function (dd, i) {
                 var sid = dd[sidIndex];
@@ -475,7 +475,7 @@
             .attr("fill", arrowColor);
 
         // console.log("paths", paths);
-            
+
 
         // insert relation label
         resultsEachY.append("text")
@@ -511,7 +511,7 @@
             // })
             ;
 
-            // console.log( "path", resultsEachY.select("path") );
+        // console.log( "path", resultsEachY.select("path") );
 
         // el = resultsEachY.select("text");
         // console.log(el.text());
@@ -527,7 +527,7 @@
             .attr("fill", "#610396")
             .text(function (d) { return 'Sent id: ' + d.sid + ' : ' + d.y_sent; });
 
-        
+
 
     }
 
@@ -591,31 +591,31 @@
             // list[i].setAttribute("class", "loader");
         }
 
-        
-        if(displayAllAtOnce){
+
+        if (displayAllAtOnce) {
             for (var i = 0; i < idrange; i++) {
                 drawConll("test" + i);
                 idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
             }
-        }else{
-            var i = 0;  
-            function myLoop (range) {
-            setTimeout(function () {  
+        } else {
+            var i = 0;
+            function myLoop(range) {
+                setTimeout(function () {
 
-                drawConll("test" + i);
-                console.log("test"+i);
-                idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
+                    drawConll("test" + i);
+                    console.log("test" + i);
+                    idIndex--; wordIndex--; lemmaIndex--; headIndex--; labelIndex--; posIndex--;
 
-                i++;                
-                if (i < range) {          
-                    myLoop(range);          
-                }                        
-            }, 10)
+                    i++;
+                    if (i < range) {
+                        myLoop(range);
+                    }
+                }, 10)
             }
-            
+
             myLoop(idrange);
         }
-    
+
     }
 
 }());
