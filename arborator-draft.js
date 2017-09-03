@@ -1,3 +1,20 @@
+/*!
+ * arborator script for dependency drawing 
+ * version 1.0
+ * http://arborator.ilpga.fr/
+ *
+ * Copyright 2010-2017, Kim Gerdes & Gaël Guibon
+ *
+ * This program is free software:
+ * Licensed under version 3 of the GNU Affero General Public License (the "License");
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at http://www.gnu.org/licenses/agpl-3.0.html
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+ * See the License for the specific language governing permissions and limitations under the License. 
+ *
+ */
+
 // global variables:
 fontSize = 0; // computed from css value for .token in arborator-draft.css
 svgDefaultHeight = 500;
@@ -192,21 +209,19 @@ function getSVGPath(startPoint,endPoint,computedStyle) {
 	var x1x2=Math.abs(x1-x2)/2;		
 	var yy = Math.max(y1-x1x2-wordDistanceFactor*Math.abs(endPoint['id']-startPoint['id']),-tokDepDist);
 	var yy = Math.min(yy,y1)-depMinHeight;
-	var cstr="M"+x1+","+y1+"C"+x1+","+yy+" "+x2+","+yy+" "+(x2+.01)+","+y2; // 0.01: workaround for strange bug in the computation of getTotalLength!!!
+	var cstr="M"+x1+","+y1+" C"+x1+","+yy+" "+x2+","+yy+" "+x2+","+(y2-2); // -2 so that the arrow is really pointed
 	return cstr;
 }
 
 
 function arrowhead(x,y) {
 	// gives path for arrowhead x,y startpoint (end of arrow)
-	
-	var pathAB = [4, -8]; // right point of arrow
-	var pathAC = [0, -6]; // center dip
-	var pathAD = [-4, -8]; // left point of arrow
-	var pointB = [x + pathAB[0], y + pathAB[1]];
-	var pointC = [x + pathAC[0], y + pathAC[1]];
-	var pointD = [x + pathAD[0], y + pathAD[1]];
-	return [x,y] + ' ' + pointB + ' ' + pointC + ' ' + pointD;
+	var size = 5;
+	var startpoint = x+","+y; // to move the arrowhead lower: (y+size/3);
+	var lefttop = "0,0" +(-size/2)+","+(-size*1.5)+" "+(-size/2)+","+(-size*1.5);
+	var righttop = (size/2)+"," +(size/2)+" "+(size/2)+"," +(size/2)+ " "+(size)+",0";
+	var arrowPath = "M"+ startpoint+"c"+lefttop+ "c"+righttop+ "z";
+	return arrowPath;
 }
 
 
@@ -251,14 +266,14 @@ function draw(div, tree) {
 				if (govid==0) // sentence root:
 				{
 					var y=svgDefaultHeight-fontSize*2;
-					return "M"+x+","+y+"L"+x+","+0;
+					return "M"+x+","+(y-2)+"L"+x+","+0; // -2 so that the arrow is really pointed
 				}
 				// normal link:
 				else return getSVGPath(tree[govid],tree[txt.attr("id")], getComputedStyle(this));
 			});
-			group.append("polygon")
+			group.append("path")
 			.attr("class", "arrowhead")
-			.attr("points", function (dd) {
+			.attr("d", function (dd) {
 				return arrowhead(x, svgDefaultHeight - fontSize*2);
 			});
 			var label=tree[d3.select(this).attr("id")]["gov"][govid];

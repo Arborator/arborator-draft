@@ -14,7 +14,9 @@
 } 
 
 .arrowhead {
-	fill: black;
+	fill: white;
+	stroke: black;
+	stroke-width: .8;
 }
 
 .curve {
@@ -28,13 +30,14 @@
 }
 
 .conll {
-	display:none; /*toggles with inline*/
+	display:none; /*toggles to inline*/
 	unicode-bidi: embed;
 	font-family: monospace;
 	white-space: pre;
 	margin-bottom: 0.6em;
 	border-bottom: 1px solid #aaa;
 	padding: 0.5em 0 0.17em 0;
+	tab-size: 12;
 }
 
 .sentencebox {
