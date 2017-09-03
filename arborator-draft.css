@@ -1,0 +1,81 @@
+.token {
+	font: 18px DejaVu Sans;
+	fill: black;
+	font-family:sans-serif;
+	--wordDistance:10;
+} 
+
+.deprel {
+	font: 12px Arial;
+	fill: #1d2ec1;
+	font-style: oblique;
+	font-family:sans-serif;
+	--funcCurveDist:3; /* distance between the function name and the curves highest point */
+} 
+
+.arrowhead {
+	fill: black;
+}
+
+.curve {
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
+	--startOffset: 8;
+	--tokDepDist: 15; /* distance between tokens and depdendency relation */
+	--depMinHeight: 15; /* minimum height for dependency */
+	--wordDistanceFactor: -1; /* distant words get higher curves. this factor fixes how much higher */
+}
+
+.conll {
+	display:none; /*toggles with inline*/
+	unicode-bidi: embed;
+	font-family: monospace;
+	white-space: pre;
+	margin-bottom: 0.6em;
+	border-bottom: 1px solid #aaa;
+	padding: 0.5em 0 0.17em 0;
+}
+
+.sentencebox {
+	margin-bottom: 0.6em;
+	border-bottom: 1px solid #aaa;
+	padding: 0.5em 0 0.17em 0;
+	margin-top: 1em;
+}
+
+.showHideConll {
+	-moz-box-shadow:inset 0px 5px 0px -19px #e67a73;
+	-webkit-box-shadow:inset 0px 5px 0px -19px #e67a73;
+	box-shadow:inset 0px 5px 0px -19px #e67a73;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e4685d), color-stop(1, #eb675e));
+	background:-moz-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+	background:-webkit-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+	background:-o-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+	background:-ms-linear-gradient(top, #e4685d 5%, #eb675e 100%);
+	background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4685d', endColorstr='#eb675e',GradientType=0);
+	background-color:#e4685d;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:2px 4px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.showHideConll:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eb675e), color-stop(1, #e4685d));
+	background:-moz-linear-gradient(top, #eb675e 5%, #e4685d 100%);
+	background:-webkit-linear-gradient(top, #eb675e 5%, #e4685d 100%);
+	background:-o-linear-gradient(top, #eb675e 5%, #e4685d 100%);
+	background:-ms-linear-gradient(top, #eb675e 5%, #e4685d 100%);
+	background:linear-gradient(to bottom, #eb675e 5%, #e4685d 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eb675e', endColorstr='#e4685d',GradientType=0);
+	background-color:#eb675e;
+}
+.showHideConll:active {
+	position:relative;
+	top:1px;
+}

@@ -8,7 +8,7 @@
     <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="style.css" type="text/css" /> -->
+    <link rel="stylesheet" href="arborator-draft.css" type="text/css" />
 
     
     
@@ -21,91 +21,106 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading"><h2>Settings</h2></div>
                     <div class="panel-body">
-                        <strong>Multiple options (non mandatory)</strong>
+                        <strong>Graphical options are in arborator-draft.css</strong>
+                        <p>Add this in the end of your page containing dependency trees between Conll tags:</p>
                         <pre><code>
-var options = {
-    labelColor:'#ea2929', // deprel color
-    arrowColor : '#000', // arrow color
-    wordColor : '#000', // words color
-    lemmaColor : '#006400', // color of lemmas
-    posColor : '#9e04de', // color of part-of-speech tags
-    pathColor : '#000', // color of paths
-    pathWidth : 1, // width of syntactic paths
-    pathHeight : 23, // height of syntactic paths
-    format : {sid : 0, id : 0, word : 1, lemma : 2, pos : 3, head : 6, deprel : 7} // entry format
-};
-new ArboratorPlugin(options); // Start
+	window.onload = function () { 
+		new ArboratorDraft(); // START
+        }
                         </code></pre>
+                        <p>Then the Conll will transformed into dependency graphs!</p>
                     </div>
                 </div>
             </div>
 
         <div class="row">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h2>Dependency tree example with html entities...</h2></div>
+                <div class="panel-heading"><h2>First dependency tree example surrounded by Conll tags</h2></div>
                 <div class="panel-body">
-                    <conll>1&Tab;est-ce&Tab;est-ce&Tab;CSU&Tab;CSU&Tab;_&Tab;0&Tab;root&Tab;_&Tab;_&NewLine;2&Tab;-ce&Tab;ce&Tab;CLS&Tab;CSU&Tab;_&Tab;1&Tab;dep&Tab;_&Tab;_&NewLine;3&Tab;vous&Tab;vous&Tab;CLS&Tab;CLS&Tab;_&Tab;4&Tab;suj&Tab;_&Tab;_&NewLine;4&Tab;pourriez&Tab;pouvoir&Tab;VRB&Tab;VRB&Tab;_&Tab;1&Tab;dep&Tab;_&Tab;_&NewLine;5&Tab;décrire&Tab;décrire&Tab;VNF&Tab;VNF&Tab;_&Tab;4&Tab;comp&Tab;_&Tab;_&NewLine;6&Tab;euh&Tab;euh&Tab;INT&Tab;INT&Tab;_&Tab;5&Tab;dm&Tab;_&Tab;_&NewLine;7&Tab;les&Tab;le&Tab;DET&Tab;DET&Tab;_&Tab;8&Tab;spe&Tab;_&Tab;_&NewLine;8&Tab;déplacements&Tab;déplacement&Tab;NOM&Tab;NOM&Tab;_&Tab;5&Tab;comp&Tab;_&Tab;_&NewLine;9&Tab;avec&Tab;avec&Tab;PRE&Tab;PRE&Tab;_&Tab;5&Tab;ad&Tab;_&Tab;_&NewLine;10&Tab;précision&Tab;précision&Tab;NOM&Tab;NOM&Tab;_&Tab;9&Tab;dep&Tab;_&Tab;_&NewLine;11&Tab;une&Tab;un&Tab;DET&Tab;DET&Tab;_&Tab;12&Tab;spe&Tab;_&Tab;_&NewLine;12&Tab;journée&Tab;journée&Tab;NOM&Tab;NOM&Tab;_&Tab;8&Tab;para&Tab;_&Tab;_&NewLine;13&Tab;eh ben&Tab;eh ben&Tab;INT&Tab;INT&Tab;_&Tab;12&Tab;dm&Tab;_&Tab;_&NewLine;14&Tab;soit&Tab;soit&Tab;COO&Tab;COO&Tab;_&Tab;16&Tab;mark&Tab;_&Tab;_&NewLine;15&Tab;on&Tab;on&Tab;CLS&Tab;CLS&Tab;_&Tab;16&Tab;suj&Tab;_&Tab;_&NewLine;16&Tab;travaille&Tab;travailler&Tab;VRB&Tab;VRB&Tab;_&Tab;0&Tab;root&Tab;_&Tab;_&NewLine;17&Tab;par&Tab;par&Tab;PRE&Tab;PRE&Tab;_&Tab;12&Tab;dep&Tab;_&Tab;_&NewLine;18&Tab;exemple&Tab;exemple&Tab;NOM&Tab;NOM&Tab;_&Tab;17&Tab;dep&Tab;_&Tab;_</conll>
+                    <conll>
+# conllu format using SpaceAfter=No
+1	Can	can	AUX	MD	VerbForm=Fin	3	aux	_	_
+2	you	you	PRON	PRP	Case=Nom|Person=2|PronType=Prs	3	nsubj	_	_
+3	use	use	VERB	VB	VerbForm=Inf	0	root	_	_
+4	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_	_
+5	'	'	PUNCT	``	_	6	punct	_	SpaceAfter=No
+6	find	find	VERB	VB	VerbForm=Inf	10	compound	_	_
+7	my	my	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	8	nmod:poss	_	_
+8	phone	phone	NOUN	NN	Number=Sing	6	dobj	_	SpaceAfter=No
+9	'	'	PUNCT	''	_	6	punct	_	_
+10	feature	feature	NOUN	NN	Number=Sing	3	dobj	_	_
+11	to	to	PART	TO	_	12	mark	_	_
+12	track	track	VERB	VB	VerbForm=Inf	3	advcl	_	_
+13	someone	someone	NOUN	NN	Number=Sing	16	nmod:poss	_	_
+14	else	else	ADJ	JJ	Degree=Pos	13	amod	_	SpaceAfter=No
+15	's	's	PART	POS	_	13	case	_	_
+16	phone	phone	NOUN	NN	Number=Sing	12	dobj	_	SpaceAfter=No
+17	?	?	PUNCT	.	_	3	punct	_	_
+
+                    
+                    
+1	l'	le	DET	_	_	2	spe	_	_
+2	avenir	avenir	NOM	_	_	3	subj	_	_
+3	dépend	dépendre	VRB	_	_	0	root	_	_
+4	de	de	PRE	_	_	3	comp	_	_
+5	notre	son	DET	_	_	6	spe	_	_
+6	capacité	capacité	NOM	_	_	4	dep	_	_
+7	à	à	PRE	_	_	6	dep	_	_
+8	construire	construire	VNF	_	_	7	dep	_	_
+9	à	à	PRE	_	_	7	para	_	_
+10	créer	créer	VNF	_	_	9	dep	_	_
+11	à	à	PRE	_	_	9	para	_	_
+12	rêver	rêver	VNF	_	_	11	dep	_	_
+13	ensemble	ensemble	ADV	_	_	12	ad	_	_
+14	les	le	DET	_	_	15	spe	_	_
+15	voies	voie	NOM	_	_	12	comp	_	_
+16	de	de	PRE	_	_	15	dep	_	_
+17	l'	le	DET	_	_	18	spe	_	_
+18	aventure	aventure	NOM	_	_	16	dep	_	_
+19	humaine	humain	ADJ	_	_	18	dep	_	_
+
+                    
+                    </conll>
                 </div>
             </div>
         </div>
         
         <div class="row">
             <div class="panel panel-danger">
-                <div class="panel-heading"><h2>... and without HTML entities.</h2></div>
+                <div class="panel-heading"><h2>Another dependency tree example surrounded by Conll tags</h2></div>
                 <div class="panel-body">
-                        <conll>1	donc	donc	ADV	ADV	_	5	dm	_	_
-2	moi	lui	PRO	PRO	_	5	periph	_	_
-3	ben	ben	INT	INT	_	2	dm	_	_
-4	je	je	CLS	CLS	_	5	suj	_	_
-5	vais	aller	VRB	VRB	_	0	root	_	_
-6	je	je	CLS	CLS	_	8	suj	_	_
-7	je	je	CLS	CLS	_	6	para	_	_
-8	prends	prendre	VRB	VRB	_	5	para	_	_
-9	le	le	DET	DET	_	10	spe	_	_
-10	mét~	métro	NOM	NOM	_	8	comp	_	_
-11	je	je	CLS	CLS	_	12	suj	_	_
-12	prends	prendre	VRB	VRB	_	8	para	_	_
-13	le	le	DET	DET	_	14	spe	_	_
-14	métro	métro	NOM	NOM	_	12	comp	_	_
-15	le	le	DET	DET	_	16	spe	_	_
-16	matin	matin	NOM	NOM	_	12	ad	_	_
-17	bon	bon	INT	INT	_	16	dm	_	_
-18	jusqu'	jusque	PRE	PRE	_	12	ad	_	_
-19	au	à+le	PRE	PRE	_	18	dep	_	_
-20	Palais	Palais	NOM	NOM	_	19	dep	_	_
-21	Royal	Royal	NOM	NOM	_	20	dep	_	_
-22	à	à	PRE	PRE	_	12	ad	_	_
-23	quelle	quel	PRQ	PRQ	_	24	dep	_	_
-24	heure	heure	NOM	NOM	_	22	dep	_	_
-25	excusez	excuser	VRB	VRB	_	24	dm	_	_
-26		moi	CLI	CLI	_	25	comp	_	_
-27	-moi	moi	CLI	CLI	_	26	dep	_	_</conll>
+                        <conll>
+                        
+                        1	car	car	COO	_	_	12	mark	_	_
+2	dans	dans	PRE	_	_	12	periph	_	_
+3	un	un	DET	_	_	4	spe	_	_
+4	monde	monde	NOM	_	_	2	dep	_	_
+5	où	où	PRQ	_	_	9	ad	_	_
+6	rien	rien	PRO	_	_	8	subj	_	_
+7	n'	ne	CLN	_	_	8	ad	_	_
+8	est	être	VRB	_	_	4	dep	_	_
+9	figé	figer	VPP	_	_	8	aux	_	_
+10	l'	le	DET	_	_	11	spe	_	_
+11	avenir	avenir	NOM	_	_	12	subj	_	_
+12	dépend	dépendre	VRB	_	_	0	root	_	_
+13	de	de	PRE	_	_	12	comp	_	_
+14	nous	lui	PRO	_	_	13	dep	_	_
+
+                        </conll>
                 </div>
             </div>  
         </div>
     </div>
 
     <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="arborator-draft.js"></script>
     <script>
-       window.onload = function () { 
-        var options = {
-            labelColor:'#ea2929', // COULEUR DES FONCTIONS SYNTAXIQUES
-            arrowColor : '#000', // COULEUR DES ARCS SYNTAXIQUES
-            wordColor : '#000', // COULEUR DES MOTS
-            lemmaColor : '#006400', // COULEUR DES LEMMES
-            posColor : '#9e04de', // COULEUR DES POS
-            pathColor : '#000', // COULEUR DE L'ARC SYNTAXIQUE
-            pathWidth : 1, // LARGEUR DE L'ARC SYNTAXIQUE
-            pathHeight : 23, // TAILLE DES ARCS SYNTAXIQUES
-            format : {sid : 0, id : 0, word : 1, lemma : 2, pos : 3, head : 6, deprel : 7} // FORMAT D'ENTREE
-        };
-        new ArboratorDraft(options); // DEMARRE LE PLUGIN
+	window.onload = function () { 
+		new ArboratorDraft(); // START
         }
     </script>
 </body>
