@@ -1,3 +1,5 @@
+(function () {
+
 /*!
  * arborator script for dependency drawing 
  * version 1.0
@@ -24,6 +26,7 @@ uextras=[]; // list of comments. each comment is a hashtable position(=line)->co
 conlltrees=[]; // list of conll strings
 defaultCat="_"
 shownfeatures=["t", "cat", "lemma","gloss"]; // recomputed in readConll
+progressiveLoading = true; // false to make it load all trees at once (may overload the browser)
 conlls = {	
 	10: 	{"id": 0, "t":1, "lemma": 2, "cat": 3, "xpos":4, "morph":5, "gov":6, "func":7, "xgov":8, "gloss":9}, 
 	14: 	{"id": 0, "t":1, "lemma": 3, "cat": 5, "gov":9, "func":11}, 
@@ -37,17 +40,40 @@ log = console.log.bind(console);
 lemmaColor = '#006400';
 posColor = '#9e04de';
 
-
-function ArboratorDraft() {
+// public initialisation function
+this.ArboratorDraft = function() {
 	// main function called from html file
 // 	$("conll").css("white-space", "pre"); //.css("display", "none"); 
 // 	$("conll").before("<div class='expander'>View Conll</div>");
 	$( ".expander" ).click(function(){
 		log(99,$(this).next('conll'));
 		$(this).next('conll').toggle();});    
-	readConll(); 
+	readConll();
 }
 
+
+
+
+function progressiveReadConll() {
+	// draw each conll tags progressively (only conll tags) 
+	// TODO : change drawConll() to also load progressively inside a conll tag 
+	var conllLoop = d3.selectAll('conll')['_groups'][0]; // need to go out d3js to load it progressively
+	var i = 0;
+	function waitBetweenElements(range) {
+		setTimeout(function () {
+
+			drawConll(conllLoop[i]);
+			console.log(i);
+
+			i++;
+			if (i < range) {
+				waitBetweenElements(range);
+			}
+		}, 10)
+	}
+
+	waitBetweenElements(conllLoop.length);
+}
 
 function readConll() {
 	// reads the conll representation of the whole treebank that is in the conll field
@@ -55,34 +81,18 @@ function readConll() {
 	trees=[]; // list of tree objects 
 	uextras=[]; // list of comments. each comment is a hashtable position(=line)->comment # TODO: show sentence features!
 	conlltrees=[]; // list of conll strings, one string per tree
-	d3.selectAll('conll').each(function(d) { // for each <conll> section:
-		
-		var conll = d3.select(this).attr("class", 'conll'); 
-		conll.html(conll.html().trim())
-		var pnode = d3.select(this.parentNode);
-		var toggle = false;
-		pnode.insert('div',':first-child'); // just to get a new line
-		var showHideConll = pnode.insert('div',':first-child').html("View Conll").attr("class", 'showHideConll')
-		showHideConll.on("click", ()=>{
-			log(111,toggle);
-			conll.style("display", toggle ? "none" : "inline");
-			showHideConll.html(toggle ? "View Conll": "Hide Conll");
-			toggle = !toggle;
-		});
-		var treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
-		for (let singleConll of treelines) { // for each conll tree:
-			conlltrees.push(singleConll);
-			var data=conllNodesToTree(singleConll);
-			trees.push(data.tree);
-			uextras.push(data.uextra)						 
-			var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
-			divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
-			draw(divsvgbox, data.tree);
-		}
-		 
-	});
+	
+	$('conll').hide(); // to hide the huge conll data
+
+	if(progressiveLoading){
+		progressiveReadConll(); // progressive draw
+	}else{
+		d3.selectAll('conll').each(function(d){ drawConll(this); }); // all at once
+	}
+
 	// 	TODO: check whether this is useful: adapt which nodes should be shown depending on what we find on the first node
-	firstnode=trees[0][Math.min.apply(Math,Object.keys(trees[0]))]; // take lowest existing treenode number
+	// TODO : make it faster. This part is really slow
+	/*firstnode=trees[0][Math.min.apply(Math,Object.keys(trees[0]))]; // take lowest existing treenode number
 	shownfeatures = $.grep(shownfeatures, function (attri,i)
 		{ // for each shownfeatures :
 		if (i < 2 || ((attri in firstnode) && firstnode[attri]!=defaultCat)) { 
@@ -90,7 +100,32 @@ function readConll() {
 			return true; // keep it
 			}
 		return false; // kick it out
+	});*/
+}
+
+function drawConll(conllElement) { // for each <conll> section:
+	var conll = d3.select(conllElement).attr("class", 'conll'); 
+	conll.html(conll.html().trim())
+	var pnode = d3.select(conllElement.parentNode);
+	var toggle = false;
+	pnode.insert('div',':first-child'); // just to get a new line
+	var showHideConll = pnode.insert('div').html("View Conll").attr("class", 'showHideConll')
+	showHideConll.on("click", ()=>{
+		log(111,toggle);
+		conll.style("display", toggle ? "none" : "block");
+		showHideConll.html(toggle ? "View Conll": "Hide Conll");
+		toggle = !toggle;
 	});
+	var treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
+	for (let singleConll of treelines) { // for each conll tree:
+		conlltrees.push(singleConll);
+		var data=conllNodesToTree(singleConll);
+		trees.push(data.tree);
+		uextras.push(data.uextra)						 
+		var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
+		divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
+		draw(divsvgbox, data.tree);
+	}
 }
 
 
@@ -300,3 +335,5 @@ function draw(div, tree) {
 	group.attr("transform", "translate(" + 0 + "," + (-smallestY) + ")");
 	svg.attr("height", svgDefaultHeight-smallestY); // adapt svg height
 }
+
+}());

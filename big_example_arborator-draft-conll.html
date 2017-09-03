@@ -1,0 +1,4453 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="arborator-draft.css" type="text/css" />
+
+    
+    
+</head>
+
+<body>
+
+    <div class="container">        
+        <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h2>Settings</h2></div>
+                    <div class="panel-body">
+                        <strong>Graphical options are in arborator-draft.css</strong>
+                        <p>Add this in the end of your page containing dependency trees between Conll tags:</p>
+                        <pre><code>
+	window.onload = function () { 
+		new ArboratorDraft(); // START
+        }
+                        </code></pre>
+                        <p>Then the Conll will transformed into dependency graphs!</p>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h2>First dependency tree example surrounded by Conll tags</h2></div>
+                <div class="panel-body">
+                    <conll>
+# conllu format using SpaceAfter=No
+1	Can	can	AUX	MD	VerbForm=Fin	3	aux	_	_
+2	you	you	PRON	PRP	Case=Nom|Person=2|PronType=Prs	3	nsubj	_	_
+3	use	use	VERB	VB	VerbForm=Inf	0	root	_	_
+4	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_	_
+5	'	'	PUNCT	``	_	6	punct	_	SpaceAfter=No
+6	find	find	VERB	VB	VerbForm=Inf	10	compound	_	_
+7	my	my	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	8	nmod:poss	_	_
+8	phone	phone	NOUN	NN	Number=Sing	6	dobj	_	SpaceAfter=No
+9	'	'	PUNCT	''	_	6	punct	_	_
+10	feature	feature	NOUN	NN	Number=Sing	3	dobj	_	_
+11	to	to	PART	TO	_	12	mark	_	_
+12	track	track	VERB	VB	VerbForm=Inf	3	advcl	_	_
+13	someone	someone	NOUN	NN	Number=Sing	16	nmod:poss	_	_
+14	else	else	ADJ	JJ	Degree=Pos	13	amod	_	SpaceAfter=No
+15	's	's	PART	POS	_	13	case	_	_
+16	phone	phone	NOUN	NN	Number=Sing	12	dobj	_	SpaceAfter=No
+17	?	?	PUNCT	.	_	3	punct	_	_
+
+                    
+                    
+1	l'	le	DET	_	_	2	spe	_	_
+2	avenir	avenir	NOM	_	_	3	subj	_	_
+3	dépend	dépendre	VRB	_	_	0	root	_	_
+4	de	de	PRE	_	_	3	comp	_	_
+5	notre	son	DET	_	_	6	spe	_	_
+6	capacité	capacité	NOM	_	_	4	dep	_	_
+7	à	à	PRE	_	_	6	dep	_	_
+8	construire	construire	VNF	_	_	7	dep	_	_
+9	à	à	PRE	_	_	7	para	_	_
+10	créer	créer	VNF	_	_	9	dep	_	_
+11	à	à	PRE	_	_	9	para	_	_
+12	rêver	rêver	VNF	_	_	11	dep	_	_
+13	ensemble	ensemble	ADV	_	_	12	ad	_	_
+14	les	le	DET	_	_	15	spe	_	_
+15	voies	voie	NOM	_	_	12	comp	_	_
+16	de	de	PRE	_	_	15	dep	_	_
+17	l'	le	DET	_	_	18	spe	_	_
+18	aventure	aventure	NOM	_	_	16	dep	_	_
+19	humaine	humain	ADJ	_	_	18	dep	_	_
+
+                    
+                    </conll>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h2>Another dependency tree example surrounded by Conll tags</h2></div>
+                <div class="panel-body">
+                        
+<conll>
+    
+1	euh	euh	INTJ	_	_	17	discourse	_	_
+2	bon	bon	INTJ	_	_	1	discourse	_	_
+3	pour	pour	ADP	_	_	4	mark	_	_
+4	aller	aller	VERB	_	_	17	parataxis	_	_
+5	du	de+le	ADP	_	_	6	case	_	_
+6	CRDT	CRDT	PROPN	_	_	4	iobj	_	_
+7	à	à	ADP	_	_	9	case	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	gare	gare	NOUN	_	_	4	iobj	_	_
+10	euh	euh	INTJ	_	_	9	discourse	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	Grenoble	Grenoble	PROPN	_	_	9	nmod	_	_
+13	je	je	PRON	_	_	17	nsubj	_	_
+14	euh	euh	INTJ	_	_	13	discourse	_	_
+15	ben	ben	INTJ	_	_	14	discourse	_	_
+16	je	je	PRON	_	_	13	conj	_	_
+17	sors	sortir	VERB	_	_	0	root	_	_
+18	déjà	déjà	ADV	_	_	17	advmod	_	_
+19	du	de+le	ADP	_	_	20	case	_	_
+20	CRDT	CRDT	PROPN	_	_	17	iobj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	remonte	remonter	VERB	_	_	0	root	_	_
+3	euh	euh	INTJ	_	_	2	discourse	_	_
+4	l'	le	DET	_	_	5	det	_	_
+5	avenue	avenue	NOUN	_	_	2	obj	_	_
+6	Général	Général	PROPN	_	_	5	appos	_	_
+7	Champon	Champon	PROPN	_	_	6	flat	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	traverse	traverser	VERB	_	_	0	root	_	_
+3	euh	euh	INTJ	_	_	2	discourse	_	_
+4	face	face	NOUN	_	_	2	ad	_	_
+5	à	à	ADP	_	_	8	case	_	_
+6	la	le	DET	_	_	8	det	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	MDE	MDE	PROPN	_	_	4	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	je	je	PRON	_	_	5	nsubj	_	_
+3	euh	euh	INTJ	_	_	2	discourse	_	_
+4	je	je	PRON	_	_	2	conj	_	_
+5	continue	continuer	VERB	_	_	0	root	_	_
+6	je	je	PRON	_	_	7	csubj	_	_
+7	continue	continuer	VERB	_	_	5	conj	_	_
+8	jusqu'	jusque	ADP	_	_	11	case	_	_
+9	à	à	ADP	_	_	11	case	_	_
+10	une	un	DET	_	_	11	det	_	_
+11	place	place	NOUN	_	_	7	obl	_	_
+12	qui	qui	PRON	_	_	14	csubj	_	_
+13	est	être	AUX	_	_	14	cop	_	_
+14	face	face	NOUN	_	_	11	dep	_	_
+15	à	à	ADP	_	_	18	case	_	_
+16	la	le	DET	_	_	18	det	_	_
+17	grande	grand	ADJ	_	_	18	amod	_	_
+18	poste	poste	NOUN	_	_	14	nmod	_	_
+19	où	où	PRON	_	_	22	advmod	_	_
+20	il	il	PRON	_	_	22	expl	_	_
+21	y	y	PRON	_	_	22	expl	_	_
+22	a	avoir	VERB	_	_	18	acl	_	_
+23	la	le	DET	_	_	25	det	_	_
+24	euh	euh	INTJ	_	_	23	discourse	_	_
+25	Chambre	Chambre	PROPN	_	_	22	obj	_	_
+26	de	de	ADP	_	_	27	case	_	_
+27	Commerce	Commerce	PROPN	_	_	25	nmod	_	_
+28	et	et	CCONJ	_	_	30	cc	_	_
+29	d'	de	ADP	_	_	30	case	_	_
+30	Industrie	Industrie	PROPN	_	_	27	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	je	je	PRON	_	_	4	nsubj	_	_
+4	reprends	reprendre	VERB	_	_	0	root	_	_
+5	je	je	PRON	_	_	6	csubj	_	_
+6	crois	croire	VERB	_	_	4	discourse	_	_
+7	le	le	DET	_	_	6	advmod	_	_
+8	non	non	INTJ	_	_	7	discourse	_	_
+9	c'	ce	PRON	_	_	13	nsubj	_	_
+10	est	être	AUX	_	_	13	cop	_	_
+11	pas	pas	PART	_	_	13	mark	_	_
+12	le	le	DET	_	_	13	det	_	_
+13	boulevard	boulevard	NOUN	_	_	0	root	_	_
+14	Gambetta	Gambetta	PROPN	_	_	13	appos	_	_
+15	je	je	PRON	_	_	17	nsubj	_	_
+16	ne	ne	PART	_	_	17	mark	_	_
+17	sais	savoir	VERB	_	_	0	root	_	_
+18	pas	pas	PART	_	_	17	mark	_	_
+19	lequel	lequel	PRON	_	_	21	comp	_	_
+20	c'	ce	PRON	_	_	21	csubj	_	_
+21	est	être	AUX	_	_	17	ccomp	_	_
+22	euh	euh	INTJ	_	_	21	discourse	_	_
+23	c'	ce	PRON	_	_	26	nsubj	_	_
+24	est	être	AUX	_	_	26	cop	_	_
+25	l'	le	DET	_	_	26	det	_	_
+26	autre	autre	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	donc	donc	ADV	_	_	2	discourse	_	_
+4	je	je	PRON	_	_	5	nsubj	_	_
+5	vais	aller	VERB	_	_	0	root	_	_
+6	jusqu'	jusque	ADP	_	_	5	comp	_	_
+7	au	à+le	ADP	_	_	6	dep	_	_
+8	jusqu'	jusque	ADP	_	_	9	case	_	_
+9	à la place	à la place	ADV	_	_	6	conj	_	_
+10	Victor	Victor	PROPN	_	_	9	dep	_	_
+11	Hugo	Hugo	PROPN	_	_	10	flat	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	là	là	ADV	_	_	5	advmod	_	_
+3	je	je	PRON	_	_	5	nsubj	_	_
+4	me	me	PRON	_	_	5	iobj	_	_
+5	retrouve	retrouver	VERB	_	_	0	root	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	en effet	en effet	ADV	_	_	5	advmod	_	_
+8	euh	euh	INTJ	_	_	7	discourse	_	_
+9	s~	s~	X	_	_	5	obj	_	_
+10	près des	près de	ADP	_	_	11	case	_	_
+11	rails	rail	NOUN	_	_	9	conj	_	_
+12	du	de+le	ADP	_	_	13	case	_	_
+13	tram	tram	NOUN	_	_	11	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	10	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	et	et	CCONJ	_	_	1	conj	_	_
+4	ces	ce	DET	_	_	5	det	_	_
+5	rails	rail	NOUN	_	_	10	dislocated	_	_
+6	du	de+le	ADP	_	_	7	case	_	_
+7	tram	tram	NOUN	_	_	5	nmod	_	_
+8	eh ben	eh ben	INTJ	_	_	7	discourse	_	_
+9	je	je	PRON	_	_	10	nsubj	_	_
+10	vais	aller	VERB	_	_	0	root	_	_
+11	je	je	PRON	_	_	12	csubj	_	_
+12	vais	aller	VERB	_	_	10	conj	_	_
+13	les	le	PRON	_	_	14	obj	_	_
+14	longer	longer	VERB	_	_	12	xcomp	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	vais	aller	VERB	_	_	0	root	_	_
+3	traverser	traverser	VERB	_	_	2	xcomp	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	le	le	DET	_	_	6	det	_	_
+6	boulevard	boulevard	NOUN	_	_	3	obj	_	_
+7	Gambetta	Gambetta	PROPN	_	_	6	appos	_	_</conll>
+
+<conll>1	ça	ça	PRON	_	_	7	dislocated	_	_
+2	cette	ce	DET	_	_	3	det	_	_
+3	fois	fois	NOUN	_	_	7	dislocated	_	_
+4	c'	ce	PRON	_	_	7	nsubj	_	_
+5	est	être	AUX	_	_	7	cop	_	_
+6	le	le	DET	_	_	7	det	_	_
+7	boulevard	boulevard	NOUN	_	_	0	root	_	_
+8	Gambetta	Gambetta	PROPN	_	_	7	appos	_	_</conll>
+
+<conll>1	ensuite	ensuite	ADV	_	_	4	advmod	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	je	je	PRON	_	_	4	nsubj	_	_
+4	vais	aller	VERB	_	_	0	root	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	prendre	prendre	VERB	_	_	4	xcomp	_	_
+7	je	je	PRON	_	_	8	csubj	_	_
+8	crois	croire	VERB	_	_	6	ccomp	_	_
+9	que	que	SCONJ	_	_	13	mark	_	_
+10	c'	ce	PRON	_	_	13	csubj	_	_
+11	est	être	AUX	_	_	13	cop	_	_
+12	l'	le	DET	_	_	13	det	_	_
+13	avenue	avenue	NOUN	_	_	8	ccomp	_	_
+14	Alsace-Lorraine	Alsace-Lorraine	PROPN	_	_	13	appos	_	_
+15	que	que	PRON	_	_	18	obj	_	_
+16	je	je	PRON	_	_	17	csubj	_	_
+17	vais	aller	VERB	_	_	13	acl	_	_
+18	remonter	remonter	VERB	_	_	17	xcomp	_	_
+19	remonter	remonter	VERB	_	_	18	conj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	vais	aller	VERB	_	_	0	root	_	_
+3	traverser	traverser	VERB	_	_	2	xcomp	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	cours	cours	NOUN	_	_	3	obj	_	_
+6	Jean	Jean	PROPN	_	_	5	appos	_	_
+7	Jaurès	Jaurès	PROPN	_	_	6	flat	_	_
+8	si	si	SCONJ	_	_	11	mark	_	_
+9	je	je	PRON	_	_	11	csubj	_	_
+10	me	me	PRON	_	_	11	obj	_	_
+11	souviens	souvenir	VERB	_	_	2	parataxis	_	_
+12	bien	bien	ADV	_	_	11	advmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	je	je	PRON	_	_	3	nsubj	_	_
+3	vais	aller	VERB	_	_	0	root	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	je	je	PRON	_	_	6	nsubj	_	_
+6	vais	aller	VERB	_	_	0	root	_	_
+7	toujours	toujours	ADV	_	_	6	advmod	_	_
+8	continuer	continuer	VERB	_	_	6	xcomp	_	_
+9	cette	ce	DET	_	_	10	det	_	_
+10	avenue	avenue	NOUN	_	_	8	obj	_	_
+11	Alsace-Lorraine	Alsace-Lorraine	PROPN	_	_	10	appos	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	7	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	et	et	CCONJ	_	_	1	conj	_	_
+4	ben	ben	INTJ	_	_	3	discourse	_	_
+5	voilà	voilà	VERB	_	_	4	discourse	_	_
+6	j'	je	PRON	_	_	7	nsubj	_	_
+7	arrive	arriver	VERB	_	_	0	root	_	_
+8	au	à+le	ADP	_	_	9	case	_	_
+9	niveau	niveau	NOUN	_	_	7	iobj	_	_
+10	de	de	ADP	_	_	13	case	_	_
+11	la	le	DET	_	_	13	det	_	_
+12	grande	grand	ADJ	_	_	13	amod	_	_
+13	place	place	NOUN	_	_	9	nmod	_	_
+14	de	de	ADP	_	_	16	case	_	_
+15	la	le	DET	_	_	16	det	_	_
+16	gare	gare	NOUN	_	_	13	nmod	_	_
+17	où	où	PRON	_	_	20	advmod	_	_
+18	il	il	PRON	_	_	20	expl	_	_
+19	y	y	PRON	_	_	20	expl	_	_
+20	a	avoir	VERB	_	_	13	acl	_	_
+21	tous	tout	ADJ	_	_	23	amod	_	_
+22	les	le	DET	_	_	23	det	_	_
+23	trams	tram	NOUN	_	_	20	obj	_	_
+24	tous	tout	ADJ	_	_	26	amod	_	_
+25	les	le	DET	_	_	26	det	_	_
+26	bus	bus	NOUN	_	_	23	conj	_	_
+27	non	non	INTJ	_	_	26	discourse	_	_
+28	pas	pas	NOUN	_	_	31	dep	_	_
+29	tous	tout	ADJ	_	_	31	amod	_	_
+30	les	le	DET	_	_	31	det	_	_
+31	bus	bus	NOUN	_	_	23	conj	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	2	nsubj	_	_
+2	sont	être	AUX	_	_	0	root	_	_
+3	pas	pas	PART	_	_	2	mark	_	_
+4	de	de	ADP	_	_	6	case	_	_
+5	ce	ce	DET	_	_	6	det	_	_
+6	côté	côté	NOUN	_	_	2	iobj	_	_
+7	-là	là	ADV	_	_	6	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	2	cc	_	_
+2	voilà	voilà	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	je	je	PRON	_	_	4	nsubj	_	_
+3	suis	être	AUX	_	_	4	aux	_	_
+4	arrivée	arriver	VERB	_	_	0	root	_	_
+5	sur	sur	ADP	_	_	7	case	_	_
+6	la	le	DET	_	_	7	det	_	_
+7	gare	gare	NOUN	_	_	4	iobj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	advmod	_	_
+2	là	là	ADV	_	_	4	advmod	_	_
+3	tu	tu	PRON	_	_	4	nsubj	_	_
+4	vois	voir	VERB	_	_	0	root	_	_
+5	donc	donc	ADV	_	_	4	discourse	_	_
+6	tu	tu	PRON	_	_	7	nsubj	_	_
+7	continues	continuer	VERB	_	_	0	root	_	_
+8	tout	tout	ADV	_	_	9	advmod	_	_
+9	droit	droit	ADJ	_	_	7	advmod	_	_
+10	tout	tout	ADV	_	_	11	advmod	_	_
+11	droit	droit	ADJ	_	_	9	conj	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	traverses	traverser	VERB	_	_	0	root	_	_
+3	tout	tout	ADV	_	_	2	comp	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	arrives	arriver	VERB	_	_	0	root	_	_
+3	à	à	ADP	_	_	5	case	_	_
+4	un	un	DET	_	_	5	det	_	_
+5	rond-point	rond-point	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	au	à+le	ADP	_	_	2	case	_	_
+2	rond-point	rond-point	NOUN	_	_	6	parataxis	_	_
+3	c'	ce	PRON	_	_	6	nsubj	_	_
+4	est	être	AUX	_	_	6	cop	_	_
+5	tout	tout	ADV	_	_	6	advmod	_	_
+6	droit	droit	ADJ	_	_	0	root	_	_
+7	direction	direction	NOUN	_	_	6	conj	_	_
+8	Saint-Jean-de-Maurienne	Saint-Jean-de-Maurienne	PROPN	_	_	7	appos	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	6	discourse	_	_
+2	donc	donc	ADV	_	_	1	discourse	_	_
+3	tou~	tou~	ADV	_	_	6	dep	_	_
+4	tou~	tou~	ADV	_	_	3	conj	_	_
+5	toujours	toujours	ADV	_	_	3	conj	_	_
+6	Saint-Jean-de-Maurienne	Saint-Jean-de-Maurienne	PROPN	_	_	0	root	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	passes	passer	VERB	_	_	0	root	_	_
+3	un	un	DET	_	_	5	det	_	_
+4	autre	autre	ADJ	_	_	5	amod	_	_
+5	rond-point	rond-point	NOUN	_	_	2	obj	_	_</conll>
+
+<conll>1	donc	donc	ADV	_	_	4	discourse	_	_
+2	toujours	toujours	ADV	_	_	4	advmod	_	_
+3	tout	tout	ADV	_	_	4	advmod	_	_
+4	droit	droit	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	après	après	ADP	_	_	3	periph	_	_
+2	tu	tu	PRON	_	_	3	nsubj	_	_
+3	montes	monter	VERB	_	_	0	root	_	_
+4	une	un	DET	_	_	7	det	_	_
+5	grande	grand	ADJ	_	_	7	amod	_	_
+6	grande	grand	ADJ	_	_	5	conj	_	_
+7	ligne	ligne	NOUN	_	_	3	obj	_	_
+8	droite	droit	ADJ	_	_	7	amod	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	passes	passer	VERB	_	_	0	root	_	_
+3	devant	devant	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	piscine	piscine	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	4	discourse	_	_
+2	il	il	PRON	_	_	4	expl	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	a	avoir	VERB	_	_	0	root	_	_
+5	un	un	DET	_	_	6	det	_	_
+6	stade	stade	NOUN	_	_	4	obj	_	_
+7	aussi	aussi	ADV	_	_	4	advmod	_	_
+8	à	à	ADP	_	_	9	case	_	_
+9	côté	côté	NOUN	_	_	4	obl	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	tu	tu	PRON	_	_	3	nsubj	_	_
+3	arrives	arriver	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	6	case	_	_
+5	un	un	DET	_	_	6	det	_	_
+6	rond-point	rond-point	NOUN	_	_	3	iobj	_	_
+7	donc	donc	ADV	_	_	10	mark	_	_
+8	là	là	ADV	_	_	10	advmod	_	_
+9	tu	tu	PRON	_	_	10	nsubj	_	_
+10	rentres	rentrer	VERB	_	_	0	root	_	_
+11	dans	dans	ADP	_	_	13	case	_	_
+12	le	le	DET	_	_	13	det	_	_
+13	centre-ville	centre-ville	NOUN	_	_	10	iobj	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	arrives	arriver	VERB	_	_	0	root	_	_
+3	à	à	ADP	_	_	5	case	_	_
+4	un	un	DET	_	_	5	det	_	_
+5	rond-point	rond-point	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	donc	donc	ADV	_	_	2	discourse	_	_
+4	à	à	ADP	_	_	6	case	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	gauche	gauche	NOUN	_	_	2	iobj	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	ensuite	ensuite	ADV	_	_	11	ad	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	donc	donc	ADV	_	_	9	discourse	_	_
+11	gauche	gauche	NOUN	_	_	6	conj	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	3	advmod	_	_
+2	je	je	PRON	_	_	3	nsubj	_	_
+3	crois	croire	VERB	_	_	0	root	_	_
+4	que	que	SCONJ	_	_	7	mark	_	_
+5	ça	ça	PRON	_	_	7	csubj	_	_
+6	sera	être	AUX	_	_	7	aux	_	_
+7	indiqué	indiquer	VERB	_	_	3	ccomp	_	_
+8	déjà	déjà	ADV	_	_	7	advmod	_	_
+9	gare	gare	NOUN	_	_	7	obj	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	2	discourse	_	_
+2	mais	mais	CCONJ	_	_	6	cc	_	_
+3	bon	bon	INTJ	_	_	2	discourse	_	_
+4	tu	tu	PRON	_	_	6	nsubj	_	_
+5	tu	tu	PRON	_	_	4	conj	_	_
+6	traverses	traverser	VERB	_	_	0	root	_	_
+7	le	le	DET	_	_	8	det	_	_
+8	champ	champ	NOUN	_	_	6	obj	_	_
+9	de	de	ADP	_	_	10	case	_	_
+10	foire	foire	NOUN	_	_	8	nmod	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	arrives	arriver	VERB	_	_	0	root	_	_
+3	à	à	ADP	_	_	6	case	_	_
+4	un	un	DET	_	_	6	det	_	_
+5	autre	autre	ADJ	_	_	6	amod	_	_
+6	rond-point	rond-point	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	3	advmod	_	_
+2	c'	ce	PRON	_	_	3	nsubj	_	_
+3	est	être	AUX	_	_	0	root	_	_
+4	encore	encore	ADV	_	_	3	advmod	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	à gauche	à gauche	ADV	_	_	3	comp	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	4	discourse	_	_
+2	et	et	CCONJ	_	_	4	cc	_	_
+3	tu	tu	PRON	_	_	4	nsubj	_	_
+4	descends	descendre	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	en	en	ADP	_	_	6	parataxis	_	_
+2	fait	fait	NOUN	_	_	1	fixed	_	_
+3	c'	ce	PRON	_	_	6	nsubj	_	_
+4	est	être	AUX	_	_	6	cop	_	_
+5	une	un	DET	_	_	6	det	_	_
+6	route	route	NOUN	_	_	0	root	_	_
+7	qui	qui	PRON	_	_	8	csubj	_	_
+8	descend	descendre	VERB	_	_	6	acl	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	passes	passer	VERB	_	_	0	root	_	_
+3	devant	devant	ADP	_	_	5	case	_	_
+4	les	le	DET	_	_	5	det	_	_
+5	pompiers	pompier	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	ensuite	ensuite	ADV	_	_	5	advmod	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	premier	premier	ADJ	_	_	0	root	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_</conll>
+
+<conll>1	tu	tu	PRON	_	_	2	nsubj	_	_
+2	passes	passer	VERB	_	_	0	root	_	_
+3	devant	devant	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	Bastille	Bastille	PROPN	_	_	2	iobj	_	_
+6	aussi	aussi	ADV	_	_	2	advmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	6	cc	_	_
+2	ensuite	ensuite	ADV	_	_	6	advmod	_	_
+3	c'	ce	PRON	_	_	6	nsubj	_	_
+4	est	être	AUX	_	_	6	cop	_	_
+5	la	le	DET	_	_	6	dep	_	_
+6	première	premier	ADJ	_	_	0	root	_	_
+7	ou	ou	CCONJ	_	_	11	cc	_	_
+8	enfin	enfin	ADV	_	_	7	discourse	_	_
+9	non	non	INTJ	_	_	8	discourse	_	_
+10	euh	euh	INTJ	_	_	9	discourse	_	_
+11	deuxième	deuxième	ADJ	_	_	6	conj	_	_
+12	ou	ou	CCONJ	_	_	13	cc	_	_
+13	troisième	troisième	ADJ	_	_	6	conj	_	_
+14	troisième	troisième	ADJ	_	_	6	conj	_	_
+15	il	il	PRON	_	_	17	csubj	_	_
+16	me	me	PRON	_	_	17	obj	_	_
+17	semble	sembler	VERB	_	_	14	discourse	_	_
+18	à droite	à droite	ADV	_	_	14	advmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	tu	tu	PRON	_	_	3	nsubj	_	_
+3	montes	monter	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	voilà	voilà	VERB	_	_	1	discourse	_	_
+3	tu	tu	PRON	_	_	4	nsubj	_	_
+4	arrives	arriver	VERB	_	_	0	root	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	devant	devant	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	gare	gare	NOUN	_	_	4	iobj	_	_</conll>
+
+<conll>1	après	après	ADP	_	_	5	periph	_	_
+2	là	là	ADV	_	_	5	advmod	_	_
+3	c'	ce	PRON	_	_	5	nsubj	_	_
+4	est	être	AUX	_	_	5	aux	_	_
+5	indiqué	indiquer	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	3	expl	_	_
+2	y	y	PRON	_	_	3	expl	_	_
+3	a	avoir	VERB	_	_	0	root	_	_
+4	la	le	DET	_	_	6	det	_	_
+5	une	un	DET	_	_	4	conj	_	_
+6	cabine	cabine	NOUN	_	_	3	obj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	téléphone	téléphone	NOUN	_	_	6	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	2	cc	_	_
+2	voilà	voilà	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	là	là	ADV	_	_	2	comp	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	programme	programme	NOUN	_	_	7	nsubj	_	_
+3	monsieur	Monsieur	NOUN	_	_	7	dislocated	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	premier	premier	ADJ	_	_	3	amod	_	_
+6	ministre	ministre	NOUN	_	_	5	dep	_	_
+7	comporte	comporter	VERB	_	_	0	root	_	_
+8	un	un	DET	_	_	10	det	_	_
+9	certain	certain	ADJ	_	_	10	amod	_	_
+10	nombre	nombre	NOUN	_	_	7	obj	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	projets	projet	NOUN	_	_	10	nmod	_	_
+13	d'autant	d'autant	ADV	_	_	14	advmod	_	_
+14	plus	plus	ADV	_	_	15	advmod	_	_
+15	intéressants	intéressant	ADJ	_	_	12	amod	_	_
+16	à	à	ADP	_	_	18	case	_	_
+17	nos	son	DET	_	_	18	det	_	_
+18	yeux	yeux	NOUN	_	_	15	obl	_	_
+19	que	que	SCONJ	_	_	22	mark	_	_
+20	nous	nous	PRON	_	_	22	csubj	_	_
+21	les	le	PRON	_	_	22	obj	_	_
+22	proposons	proposer	VERB	_	_	13	advcl	_	_
+23	depuis	depuis	ADP	_	_	24	case	_	_
+24	longtemps	longtemps	ADV	_	_	22	advmod	_	_
+25	relèvement	relèvement	NOUN	_	_	10	conj	_	_
+26	du	de+le	ADP	_	_	27	case	_	_
+27	Smic	Smic	PROPN	_	_	25	nmod	_	_
+28	amnistie	amnistier	VERB	_	_	10	conj	_	_
+29	pour	pour	ADP	_	_	31	case	_	_
+30	les	le	DET	_	_	31	det	_	_
+31	commerçants	commerçant	NOUN	_	_	28	obl	_	_
+32	et	et	CCONJ	_	_	34	cc	_	_
+33	les	le	DET	_	_	34	det	_	_
+34	artisans	artisan	NOUN	_	_	31	conj	_	_
+35	aide	aider	VERB	_	_	10	conj	_	_
+36	aux	à+le	ADP	_	_	37	case	_	_
+37	chômeurs	chômeur	NOUN	_	_	35	obl	_	_
+38	partiels	partiel	ADJ	_	_	37	amod	_	_
+39	égalisation	égalisation	NOUN	_	_	10	conj	_	_
+40	des	de+le	ADP	_	_	41	case	_	_
+41	salaires	salaire	NOUN	_	_	39	nmod	_	_
+42	féminins	féminin	ADJ	_	_	41	amod	_	_
+43	et	et	CCONJ	_	_	44	cc	_	_
+44	masculins	masculin	ADJ	_	_	42	conj	_	_
+45	participation	participation	NOUN	_	_	39	conj	_	_
+46	accrue	accru	ADJ	_	_	45	amod	_	_
+47	des	de+le	ADP	_	_	48	case	_	_
+48	cadres	cadre	NOUN	_	_	45	nmod	_	_
+49	aux	à+le	ADP	_	_	50	case	_	_
+50	conseils	conseil	NOUN	_	_	45	nmod	_	_
+51	d'	de	ADP	_	_	52	case	_	_
+52	administration	administration	NOUN	_	_	50	nmod	_	_
+53	des	de+le	ADP	_	_	54	case	_	_
+54	sociétés	société	NOUN	_	_	50	nmod	_	_
+55	réforme	réforme	NOUN	_	_	45	para	_	_
+56	du	de+le	ADP	_	_	57	case	_	_
+57	droit	droit	NOUN	_	_	55	nmod	_	_
+58	de	de	ADP	_	_	59	case	_	_
+59	licenciement	licenciement	NOUN	_	_	57	nmod	_	_
+60	nomination	nomination	NOUN	_	_	55	para	_	_
+61	d'	de	ADP	_	_	63	case	_	_
+62	un	un	DET	_	_	63	det	_	_
+63	médiateur	médiateur	NOUN	_	_	60	nmod	_	_
+64	entre	entre	ADP	_	_	66	case	_	_
+65	l'	le	DET	_	_	66	det	_	_
+66	administration	administration	NOUN	_	_	63	nmod	_	_
+67	et	et	CCONJ	_	_	69	cc	_	_
+68	le	le	DET	_	_	69	det	_	_
+69	public	public	NOUN	_	_	66	conj	_	_
+70	contrôle	contrôler	VERB	_	_	60	para	_	_
+71	des	de+le	ADP	_	_	72	case	_	_
+72	dépenses	dépense	NOUN	_	_	70	obl	_	_
+73	électorales	électoral	ADJ	_	_	72	amod	_	_
+74	toutes	tout	ADJ	_	_	75	det	_	_
+75	mesures	mesure	NOUN	_	_	70	para	_	_
+76	qui	qui	PRON	_	_	77	csubj	_	_
+77	dormaient	dormir	VERB	_	_	75	acl	_	_
+78	dans	dans	ADP	_	_	80	case	_	_
+79	vos	son	DET	_	_	80	det	_	_
+80	cartons	carton	NOUN	_	_	77	obl	_	_
+81	que	que	PRON	_	_	86	obj	_	_
+82	vos	son	DET	_	_	83	det	_	_
+83	prédécesseurs	prédécesseur	NOUN	_	_	86	csubj	_	_
+84	avaient	avoir	VERB	_	_	86	aux	_	_
+85	énergiquement	énergiquement	ADV	_	_	86	advmod	_	_
+86	refusées	refuser	VERB	_	_	77	conj	_	_
+87	et	et	CCONJ	_	_	90	cc	_	_
+88	que	que	SCONJ	_	_	90	comp	_	_
+89	l'on	on	PRON	_	_	90	csubj	_	_
+90	retrouve	retrouver	VERB	_	_	77	conj	_	_
+91	dans	dans	ADP	_	_	93	case	_	_
+92	le	le	DET	_	_	93	det	_	_
+93	programme	programme	NOUN	_	_	90	obl	_	_
+94	commun	commun	ADJ	_	_	93	amod	_	_
+95	de	de	ADP	_	_	97	case	_	_
+96	la	le	DET	_	_	97	det	_	_
+97	gauche	gauche	NOUN	_	_	93	nmod	_	_</conll>
+
+<conll>1	lorsque	lorsque	SCONJ	_	_	3	mark	_	_
+2	vous	vous	PRON	_	_	3	csubj	_	_
+3	semblez	sembler	VERB	_	_	14	parataxis	_	_
+4	mettre	mettre	VERB	_	_	3	xcomp	_	_
+5	en	en	ADP	_	_	6	case	_	_
+6	doute	doute	NOUN	_	_	4	iobj	_	_
+7	notre	son	DET	_	_	8	det	_	_
+8	amour	amour	NOUN	_	_	4	obj	_	_
+9	des	de+le	ADP	_	_	10	case	_	_
+10	libertés	liberté	NOUN	_	_	8	nmod	_	_
+11	c'	ce	PRON	_	_	14	nsubj	_	_
+12	est	être	AUX	_	_	14	cop	_	_
+13	un	un	DET	_	_	14	det	_	_
+14	outrage	outrage	NOUN	_	_	0	root	_	_
+15	que	que	PRON	_	_	18	obj	_	_
+16	nous	nous	PRON	_	_	18	csubj	_	_
+17	n'	ne	PART	_	_	18	mark	_	_
+18	acceptons	accepter	VERB	_	_	14	acl	_	_
+19	pas	pas	PART	_	_	18	mark	_	_</conll>
+
+<conll>1	nous	nous	PRON	_	_	4	nsubj	_	_
+2	sommes	être	AUX	_	_	4	cop	_	_
+3	les	le	DET	_	_	4	det	_	_
+4	héritiers	héritier	NOUN	_	_	0	root	_	_
+5	de	de	ADP	_	_	7	case	_	_
+6	la	le	DET	_	_	7	det	_	_
+7	tradition	tradition	NOUN	_	_	4	nmod	_	_
+8	qui	qui	PRON	_	_	10	csubj	_	_
+9	a	avoir	VERB	_	_	10	aux	_	_
+10	instauré	instaurer	VERB	_	_	7	acl	_	_
+11	dans	dans	ADP	_	_	13	case	_	_
+12	ce	ce	DET	_	_	13	det	_	_
+13	pays	pays	NOUN	_	_	10	obl	_	_
+14	la	le	DET	_	_	15	det	_	_
+15	démocratie	démocratie	NOUN	_	_	10	obj	_	_
+16	politique	politique	ADJ	_	_	15	amod	_	_
+17	et	et	CCONJ	_	_	18	cc	_	_
+18	sociale	sociale	NOUN	_	_	16	conj	_	_</conll>
+
+<conll>1	toujours	toujours	ADV	_	_	5	dep	_	_
+2	toujours	toujours	ADV	_	_	1	conj	_	_
+3	contre	contre	ADP	_	_	5	case	_	_
+4	les	le	DET	_	_	5	det	_	_
+5	droites	droite	NOUN	_	_	14	parataxis	_	_
+6	coalisées	coaliser	VERB	_	_	5	acl	_	_
+7	nos	son	DET	_	_	8	det	_	_
+8	combats	combat	NOUN	_	_	14	nsubj	_	_
+9	pour	pour	ADP	_	_	11	case	_	_
+10	la	le	DET	_	_	11	det	_	_
+11	conquête	conquête	NOUN	_	_	8	nmod	_	_
+12	du	de+le	ADP	_	_	13	case	_	_
+13	droit	droit	NOUN	_	_	11	nmod	_	_
+14	jalonnent	jalonner	VERB	_	_	0	root	_	_
+15	l'	le	DET	_	_	16	det	_	_
+16	histoire	histoire	NOUN	_	_	14	obj	_	_
+17	des	de+le	ADP	_	_	20	case	_	_
+18	deux	deux	NUM	_	_	20	nummod	_	_
+19	derniers	dernier	ADJ	_	_	20	amod	_	_
+20	siècles	siècle	NOUN	_	_	16	nmod	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	à	à	ADP	_	_	4	case	_	_
+4	ceux	celui	PRON	_	_	2	iobj	_	_
+5	de	de	ADP	_	_	7	case	_	_
+6	votre	son	DET	_	_	7	det	_	_
+7	tradition	tradition	NOUN	_	_	4	nmod	_	_
+8	que	que	SCONJ	_	_	11	mark	_	_
+9	nous	nous	PRON	_	_	11	csubj	_	_
+10	avons	avoir	VERB	_	_	11	aux	_	_
+11	arraché	arracher	VERB	_	_	2	ccomp	_	_
+12	le	le	DET	_	_	13	det	_	_
+13	suffrage	suffrage	NOUN	_	_	11	obj	_	_
+14	universel	universel	ADJ	_	_	13	amod	_	_
+15	la	le	DET	_	_	16	det	_	_
+16	liberté	liberté	NOUN	_	_	13	conj	_	_
+17	d'	de	ADP	_	_	18	case	_	_
+18	association	association	NOUN	_	_	16	nmod	_	_
+19	que	que	SCONJ	_	_	22	mark	_	_
+20	nous	nous	PRON	_	_	22	csubj	_	_
+21	avons	avoir	VERB	_	_	22	aux	_	_
+22	arraché	arracher	VERB	_	_	11	conj	_	_
+23	la	le	DET	_	_	24	det	_	_
+24	liberté	liberté	NOUN	_	_	22	obj	_	_
+25	d'	de	ADP	_	_	26	case	_	_
+26	association	association	NOUN	_	_	24	nmod	_	_
+27	que	que	SCONJ	_	_	30	mark	_	_
+28	nous	nous	PRON	_	_	30	csubj	_	_
+29	avons	avoir	VERB	_	_	30	aux	_	_
+30	arraché	arracher	VERB	_	_	11	conj	_	_
+31	la	le	DET	_	_	32	det	_	_
+32	liberté	liberté	NOUN	_	_	30	obj	_	_
+33	de	de	ADP	_	_	35	case	_	_
+34	la	le	DET	_	_	35	det	_	_
+35	presse	presse	NOUN	_	_	32	nmod	_	_
+36	le	le	DET	_	_	37	det	_	_
+37	droit	droit	NOUN	_	_	32	conj	_	_
+38	de	de	ADP	_	_	39	case	_	_
+39	grève	grève	NOUN	_	_	37	nmod	_	_
+40	le	le	DET	_	_	41	det	_	_
+41	droit	droit	NOUN	_	_	32	conj	_	_
+42	à	à	ADP	_	_	44	case	_	_
+43	l'	le	DET	_	_	44	det	_	_
+44	instruction	instruction	NOUN	_	_	41	nmod	_	_</conll>
+
+<conll>1	seconde	second	NOUN	_	_	0	root	_	_
+2	une	un	DET	_	_	3	det	_	_
+3	seconde	second	NOUN	_	_	1	conj	_	_
+4	une	un	DET	_	_	5	det	_	_
+5	seconde	second	NOUN	_	_	1	conj	_	_</conll>
+
+<conll>1	monsieur	Monsieur	NOUN	_	_	4	dislocated	_	_
+2	Mitterrand	Mitterrand	PROPN	_	_	1	appos	_	_
+3	une	un	DET	_	_	4	det	_	_
+4	seconde	second	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	monsieur	Monsieur	NOUN	_	_	3	dislocated	_	_
+2	Mitterrand	Mitterrand	PROPN	_	_	1	appos	_	_
+3	voulez	vouloir	VERB	_	_	0	root	_	_
+4	-vous	vous	PRON	_	_	3	nsubj	_	_
+5	continuer	continuer	VERB	_	_	3	xcomp	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	7	cc	_	_
+2	monsieur	Monsieur	NOUN	_	_	7	dislocated	_	_
+3	le	le	DET	_	_	4	det	_	_
+4	président	président	NOUN	_	_	2	dep	_	_
+5	il	il	PRON	_	_	7	nsubj	_	_
+6	est	être	AUX	_	_	7	cop	_	_
+7	naturel	naturel	ADJ	_	_	0	root	_	_
+8	que	que	SCONJ	_	_	12	mark	_	_
+9	la	le	DET	_	_	10	det	_	_
+10	majorité	majorité	NOUN	_	_	12	csubj	_	_
+11	se	se	PRON	_	_	12	iobj	_	_
+12	montre	montrer	VERB	_	_	7	advcl	_	_
+13	telle	tel	ADJ	_	_	12	comp	_	_
+14	qu'	que	PRON	_	_	16	comp	_	_
+15	elle	il	PRON	_	_	16	csubj	_	_
+16	est	être	AUX	_	_	13	dep	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	2	discourse	_	_
+2	en	en	ADP	_	_	3	case	_	_
+3	partant	partir	VERB	_	_	15	parataxis	_	_
+4	de	de	ADP	_	_	6	case	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	place	place	NOUN	_	_	3	iobj	_	_
+7	Paul	Paul	PROPN	_	_	6	appos	_	_
+8	Vallier	Vallier	PROPN	_	_	7	flat	_	_
+9	pour	pour	ADP	_	_	10	mark	_	_
+10	aller	aller	VERB	_	_	3	advcl	_	_
+11	à la place	à la place	ADV	_	_	10	comp	_	_
+12	Notre-Dame	Notre-Dame	PROPN	_	_	11	dep	_	_
+13	alors	alors	ADV	_	_	15	advmod	_	_
+14	j'	je	PRON	_	_	15	nsubj	_	_
+15	emprunte	emprunter	VERB	_	_	0	root	_	_
+16	la	le	DET	_	_	17	det	_	_
+17	rue	rue	NOUN	_	_	15	obj	_	_
+18	de	de	ADP	_	_	19	case	_	_
+19	Strasbourg	Strasbourg	PROPN	_	_	17	nmod	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	passe	passer	VERB	_	_	0	root	_	_
+3	par	par	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	place	place	NOUN	_	_	2	iobj	_	_
+6	Vaucanson	Vaucanson	PROPN	_	_	5	appos	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	prends	prendre	VERB	_	_	0	root	_	_
+3	direction	direction	NOUN	_	_	2	obj	_	_
+4	Maison	Maison	PROPN	_	_	3	appos	_	_
+5	du	de+le	ADP	_	_	6	case	_	_
+6	tourisme	tourisme	NOUN	_	_	4	nmod	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	8	discourse	_	_
+2	à	à	ADP	_	_	4	case	_	_
+3	la	le	DET	_	_	4	det	_	_
+4	Maison	Maison	PROPN	_	_	8	parataxis	_	_
+5	du	de+le	ADP	_	_	6	case	_	_
+6	tourisme	tourisme	NOUN	_	_	4	nmod	_	_
+7	je	je	PRON	_	_	8	nsubj	_	_
+8	contourne	contourner	VERB	_	_	0	root	_	_
+9	enfin	enfin	ADV	_	_	8	discourse	_	_
+10	je	je	PRON	_	_	11	csubj	_	_
+11	prends	prendre	VERB	_	_	8	conj	_	_
+12	la	le	DET	_	_	13	det	_	_
+13	rue	rue	NOUN	_	_	11	obj	_	_
+14	de	de	ADP	_	_	16	case	_	_
+15	la	le	DET	_	_	16	det	_	_
+16	République	République	PROPN	_	_	13	nmod	_	_
+17	en	en	ADP	_	_	18	case	_	_
+18	remontant	remonter	VERB	_	_	11	advcl	_	_
+19	la	le	DET	_	_	20	det	_	_
+20	rue	rue	NOUN	_	_	18	obj	_	_
+21	de	de	ADP	_	_	23	case	_	_
+22	la	le	DET	_	_	23	det	_	_
+23	République	République	PROPN	_	_	20	nmod	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	tombe	tomber	VERB	_	_	0	root	_	_
+3	sur	sur	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	place	place	NOUN	_	_	2	obl	_	_
+6	Sainte-Claire	Sainte-Claire	PROPN	_	_	5	appos	_	_
+7	on	on	PRON	_	_	8	csubj	_	_
+8	va	aller	VERB	_	_	6	discourse	_	_
+9	dire	dire	VERB	_	_	8	xcomp	_	_
+10	là	là	ADV	_	_	2	advmod	_	_
+11	où	où	PRON	_	_	14	advmod	_	_
+12	il	il	PRON	_	_	14	expl	_	_
+13	y	y	PRON	_	_	14	expl	_	_
+14	a	avoir	VERB	_	_	10	dep	_	_
+15	la	le	DET	_	_	16	det	_	_
+16	halle	halle	NOUN	_	_	14	obj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	j'	je	PRON	_	_	3	nsubj	_	_
+3	arrive	arriver	VERB	_	_	0	root	_	_
+4	à la place	à la place	ADV	_	_	3	comp	_	_
+5	Notre-Dame	Notre-Dame	PROPN	_	_	4	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	vous	vous	PRON	_	_	3	nsubj	_	_
+3	appartenez	appartenir	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	ce	ce	PRON	_	_	3	iobj	_	_
+6	qu'	que	PRON	_	_	8	obj	_	_
+7	on	on	PRON	_	_	8	csubj	_	_
+8	appelle	appeler	VERB	_	_	5	acl	_	_
+9	les	le	DET	_	_	11	det	_	_
+10	flying	flying	ADJ	_	_	11	amod	_	_
+11	doctors	doctor	NOUN	_	_	8	obj	_	_
+12	de	de	ADP	_	_	14	case	_	_
+13	la	le	DET	_	_	14	det	_	_
+14	Mref	Mref	PROPN	_	_	11	nmod	_	_
+15	qui	qui	PRON	_	_	19	csubj	_	_
+16	est	être	AUX	_	_	19	cop	_	_
+17	une	un	DET	_	_	19	det	_	_
+18	une	un	DET	_	_	17	conj	_	_
+19	association	association	NOUN	_	_	14	dep	_	_
+20	des	de+le	ADP	_	_	21	case	_	_
+21	médecins	médecin	NOUN	_	_	19	nmod	_	_
+22	et	et	CCONJ	_	_	23	cc	_	_
+23	de	de	ADP	_	_	21	conj	_	_
+24	de	de	ADP	_	_	21	conj	_	_
+25	de	de	ADP	_	_	26	case	_	_
+26	recherche	recherche	NOUN	_	_	21	conj	_	_
+27	qui	qui	PRON	_	_	29	csubj	_	_
+28	est	être	AUX	_	_	29	aux	_	_
+29	basée	baser	VERB	_	_	19	acl	_	_
+30	ici	ici	ADV	_	_	29	comp	_	_
+31	à	à	ADP	_	_	30	conj	_	_
+32	à	à	ADP	_	_	33	case	_	_
+33	Nairobi	Nairobi	PROPN	_	_	30	conj	_	_
+34	au	à+le	ADP	_	_	35	case	_	_
+35	Kenya	Kenya	PROPN	_	_	30	conj	_	_</conll>
+
+<conll>1	eh	eh	INTJ	_	_	2	discourse	_	_
+2	oui	oui	INTJ	_	_	0	root	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	3	discourse	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	commencé	commencer	VERB	_	_	0	root	_	_
+5	par	par	ADP	_	_	7	mark	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	travailler	travailler	VERB	_	_	4	xcomp	_	_
+8	comme	comme	ADP	_	_	9	case	_	_
+9	médecin	médecin	NOUN	_	_	7	iobj	_	_
+10	de	de	ADP	_	_	11	case	_	_
+11	campagne	campagne	NOUN	_	_	9	nmod	_	_
+12	à	à	ADP	_	_	14	case	_	_
+13	un	un	DET	_	_	14	det	_	_
+14	endroit	endroit	NOUN	_	_	7	obl	_	_
+15	qui	qui	PRON	_	_	17	csubj	_	_
+16	s'	se	PRON	_	_	17	iobj	_	_
+17	appelait	appeler	VERB	_	_	14	acl	_	_
+18	Olkaloo	Olkaloo	PROPN	_	_	17	obj	_	_
+19	juste	juste	ADV	_	_	21	dep	_	_
+20	au	à+le	ADP	_	_	21	case	_	_
+21	sud	sud	NOUN	_	_	14	nmod	_	_
+22	de	de	ADP	_	_	24	case	_	_
+23	l'	le	DET	_	_	24	det	_	_
+24	équateur	équateur	NOUN	_	_	21	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	j'	je	PRON	_	_	5	nsubj	_	_
+3	y	y	PRON	_	_	5	obj	_	_
+4	suis	être	AUX	_	_	5	aux	_	_
+5	restée	rester	VERB	_	_	0	root	_	_
+6	pendant	pendant	ADP	_	_	8	case	_	_
+7	quatorze	quatorze	NUM	_	_	8	nummod	_	_
+8	ans	an	NOUN	_	_	5	obl	_	_
+9	comme	comme	SCONJ	_	_	8	reparandum	_	_
+10	euh	euh	INTJ	_	_	9	discourse	_	_
+11	euh	euh	INTJ	_	_	10	discourse	_	_
+12	sillonnant	sillonner	VERB	_	_	5	ad	_	_
+13	le	le	DET	_	_	16	det	_	_
+14	la	le	DET	_	_	13	conj	_	_
+15	la	le	DET	_	_	13	conj	_	_
+16	région	région	NOUN	_	_	12	obj	_	_
+17	a~	a~	X	_	_	12	advmod	_	_
+18	a~	a~	X	_	_	17	conj	_	_
+19	avec	avec	ADP	_	_	22	case	_	_
+20	euh	euh	INTJ	_	_	19	discourse	_	_
+21	mes	son	DET	_	_	22	det	_	_
+22	Peugeot	Peugeot	PROPN	_	_	17	conj	_	_
+23	successives	successif	ADJ	_	_	22	amod	_	_
+24	qui	qui	PRON	_	_	29	csubj	_	_
+25	sont	être	AUX	_	_	29	cop	_	_
+26	vraiment	vraiment	ADV	_	_	29	ad	_	_
+27	les	le	DET	_	_	29	det	_	_
+28	meilleures	meilleur	NOUN	_	_	29	dep	_	_
+29	voitures	voiture	NOUN	_	_	22	compound	_	_
+30	pour	pour	ADP	_	_	32	case	_	_
+31	le	le	DET	_	_	32	det	_	_
+32	Kenya	Kenya	PROPN	_	_	29	nmod	_	_</conll>
+
+<conll>1	ça	ça	PRON	_	_	6	dislocated	_	_
+2	je	je	PRON	_	_	3	csubj	_	_
+3	dois	devoir	VERB	_	_	1	discourse	_	_
+4	dire	dire	VERB	_	_	3	xcomp	_	_
+5	je	je	PRON	_	_	6	nsubj	_	_
+6	crois	croire	VERB	_	_	0	root	_	_
+7	que	que	SCONJ	_	_	12	mark	_	_
+8	j'	je	PRON	_	_	7	reparandum	_	_
+9	en	en	PRON	_	_	8	reparandum	_	_
+10	j'	je	PRON	_	_	12	csubj	_	_
+11	en	en	PRON	_	_	12	ad	_	_
+12	suis	être	AUX	_	_	6	ccomp	_	_
+13	à	à	ADP	_	_	16	case	_	_
+14	la	le	DET	_	_	16	dep	_	_
+15	la	le	DET	_	_	14	conj	_	_
+16	vingt~	vingt~	NUM	_	_	12	iobj	_	_
+17	vingt-deuxième	NUM	ADJ	_	_	16	conj	_	_
+18	depuis	depuis	ADP	_	_	12	advmod	_	_
+19	depuis	depuis	ADP	_	_	20	case	_	_
+20	que	que	SCONJ	_	_	22	mark	_	_
+21	je	je	PRON	_	_	22	csubj	_	_
+22	suis	être	AUX	_	_	18	conj	_	_
+23	là	là	ADV	_	_	22	comp	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	j'	je	PRON	_	_	3	nsubj	_	_
+3	avais	avoir	VERB	_	_	0	root	_	_
+4	une	un	DET	_	_	5	det	_	_
+5	circonscription	circonscription	NOUN	_	_	3	obj	_	_
+6	un	un	DET	_	_	8	det	_	_
+7	un	un	DET	_	_	6	conj	_	_
+8	rayon	rayon	NOUN	_	_	5	conj	_	_
+9	d'	de	ADP	_	_	10	case	_	_
+10	action	action	NOUN	_	_	8	nmod	_	_
+11	d'	de	ADP	_	_	15	case	_	_
+12	à peu près	à peu près	ADV	_	_	14	dep	_	_
+13	euh	euh	INTJ	_	_	12	discourse	_	_
+14	cent	cent	NUM	_	_	15	nummod	_	_
+15	kilomètres	kilomètre	NOUN	_	_	8	nmod	_	_
+16	tout	tout	ADV	_	_	17	advmod	_	_
+17	autour	autour	ADV	_	_	15	dep	_	_
+18	de	de	ADP	_	_	20	case	_	_
+19	cet	ce	DET	_	_	20	det	_	_
+20	endroit	endroit	NOUN	_	_	17	dep	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	arrivée	arriver	VERB	_	_	0	root	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	au	à+le	ADP	_	_	6	case	_	_
+6	Kenya	Kenya	PROPN	_	_	3	iobj	_	_
+7	je	je	PRON	_	_	8	csubj	_	_
+8	voulais	vouloir	VERB	_	_	3	ad	_	_
+9	travailler	travailler	VERB	_	_	8	xcomp	_	_
+10	d'abord	d'abord	ADV	_	_	8	advmod	_	_
+11	pour	pour	ADP	_	_	13	case	_	_
+12	le	le	DET	_	_	13	det	_	_
+13	gouvernement	gouvernement	NOUN	_	_	9	iobj	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	13	cc	_	_
+2	les	le	DET	_	_	3	det	_	_
+3	postes	poste	NOUN	_	_	13	nsubj	_	_
+4	qu'	que	SCONJ	_	_	8	comp	_	_
+5	ils	il	PRON	_	_	8	csubj	_	_
+6	m'	me	PRON	_	_	8	comp	_	_
+7	ont	avoir	VERB	_	_	8	aux	_	_
+8	f~	f~	X	_	_	3	dep	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	proposés	proposer	VERB	_	_	8	conj	_	_
+11	ne	ne	PART	_	_	13	mark	_	_
+12	me	me	PRON	_	_	13	obj	_	_
+13	plaisaient	plaire	VERB	_	_	0	root	_	_
+14	pas	pas	PART	_	_	13	mark	_	_
+15	beaucoup	beaucoup	ADV	_	_	13	advmod	_	_
+16	excepté	excepté	CCONJ	_	_	17	cc	_	_
+17	Marsabit	Marsabit	PROPN	_	_	13	dislocated	_	_
+18	qui	qui	PRON	_	_	21	csubj	_	_
+19	était	être	AUX	_	_	21	cop	_	_
+20	une	un	DET	_	_	21	det	_	_
+21	espèce	espèce	NOUN	_	_	17	dep	_	_
+22	de	de	ADP	_	_	21	dep	_	_
+23	d'	de	ADP	_	_	24	case	_	_
+24	île	île	NOUN	_	_	22	conj	_	_
+25	dans	dans	ADP	_	_	27	case	_	_
+26	le	le	DET	_	_	27	det	_	_
+27	désert	désert	NOUN	_	_	24	nmod	_	_
+28	tout	tout	ADV	_	_	30	dep	_	_
+29	au	à+le	ADP	_	_	30	case	_	_
+30	nord	nord	NOUN	_	_	27	nmod	_	_
+31	du	de+le	ADP	_	_	32	case	_	_
+32	Kenya	Kenya	PROPN	_	_	30	nmod	_	_
+33	dans	dans	ADP	_	_	35	case	_	_
+34	le	le	DET	_	_	35	det	_	_
+35	désert	désert	NOUN	_	_	27	conj	_	_
+36	du	de+le	ADP	_	_	37	case	_	_
+37	Kenya	Kenya	PROPN	_	_	35	nmod	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	5	advmod	_	_
+2	j'	je	PRON	_	_	5	nsubj	_	_
+3	aurais	avoir	VERB	_	_	5	aux	_	_
+4	beaucoup	beaucoup	ADV	_	_	5	advmod	_	_
+5	aimé	aimer	VERB	_	_	0	root	_	_
+6	aller	aller	VERB	_	_	5	xcomp	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	14	cc	_	_
+2	le	le	DET	_	_	4	det	_	_
+3	le	le	DET	_	_	2	conj	_	_
+4	dis~	dis~	NOUN	_	_	14	nsubj	_	_
+5	le	le	DET	_	_	6	det	_	_
+6	commissaire	commissaire	NOUN	_	_	4	conj	_	_
+7	du	de+le	ADP	_	_	8	case	_	_
+8	district	district	NOUN	_	_	6	nmod	_	_
+9	le	le	DET	_	_	10	det	_	_
+10	préfet	préfet	NOUN	_	_	4	conj	_	_
+11	du	de+le	ADP	_	_	12	case	_	_
+12	lieu	lieu	NOUN	_	_	10	nmod	_	_
+13	ne	ne	PART	_	_	14	mark	_	_
+14	voulait	vouloir	VERB	_	_	0	root	_	_
+15	pas	pas	PART	_	_	14	mark	_	_
+16	de	de	ADP	_	_	14	comp	_	_
+17	de	de	ADP	_	_	18	case	_	_
+18	femme	femme	NOUN	_	_	16	conj	_	_
+19	non	non	INTJ	_	_	18	discourse	_	_
+20	mariée	marier	ADJ	_	_	18	amod	_	_</conll>
+
+<conll>1	parce que	parce que	SCONJ	_	_	4	mark	_	_
+2	il	il	PRON	_	_	4	nsubj	_	_
+3	a	avoir	VERB	_	_	4	aux	_	_
+4	dit	dire	VERB	_	_	0	root	_	_
+5	elles	il	PRON	_	_	6	csubj	_	_
+6	corromp~	corromp~	VERB	_	_	4	ccomp	_	_
+7	elles	il	PRON	_	_	8	csubj	_	_
+8	corrompront	corrompre	VERB	_	_	6	conj	_	_
+9	tous	tout	ADJ	_	_	13	amod	_	_
+10	mes	son	DET	_	_	13	det	_	_
+11	petits	petit	ADJ	_	_	13	amod	_	_
+12	euh	euh	INTJ	_	_	11	discourse	_	_
+13	officiers	officier	NOUN	_	_	8	obj	_	_
+14	de	de	ADP	_	_	15	case	_	_
+15	district	district	NOUN	_	_	13	nmod	_	_
+16	euh	euh	INTJ	_	_	15	discourse	_	_
+17	sans	sans	ADP	_	_	4	advmod	_	_
+18	sans	sans	ADP	_	_	20	mark	_	_
+19	me	me	PRON	_	_	20	obj	_	_
+20	connaître	connaître	VERB	_	_	17	conj	_	_
+21	ni	ni	CCONJ	_	_	22	cc	_	_
+22	rien	rien	PRON	_	_	17	conj	_	_
+23	du tout	du tout	ADV	_	_	22	dep	_	_</conll>
+
+<conll>1	de sorte que	de sorte que	SCONJ	_	_	6	mark	_	_
+2	je	je	PRON	_	_	6	nsubj	_	_
+3	n'	ne	PART	_	_	6	mark	_	_
+4	ai	avoir	VERB	_	_	6	aux	_	_
+5	pas	pas	PART	_	_	6	mark	_	_
+6	pu	pouvoir	VERB	_	_	0	root	_	_
+7	aller	aller	VERB	_	_	6	xcomp	_	_
+8	là	là	ADV	_	_	7	comp	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	advmod	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	décidé	décider	VERB	_	_	0	root	_	_
+5	de	de	ADP	_	_	7	mark	_	_
+6	m'	me	PRON	_	_	7	iobj	_	_
+7	installer	installer	VERB	_	_	4	xcomp	_	_
+8	à	à	ADP	_	_	10	case	_	_
+9	mon	son	DET	_	_	10	det	_	_
+10	compte	compte	NOUN	_	_	7	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	trouvé	trouver	VERB	_	_	0	root	_	_
+5	cet	ce	DET	_	_	6	det	_	_
+6	endroit	endroit	NOUN	_	_	4	obj	_	_
+7	Olkaloo	Olkaloo	PROPN	_	_	6	conj	_	_
+8	où	où	PRON	_	_	10	advmod	_	_
+9	ils	il	PRON	_	_	10	csubj	_	_
+10	avaient	avoir	VERB	_	_	7	acl	_	_
+11	besoin	besoin	NOUN	_	_	10	obj	_	_
+12	d'	de	ADP	_	_	14	case	_	_
+13	un	un	DET	_	_	14	det	_	_
+14	médecin	médecin	NOUN	_	_	11	nmod	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	restée	rester	VERB	_	_	0	root	_	_
+4	là	là	ADV	_	_	3	comp	_	_
+5	quatorze	quatorze	NUM	_	_	6	nummod	_	_
+6	ans	an	NOUN	_	_	3	ad	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	advmod	_	_
+2	on	on	PRON	_	_	3	nsubj	_	_
+3	va	aller	VERB	_	_	0	root	_	_
+4	faire	faire	VERB	_	_	3	xcomp	_	_
+5	un	un	DET	_	_	7	det	_	_
+6	petit	petit	ADJ	_	_	7	amod	_	_
+7	retour	retour	NOUN	_	_	4	obj	_	_
+8	dans	dans	ADP	_	_	7	dep	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	en arrière	en arrière	ADV	_	_	8	conj	_	_</conll>
+
+<conll>1	oui	oui	ADV	_	_	2	discourse	_	_
+2	puisque	puisque	SCONJ	_	_	5	mark	_	_
+3	finalement	finalement	ADV	_	_	2	discourse	_	_
+4	ça	ça	PRON	_	_	5	nsubj	_	_
+5	fait	faire	VERB	_	_	0	root	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	quarante-huit	quarante-huit	NUM	_	_	8	nummod	_	_
+8	ans	an	NOUN	_	_	5	obj	_	_
+9	que	que	SCONJ	_	_	11	mark	_	_
+10	vous	vous	PRON	_	_	11	csubj	_	_
+11	êtes	être	AUX	_	_	5	ccomp	_	_
+12	au	à+le	ADP	_	_	13	case	_	_
+13	Kenya	Kenya	PROPN	_	_	11	iobj	_	_
+14	quarante-huit	quarante-huit	NUM	_	_	15	nummod	_	_
+15	ans	an	NOUN	_	_	8	conj	_	_</conll>
+
+<conll>1	oui	oui	ADV	_	_	0	root	_	_
+2	oui	oui	ADV	_	_	1	conj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	arrivée	arriver	VERB	_	_	0	root	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	la	le	DET	_	_	7	det	_	_
+6	première	premier	ADJ	_	_	7	amod	_	_
+7	fois	fois	NOUN	_	_	3	ad	_	_
+8	en	en	ADP	_	_	9	case	_	_
+9	quarante-neuf	quarante-neuf	NUM	_	_	3	nummod	_	_
+10	euh	euh	INTJ	_	_	9	discourse	_	_
+11	juste	juste	ADV	_	_	13	dep	_	_
+12	par	par	ADP	_	_	13	case	_	_
+13	hasard	hasard	NOUN	_	_	3	obl	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	5	nsubj	_	_
+2	j'	je	PRON	_	_	1	conj	_	_
+3	y	y	PRON	_	_	5	ad	_	_
+4	ai	avoir	VERB	_	_	5	aux	_	_
+5	passé	passer	VERB	_	_	0	root	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	deux	deux	NUM	_	_	8	nummod	_	_
+8	semaines	semaine	NOUN	_	_	5	obj	_	_</conll>
+
+<conll>1	j'	je	PRON	_	_	3	nsubj	_	_
+2	ai	avoir	VERB	_	_	3	aux	_	_
+3	trouvé	trouver	VERB	_	_	0	root	_	_
+4	que	que	SCONJ	_	_	8	mark	_	_
+5	c'	ce	PRON	_	_	8	csubj	_	_
+6	était	être	AUX	_	_	8	cop	_	_
+7	un	un	DET	_	_	8	det	_	_
+8	pays	pays	NOUN	_	_	3	ccomp	_	_
+9	formidable	formidable	ADJ	_	_	8	amod	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	venue	venir	VERB	_	_	0	root	_	_
+4	m'	me	PRON	_	_	6	iobj	_	_
+5	y	y	PRON	_	_	6	iobj	_	_
+6	installer	installer	VERB	_	_	3	xcomp	_	_
+7	fin	fin	NOUN	_	_	6	ad	_	_
+8	cinquante	cinquante	NUM	_	_	7	nummod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	7	advmod	_	_
+2	en	en	ADP	_	_	7	parataxis	_	_
+3	fait	fait	NOUN	_	_	2	fixed	_	_
+4	vous	vous	PRON	_	_	7	nsubj	_	_
+5	êtes	être	AUX	_	_	7	aux	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	liée	lier	VERB	_	_	0	root	_	_
+8	à	à	ADP	_	_	10	case	_	_
+9	la	le	DET	_	_	10	det	_	_
+10	France	France	PROPN	_	_	7	iobj	_	_
+11	puisque	puisque	SCONJ	_	_	7	parataxis	_	_
+12	vous	vous	PRON	_	_	14	csubj	_	_
+13	êtes	être	AUX	_	_	14	cop	_	_
+14	française	français	ADJ	_	_	11	dep	_	_</conll>
+
+<conll>1	ah	ah	INTJ	_	_	5	discourse	_	_
+2	oui	oui	ADV	_	_	1	discourse	_	_
+3	oui	oui	ADV	_	_	2	conj	_	_
+4	je	je	PRON	_	_	6	nsubj	_	_
+5	suis	être	AUX	_	_	6	cop	_	_
+6	française	français	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	vous	vous	PRON	_	_	2	nsubj	_	_
+2	êtes	être	AUX	_	_	0	root	_	_
+3	euh	euh	INTJ	_	_	2	discourse	_	_
+4	de	de	ADP	_	_	6	case	_	_
+5	l'	le	DET	_	_	6	det	_	_
+6	est	est	NOUN	_	_	2	iobj	_	_
+7	de	de	ADP	_	_	9	case	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	France	France	PROPN	_	_	6	nmod	_	_</conll>
+
+<conll>1	vous	vous	PRON	_	_	3	nsubj	_	_
+2	êtes	être	AUX	_	_	3	aux	_	_
+3	née	naître	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	6	case	_	_
+5	quel	quel	PRON	_	_	6	det	_	_
+6	endroit	endroit	NOUN	_	_	3	obl	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	née	naître	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	Cannes	Cannes	PROPN	_	_	3	obl	_	_
+6	pendant	pendant	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	guerre	guerre	NOUN	_	_	3	obl	_	_</conll>
+
+<conll>1	à	à	ADP	_	_	3	case	_	_
+2	la	le	DET	_	_	3	det	_	_
+3	fin	fin	NOUN	_	_	11	parataxis	_	_
+4	de	de	ADP	_	_	6	case	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	guerre	guerre	NOUN	_	_	3	nmod	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	dix-huit	dix-huit	NUM	_	_	6	nummod	_	_
+9	mon	son	DET	_	_	10	det	_	_
+10	père	père	NOUN	_	_	11	nsubj	_	_
+11	était	être	AUX	_	_	0	root	_	_
+12	au	à+le	ADP	_	_	13	case	_	_
+13	front	front	NOUN	_	_	11	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	nous	nous	PRON	_	_	4	nsubj	_	_
+3	avons	avoir	VERB	_	_	4	aux	_	_
+4	été	être	AUX	_	_	0	root	_	_
+5	chassés	chasser	VERB	_	_	4	aux	_	_
+6	d'	de	ADP	_	_	7	case	_	_
+7	A~	A~	PROPN	_	_	5	iobj	_	_
+8	d'	de	ADP	_	_	9	case	_	_
+9	Alsace	Alsace	PROPN	_	_	7	conj	_	_
+10	naturellement	naturellement	ADV	_	_	4	advmod	_	_</conll>
+
+<conll>1	vous	vous	PRON	_	_	3	nsubj	_	_
+2	êtes	être	AUX	_	_	3	aux	_	_
+3	née	naître	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	Cannes	Cannes	PROPN	_	_	3	obl	_	_</conll>
+
+<conll>1	et puis	et puis	CCONJ	_	_	5	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	finalement	finalement	ADV	_	_	5	advmod	_	_
+4	vous	vous	PRON	_	_	5	nsubj	_	_
+5	avez	avoir	VERB	_	_	0	root	_	_
+6	on	on	PRON	_	_	8	nsubj	_	_
+7	est	être	AUX	_	_	8	aux	_	_
+8	rentrés	rentrer	VERB	_	_	0	root	_	_
+9	vous	vous	PRON	_	_	11	csubj	_	_
+10	êtes	être	AUX	_	_	11	aux	_	_
+11	repartie	repartir	VERB	_	_	5	conj	_	_
+12	vers	vers	ADP	_	_	13	case	_	_
+13	Mulhouse	Mulhouse	PROPN	_	_	11	iobj	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	aux	_	_
+3	repartis	repartir	VERB	_	_	0	root	_	_
+4	vers	vers	ADP	_	_	5	case	_	_
+5	Mulhouse	Mulhouse	PROPN	_	_	3	iobj	_	_</conll>
+
+<conll>1	mes	son	DET	_	_	2	det	_	_
+2	souvenirs	souvenir	NOUN	_	_	6	nsubj	_	_
+3	les	le	DET	_	_	4	dep	_	_
+4	plus	plus	ADV	_	_	5	advmod	_	_
+5	anciens	ancien	ADJ	_	_	2	amod	_	_
+6	sont	être	AUX	_	_	0	root	_	_
+7	je	je	PRON	_	_	8	csubj	_	_
+8	crois	croire	VERB	_	_	6	discourse	_	_
+9	des	de+le	ADP	_	_	10	case	_	_
+10	souvenirs	souvenir	NOUN	_	_	6	iobj	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	Mulhouse	Mulhouse	PROPN	_	_	10	nmod	_	_
+13	sûrement	sûrement	ADV	_	_	14	dep	_	_
+14	pas	pas	PART	_	_	16	dep	_	_
+15	de	de	ADP	_	_	16	case	_	_
+16	Cannes	Cannes	PROPN	_	_	12	conj	_	_</conll>
+
+<conll>1	et puis	et puis	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	fait	faire	VERB	_	_	0	root	_	_
+5	mes	son	DET	_	_	6	det	_	_
+6	études	étude	NOUN	_	_	4	obj	_	_
+7	au	à+le	ADP	_	_	8	case	_	_
+8	lycée	lycée	NOUN	_	_	4	iobj	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	de	de	ADP	_	_	11	case	_	_
+11	Mulhouse	Mulhouse	PROPN	_	_	8	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	été	être	AUX	_	_	0	root	_	_
+5	deux	deux	NUM	_	_	6	nummod	_	_
+6	ans	an	NOUN	_	_	4	ad	_	_
+7	en	en	ADP	_	_	4	comp	_	_
+8	en	en	ADP	_	_	9	case	_	_
+9	Angleterre	Angleterre	PROPN	_	_	7	conj	_	_
+10	en	en	ADP	_	_	4	advmod	_	_
+11	en	en	ADP	_	_	10	conj	_	_
+12	en	en	ADP	_	_	13	case	_	_
+13	trente	trente	NUM	_	_	10	nummod	_	_
+14	trente-et-un	NUM	NUM	_	_	10	nummod	_	_
+15	trente-deux	trente-deux	NUM	_	_	10	nummod	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	là	là	ADV	_	_	2	comp	_	_
+4	que	que	SCONJ	_	_	6	mark	_	_
+5	j'	je	PRON	_	_	6	csubj	_	_
+6	ai	avoir	VERB	_	_	2	ccomp	_	_
+7	j'	je	PRON	_	_	10	csubj	_	_
+8	ai	avoir	VERB	_	_	10	aux	_	_
+9	bien	bien	ADV	_	_	10	advmod	_	_
+10	appris	apprendre	VERB	_	_	6	conj	_	_
+11	l'	le	DET	_	_	12	det	_	_
+12	anglais	anglais	NOUN	_	_	10	obj	_	_</conll>
+
+<conll>1	ce	ce	PRON	_	_	0	root	_	_
+2	qui	qui	PRON	_	_	6	csubj	_	_
+3	m'	me	PRON	_	_	6	obj	_	_
+4	a	avoir	VERB	_	_	6	aux	_	_
+5	beaucoup	beaucoup	ADV	_	_	6	advmod	_	_
+6	aidée	aider	VERB	_	_	1	acl	_	_
+7	naturellement	naturellement	ADV	_	_	1	advmod	_	_</conll>
+
+<conll>1	et puis	et puis	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	fini	finir	VERB	_	_	0	root	_	_
+5	mes	son	DET	_	_	6	det	_	_
+6	études	étude	NOUN	_	_	4	obj	_	_
+7	à	à	ADP	_	_	8	case	_	_
+8	Mulhouse	Mulhouse	PROPN	_	_	4	obl	_	_</conll>
+
+<conll>1	j~	j~	PRON	_	_	3	nsubj	_	_
+2	j'	je	PRON	_	_	1	conj	_	_
+3	ai	avoir	VERB	_	_	0	root	_	_
+4	j'	je	PRON	_	_	6	csubj	_	_
+5	ai	avoir	VERB	_	_	6	aux	_	_
+6	fait	faire	VERB	_	_	3	conj	_	_
+7	mon	son	DET	_	_	8	det	_	_
+8	PCB	PCB	PROPN	_	_	6	obj	_	_
+9	à	à	ADP	_	_	10	case	_	_
+10	Paris	Paris	PROPN	_	_	6	obl	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	voulais	vouloir	VERB	_	_	0	root	_	_
+3	retourner	retourner	VERB	_	_	2	xcomp	_	_
+4	à	à	ADP	_	_	3	comp	_	_
+5	à	à	ADP	_	_	6	case	_	_
+6	Strasbourg	Strasbourg	PROPN	_	_	4	conj	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	lâché	lâcher	VERB	_	_	0	root	_	_
+5	ça	ça	PRON	_	_	4	obj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	suis	être	AUX	_	_	3	aux	_	_
+3	restée	rester	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	Paris	Paris	PROPN	_	_	3	iobj	_	_</conll>
+
+<conll>1	une fois qu'	une fois que	SCONJ	_	_	4	mark	_	_
+2	on	on	PRON	_	_	4	csubj	_	_
+3	a	avoir	VERB	_	_	4	aux	_	_
+4	goûté	goûter	VERB	_	_	7	parataxis	_	_
+5	Paris	Paris	PROPN	_	_	4	obj	_	_
+6	on	on	PRON	_	_	7	nsubj	_	_
+7	veut	vouloir	VERB	_	_	0	root	_	_
+8	plus	plus	PART	_	_	7	mark	_	_
+9	aller	aller	VERB	_	_	7	xcomp	_	_
+10	à	à	ADP	_	_	12	case	_	_
+11	la	le	DET	_	_	12	det	_	_
+12	province	province	NOUN	_	_	9	iobj	_	_
+13	ah bon	ah bon	INTJ	_	_	12	discourse	_	_
+14	pour	pour	ADP	_	_	16	case	_	_
+15	des	de+le	ADP	_	_	16	case	_	_
+16	études	étude	NOUN	_	_	9	obl	_	_
+17	non	non	INTJ	_	_	16	discourse	_	_
+18	pour	pour	ADP	_	_	20	case	_	_
+19	les	le	DET	_	_	20	det	_	_
+20	études	étude	NOUN	_	_	16	conj	_	_
+21	ouais	ouais	INTJ	_	_	20	discourse	_	_
+22	sûrement	sûrement	ADV	_	_	7	advmod	_	_
+23	sûrement	sûrement	ADV	_	_	22	conj	_	_
+24	ouais	ouais	INTJ	_	_	23	discourse	_	_
+25	ouais	ouais	INTJ	_	_	24	conj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	advmod	_	_
+2	là	là	ADV	_	_	4	advmod	_	_
+3	vous	vous	PRON	_	_	4	nsubj	_	_
+4	faisiez	faire	VERB	_	_	0	root	_	_
+5	des	de+le	ADP	_	_	6	case	_	_
+6	études	étude	NOUN	_	_	4	iobj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	médecine	médecine	NOUN	_	_	6	nmod	_	_
+9	déjà	déjà	ADV	_	_	4	advmod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	advmod	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	fait	faire	VERB	_	_	0	root	_	_
+5	mes	son	DET	_	_	6	det	_	_
+6	études	étude	NOUN	_	_	4	obj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	médecine	médecine	NOUN	_	_	6	nmod	_	_
+9	à	à	ADP	_	_	10	case	_	_
+10	Paris	Paris	PROPN	_	_	4	obl	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	7	cc	_	_
+2	après	après	ADP	_	_	4	case	_	_
+3	la	le	DET	_	_	4	det	_	_
+4	guerre	guerre	NOUN	_	_	7	parataxis	_	_
+5	je	je	PRON	_	_	7	nsubj	_	_
+6	suis	être	AUX	_	_	7	aux	_	_
+7	venue	venir	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	parce que	parce que	SCONJ	_	_	4	mark	_	_
+2	il	il	PRON	_	_	4	expl	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	avait	avoir	VERB	_	_	0	root	_	_
+5	toujours	toujours	ADV	_	_	4	advmod	_	_
+6	dep~	dep~	ADP	_	_	5	dep	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	8	advmod	_	_
+2	depuis	depuis	ADP	_	_	5	case	_	_
+3	avant	avant	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	guerre	guerre	NOUN	_	_	8	parataxis	_	_
+6	j'	je	PRON	_	_	8	nsubj	_	_
+7	avais	avoir	VERB	_	_	8	aux	_	_
+8	rencontré	rencontrer	VERB	_	_	0	root	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	Monfreid	Monfreid	PROPN	_	_	8	obj	_	_
+11	Henry	Henry	PROPN	_	_	10	conj	_	_
+12	de	de	ADP	_	_	13	case	_	_
+13	Monfreid	Monfreid	PROPN	_	_	11	nmod	_	_
+14	qui	qui	PRON	_	_	15	csubj	_	_
+15	venait	venir	VERB	_	_	11	acl	_	_
+16	faire	faire	VERB	_	_	15	xcomp	_	_
+17	des	de+le	ADP	_	_	18	case	_	_
+18	conférences	conférence	NOUN	_	_	16	iobj	_	_
+19	à	à	ADP	_	_	16	advmod	_	_
+20	à	à	ADP	_	_	21	case	_	_
+21	Mulhouse	Mulhouse	PROPN	_	_	19	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	7	cc	_	_
+2	et	et	CCONJ	_	_	7	conj	_	_
+3	et	et	CCONJ	_	_	7	conj	_	_
+4	c'	ce	PRON	_	_	7	nsubj	_	_
+5	est	être	AUX	_	_	7	cop	_	_
+6	un	un	DET	_	_	7	det	_	_
+7	type	type	NOUN	_	_	0	root	_	_
+8	euh	euh	INTJ	_	_	7	discourse	_	_
+9	passionnant	passionnant	ADJ	_	_	7	amod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	j'	je	PRON	_	_	5	nsubj	_	_
+3	ai	avoir	VERB	_	_	5	aux	_	_
+4	toujours	toujours	ADV	_	_	5	advmod	_	_
+5	lu	lire	VERB	_	_	0	root	_	_
+6	tous	tout	ADJ	_	_	8	amod	_	_
+7	ses	son	DET	_	_	8	det	_	_
+8	livres	livre	NOUN	_	_	5	obj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	j'	je	PRON	_	_	3	nsubj	_	_
+3	avais	avoir	VERB	_	_	0	root	_	_
+4	absolument	absolument	ADV	_	_	3	advmod	_	_
+5	envie	envie	NOUN	_	_	3	obj	_	_
+6	d'	de	ADP	_	_	7	mark	_	_
+7	aller	aller	VERB	_	_	5	acl	_	_
+8	dans	dans	ADP	_	_	10	case	_	_
+9	la	le	DET	_	_	10	det	_	_
+10	corne	corne	NOUN	_	_	7	iobj	_	_
+11	de	de	ADP	_	_	13	case	_	_
+12	l'	le	DET	_	_	13	det	_	_
+13	Afrique	Afrique	PROPN	_	_	10	nmod	_	_
+14	la	le	DET	_	_	16	det	_	_
+15	l'	le	DET	_	_	14	conj	_	_
+16	Ethiopie	Ethiopie	PROPN	_	_	10	conj	_	_
+17	la	le	DET	_	_	18	det	_	_
+18	Somalie	Somalie	PROPN	_	_	10	conj	_	_
+19	euh	euh	INTJ	_	_	18	discourse	_	_
+20	l'	le	DET	_	_	21	det	_	_
+21	Ora~	Ora~	PROPN	_	_	10	conj	_	_
+22	l'	le	DET	_	_	23	det	_	_
+23	Arabie	Arabie	PROPN	_	_	10	conj	_	_
+24	tout	tout	ADJ	_	_	25	amod	_	_
+25	ça	ça	PRON	_	_	23	conj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	2	nsubj	_	_
+2	était	être	AUX	_	_	0	root	_	_
+3	c'	ce	PRON	_	_	4	csubj	_	_
+4	ét~	ét~	VERB	_	_	2	conj	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	3	advmod	_	_
+2	je	je	PRON	_	_	3	nsubj	_	_
+3	voulais	vouloir	VERB	_	_	0	root	_	_
+4	y	y	PRON	_	_	5	obj	_	_
+5	aller	aller	VERB	_	_	3	xcomp	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	12	cc	_	_
+2	à	à	ADP	_	_	3	case	_	_
+3	Cavalaire	Cavalaire	PROPN	_	_	12	parataxis	_	_
+4	Pardigon	Pardigon	PROPN	_	_	3	flat	_	_
+5	où	où	PRON	_	_	7	obj	_	_
+6	nous	nous	PRON	_	_	7	csubj	_	_
+7	allions	allier	VERB	_	_	3	acl	_	_
+8	en	en	ADP	_	_	9	case	_	_
+9	été	été	NOUN	_	_	7	obl	_	_
+10	il	il	PRON	_	_	12	expl	_	_
+11	y	y	PRON	_	_	12	expl	_	_
+12	avait	avoir	VERB	_	_	0	root	_	_
+13	une	un	DET	_	_	14	det	_	_
+14	famille	famille	NOUN	_	_	12	obj	_	_
+15	amie	ami	ADJ	_	_	14	amod	_	_
+16	à	à	ADP	_	_	17	case	_	_
+17	nous	lui	PRON	_	_	15	obl	_	_
+18	euh	euh	INTJ	_	_	17	discourse	_	_
+19	les	le	DET	_	_	20	det	_	_
+20	Besse	Besse	PROPN	_	_	15	conj	_	_
+21	et	et	CCONJ	_	_	23	cc	_	_
+22	qui	qui	PRON	_	_	23	csubj	_	_
+23	avait	avoir	VERB	_	_	15	conj	_	_
+24	un	un	DET	_	_	25	det	_	_
+25	empire	empire	NOUN	_	_	23	obj	_	_
+26	commercial	commercial	ADJ	_	_	25	amod	_	_
+27	je	je	PRON	_	_	28	csubj	_	_
+28	veux	vouloir	VERB	_	_	26	discourse	_	_
+29	dire	dire	VERB	_	_	28	xcomp	_	_
+30	surtout	surtout	ADV	_	_	31	dep	_	_
+31	à	à	ADP	_	_	23	advmod	_	_
+32	à	à	ADP	_	_	33	case	_	_
+33	Aden	Aden	PROPN	_	_	31	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	8	cc	_	_
+2	après	après	ADP	_	_	4	case	_	_
+3	la	le	DET	_	_	4	det	_	_
+4	guerre	guerre	NOUN	_	_	8	parataxis	_	_
+5	il	il	PRON	_	_	8	nsubj	_	_
+6	m'	me	PRON	_	_	8	iobj	_	_
+7	a	avoir	VERB	_	_	8	aux	_	_
+8	invitée	inviter	VERB	_	_	0	root	_	_
+9	à	à	ADP	_	_	10	mark	_	_
+10	venir	venir	VERB	_	_	8	xcomp	_	_
+11	euh	euh	INTJ	_	_	10	discourse	_	_
+12	à	à	ADP	_	_	10	comp	_	_
+13	à	à	ADP	_	_	14	case	_	_
+14	Aden	Aden	PROPN	_	_	12	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	je	je	PRON	_	_	4	nsubj	_	_
+3	suis	être	AUX	_	_	4	aux	_	_
+4	restée	rester	VERB	_	_	0	root	_	_
+5	là	là	ADV	_	_	4	comp	_	_
+6	presqu'	presque	ADV	_	_	8	dep	_	_
+7	un	un	DET	_	_	8	det	_	_
+8	an	an	NOUN	_	_	4	ad	_	_</conll>
+
+<conll>1	j'	je	PRON	_	_	3	nsubj	_	_
+2	ai	avoir	VERB	_	_	3	aux	_	_
+3	travaillé	travailler	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	6	case	_	_
+5	l'	le	DET	_	_	6	det	_	_
+6	hôpital	hôpital	NOUN	_	_	3	obl	_	_
+7	d'	de	ADP	_	_	8	case	_	_
+8	Aden	Aden	PROPN	_	_	6	nmod	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	4	nsubj	_	_
+2	m'	me	PRON	_	_	4	iobj	_	_
+3	a	avoir	VERB	_	_	4	aux	_	_
+4	demandé	demander	VERB	_	_	0	root	_	_
+5	de	de	ADP	_	_	7	mark	_	_
+6	le	le	PRON	_	_	7	obj	_	_
+7	faire	faire	VERB	_	_	4	xcomp	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	3	cc	_	_
+2	vous	vous	PRON	_	_	3	nsubj	_	_
+3	étiez	être	AUX	_	_	0	root	_	_
+4	auprès des	auprès de	ADP	_	_	5	case	_	_
+5	femmes	femme	NOUN	_	_	3	iobj	_	_
+6	alors	alors	ADV	_	_	5	discourse	_	_
+7	là-bas	là-bas	ADV	_	_	3	advmod	_	_</conll>
+
+<conll>1	ah	ah	INTJ	_	_	3	discourse	_	_
+2	oui	oui	INTJ	_	_	1	discourse	_	_
+3	naturellement	naturellement	ADV	_	_	0	root	_	_</conll>
+
+<conll>1	parce que	parce que	SCONJ	_	_	8	mark	_	_
+2	la	le	DET	_	_	1	dep	_	_
+3	seule	seul	ADJ	_	_	2	reparandum	_	_
+4	la	le	DET	_	_	6	det	_	_
+5	seule	seul	ADJ	_	_	6	amod	_	_
+6	médecin	médecin	NOUN	_	_	8	nsubj	_	_
+7	femme	femme	NOUN	_	_	6	compound	_	_
+8	a	avoir	VERB	_	_	0	root	_	_
+9	avait	avoir	VERB	_	_	8	conj	_	_
+10	été	être	AUX	_	_	9	aux	_	_
+11	est	être	AUX	_	_	10	conj	_	_
+12	tombée	tomber	VERB	_	_	11	aux	_	_
+13	malade	malade	ADJ	_	_	12	comp	_	_
+14	était	être	AUX	_	_	12	conj	_	_
+15	rentrée	rentrer	VERB	_	_	14	aux	_	_
+16	en	en	ADP	_	_	17	case	_	_
+17	Angleterre	Angleterre	PROPN	_	_	15	iobj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	5	discourse	_	_
+2	comme	comme	ADP	_	_	3	case	_	_
+3	ça	ça	PRON	_	_	6	parataxis	_	_
+4	j'	je	PRON	_	_	6	nsubj	_	_
+5	ai	avoir	VERB	_	_	6	aux	_	_
+6	travaillé	travailler	VERB	_	_	0	root	_	_
+7	pendant	pendant	ADP	_	_	6	advmod	_	_
+8	jusqu'	jusque	ADP	_	_	7	conj	_	_
+9	au	à+le	ADP	_	_	10	case	_	_
+10	moment	moment	NOUN	_	_	8	dep	_	_
+11	où	où	PRON	_	_	15	advmod	_	_
+12	il	il	PRON	_	_	15	expl	_	_
+13	y	y	PRON	_	_	15	expl	_	_
+14	a	avoir	VERB	_	_	15	aux	_	_
+15	eu	avoir	VERB	_	_	10	acl	_	_
+16	une	un	DET	_	_	17	det	_	_
+17	remplaçante	remplaçant	NOUN	_	_	15	obj	_	_
+18	qui	qui	PRON	_	_	19	csubj	_	_
+19	est	être	AUX	_	_	17	acl	_	_
+20	qui	qui	PRON	_	_	22	csubj	_	_
+21	est	être	AUX	_	_	22	aux	_	_
+22	venue	venir	VERB	_	_	19	conj	_	_
+23	d'	de	ADP	_	_	24	case	_	_
+24	Angleterre	Angleterre	PROPN	_	_	22	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	moi	lui	PRON	_	_	5	dislocated	_	_
+3	je	je	PRON	_	_	5	nsubj	_	_
+4	suis	être	AUX	_	_	5	aux	_	_
+5	allée	aller	VERB	_	_	0	root	_	_
+6	en	en	ADP	_	_	7	case	_	_
+7	Ethiopie	Ethiopie	PROPN	_	_	5	iobj	_	_
+8	pour	pour	ADP	_	_	9	mark	_	_
+9	essayer	essayer	VERB	_	_	5	advcl	_	_
+10	de	de	ADP	_	_	11	mark	_	_
+11	trouver	trouver	VERB	_	_	9	xcomp	_	_
+12	une	un	DET	_	_	13	det	_	_
+13	place	place	NOUN	_	_	11	obj	_	_
+14	dans	dans	ADP	_	_	16	case	_	_
+15	le	le	DET	_	_	16	det	_	_
+16	gouvernement	gouvernement	NOUN	_	_	11	obl	_	_
+17	euh	euh	INTJ	_	_	16	discourse	_	_
+18	éthiopien	éthiopien	ADJ	_	_	16	amod	_	_
+19	comme	comme	ADP	_	_	20	case	_	_
+20	médecin	médecin	NOUN	_	_	11	obl	_	_
+21	d'	de	ADP	_	_	22	case	_	_
+22	hôpital	hôpital	NOUN	_	_	20	nmod	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	4	nsubj	_	_
+2	m'	me	PRON	_	_	4	iobj	_	_
+3	ont	avoir	VERB	_	_	4	aux	_	_
+4	dit	dire	VERB	_	_	0	root	_	_
+5	malheureusement	malheureusement	ADV	_	_	10	advmod	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	toutes	tout	ADJ	_	_	9	amod	_	_
+8	nos	son	DET	_	_	9	det	_	_
+9	places	place	NOUN	_	_	10	csubj	_	_
+10	sont	être	AUX	_	_	4	ccomp	_	_
+11	occupées	occuper	VERB	_	_	10	aux	_	_
+12	et	et	CCONJ	_	_	14	cc	_	_
+13	nous	nous	PRON	_	_	14	csubj	_	_
+14	avons	avoir	VERB	_	_	10	conj	_	_
+15	nous	nous	PRON	_	_	17	csubj	_	_
+16	n'	ne	PART	_	_	17	mark	_	_
+17	avons	avoir	VERB	_	_	10	conj	_	_
+18	pas	pas	PART	_	_	17	mark	_	_
+19	besoin	besoin	NOUN	_	_	17	obj	_	_
+20	de	de	ADP	_	_	21	case	_	_
+21	docteur	docteur	NOUN	_	_	19	nmod	_	_</conll>
+
+<conll>1	j'	je	PRON	_	_	3	nsubj	_	_
+2	ai	avoir	VERB	_	_	3	aux	_	_
+3	dit	dire	VERB	_	_	0	root	_	_
+4	combien	combien	PRON	_	_	5	obj	_	_
+5	avez	avoir	VERB	_	_	3	ccomp	_	_
+6	vous	vous	PRON	_	_	5	csubj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	docteurs	docteur	NOUN	_	_	4	dep	_	_
+9	dans	dans	ADP	_	_	5	advmod	_	_
+10	dans	dans	ADP	_	_	12	case	_	_
+11	le	le	DET	_	_	12	det	_	_
+12	gouvernement	gouvernement	NOUN	_	_	9	conj	_	_</conll>
+
+<conll>1	eh bien	eh bien	INTJ	_	_	4	discourse	_	_
+2	nous	nous	PRON	_	_	4	nsubj	_	_
+3	en	en	PRON	_	_	5	comp	_	_
+4	avons	avoir	VERB	_	_	0	root	_	_
+5	vingt-neuf	vingt-neuf	NUM	_	_	4	nummod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	advmod	_	_
+2	vous	vous	PRON	_	_	4	nsubj	_	_
+3	vous	vous	PRON	_	_	4	obj	_	_
+4	rendez	rendre	VERB	_	_	0	root	_	_
+5	compte	compte	NOUN	_	_	4	obj	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	5	nsubj	_	_
+2	étaient	être	AUX	_	_	5	cop	_	_
+3	déjà	déjà	ADV	_	_	5	ad	_	_
+4	quinze	quinze	NUM	_	_	5	nummod	_	_
+5	millions	million	NOUN	_	_	0	root	_	_
+6	à peu près	à peu près	ADV	_	_	5	dep	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	2	nsubj	_	_
+2	avaient	avoir	VERB	_	_	0	root	_	_
+3	vingt-neuf	vingt-neuf	NUM	_	_	4	nummod	_	_
+4	docteurs	docteur	NOUN	_	_	2	obj	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	ils	il	PRON	_	_	4	nsubj	_	_
+3	ont	avoir	VERB	_	_	4	aux	_	_
+4	dit	dire	VERB	_	_	0	root	_	_
+5	venez	venir	VERB	_	_	4	ccomp	_	_
+6	venez	venir	VERB	_	_	5	conj	_	_
+7	vous	vous	PRON	_	_	8	iobj	_	_
+8	installer	installer	VERB	_	_	6	xcomp	_	_
+9	à	à	ADP	_	_	10	case	_	_
+10	vos	son	DET	_	_	8	iobj	_	_
+11	vos	son	DET	_	_	10	conj	_	_
+12	nous	nous	PRON	_	_	13	csubj	_	_
+13	se~	se~	VERB	_	_	5	conj	_	_
+14	nous	nous	PRON	_	_	17	csubj	_	_
+15	serons	être	AUX	_	_	17	cop	_	_
+16	très	très	ADV	_	_	17	advmod	_	_
+17	heureux	heureux	ADJ	_	_	5	conj	_	_
+18	si	si	SCONJ	_	_	17	ad	_	_
+19	vous	vous	PRON	_	_	20	csubj	_	_
+20	voulez	vouloir	VERB	_	_	18	dep	_	_
+21	vous	vous	PRON	_	_	22	obj	_	_
+22	installer	installer	VERB	_	_	20	xcomp	_	_
+23	à	à	ADP	_	_	22	advmod	_	_
+24	à	à	ADP	_	_	26	case	_	_
+25	vos	son	DET	_	_	26	det	_	_
+26	frais	frais	NOUN	_	_	23	conj	_	_
+27	n'importe où	n'importe où	ADV	_	_	22	advmod	_	_
+28	euh	euh	INTJ	_	_	27	discourse	_	_
+29	on	on	PRON	_	_	32	csubj	_	_
+30	on	on	PRON	_	_	29	conj	_	_
+31	on	on	PRON	_	_	29	conj	_	_
+32	voudrait	vouloir	VERB	_	_	15	conj	_	_
+33	bien	bien	ADV	_	_	32	advmod	_	_
+34	que	que	SCONJ	_	_	36	mark	_	_
+35	vous	vous	PRON	_	_	36	csubj	_	_
+36	fassiez	faire	VERB	_	_	32	ccomp	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	discourse	_	_
+2	j'	je	PRON	_	_	3	nsubj	_	_
+3	a~	a~	X	_	_	0	root	_	_
+4	j'	je	PRON	_	_	5	csubj	_	_
+5	avais	avoir	VERB	_	_	3	conj	_	_
+6	beaucoup	beaucoup	ADV	_	_	5	advmod	_	_
+7	j'	je	PRON	_	_	8	csubj	_	_
+8	avais	avoir	VERB	_	_	3	conj	_	_
+9	beaucoup	beaucoup	ADV	_	_	10	advmod	_	_
+10	trop	trop	ADV	_	_	11	dep	_	_
+11	peur	peur	NOUN	_	_	8	obj	_	_
+12	de	de	ADP	_	_	14	mark	_	_
+13	m'	me	PRON	_	_	14	obj	_	_
+14	installer	installer	VERB	_	_	11	acl	_	_
+15	comme	comme	ADP	_	_	16	case	_	_
+16	ça	ça	PRON	_	_	14	obl	_	_
+17	seule	seul	ADJ	_	_	14	advmod	_	_
+18	de~	de~	X	_	_	14	advmod	_	_
+19	dans	dans	ADP	_	_	21	case	_	_
+20	la	le	DET	_	_	21	det	_	_
+21	brousse	brousse	NOUN	_	_	18	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	je	je	PRON	_	_	3	nsubj	_	_
+3	voulais	vouloir	VERB	_	_	0	root	_	_
+4	pas	pas	PART	_	_	3	mark	_	_
+5	aller	aller	VERB	_	_	3	xcomp	_	_
+6	à	à	ADP	_	_	7	case	_	_
+7	Addis	Addis	PROPN	_	_	5	iobj	_	_
+8	Abeba	Abeba	PROPN	_	_	7	flat	_	_</conll>
+
+<conll>1	puisque	puisque	SCONJ	_	_	14	mark	_	_
+2	les	le	DET	_	_	6	det	_	_
+3	les	le	DET	_	_	2	conj	_	_
+4	les	le	DET	_	_	2	conj	_	_
+5	les	le	DET	_	_	2	conj	_	_
+6	c~	c~	X	_	_	14	nsubj	_	_
+7	les	le	DET	_	_	8	det	_	_
+8	capitales	capitale	NOUN	_	_	6	conj	_	_
+9	les	le	DET	_	_	11	det	_	_
+10	grandes	grand	ADJ	_	_	11	amod	_	_
+11	villes	ville	NOUN	_	_	6	conj	_	_
+12	ne	ne	PART	_	_	14	mark	_	_
+13	me	me	PRON	_	_	14	iobj	_	_
+14	disaient	dire	VERB	_	_	0	root	_	_
+15	rien	rien	PRON	_	_	14	obj	_	_
+16	du tout	du tout	ADV	_	_	15	dep	_	_</conll>
+
+<conll>1	de sorte que	de sorte que	SCONJ	_	_	6	mark	_	_
+2	je	je	PRON	_	_	6	nsubj	_	_
+3	je	je	PRON	_	_	2	conj	_	_
+4	me	me	PRON	_	_	6	iobj	_	_
+5	suis	être	AUX	_	_	6	aux	_	_
+6	dit	dire	VERB	_	_	0	root	_	_
+7	bon ben	bon ben	INTJ	_	_	6	discourse	_	_
+8	je	je	PRON	_	_	9	csubj	_	_
+9	vais	aller	VERB	_	_	6	ccomp	_	_
+10	voir	voir	VERB	_	_	9	xcomp	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	7	cc	_	_
+2	à	à	ADP	_	_	1	dep	_	_
+3	par	par	ADP	_	_	4	case	_	_
+4	hasard	hasard	NOUN	_	_	7	parataxis	_	_
+5	je	je	PRON	_	_	7	nsubj	_	_
+6	suis	être	AUX	_	_	7	aux	_	_
+7	allée	aller	VERB	_	_	0	root	_	_
+8	en	en	ADP	_	_	9	case	_	_
+9	quarante-neuf	quarante-neuf	NUM	_	_	7	nummod	_	_
+10	à	à	ADP	_	_	7	comp	_	_
+11	ayant	avoir	VERB	_	_	7	ad	_	_
+12	fini	finir	VERB	_	_	11	aux	_	_
+13	mon	son	DET	_	_	14	det	_	_
+14	tour	tour	NOUN	_	_	12	obj	_	_
+15	à	à	ADP	_	_	16	case	_	_
+16	Aden	Aden	PROPN	_	_	14	nmod	_	_
+17	à	à	ADP	_	_	10	conj	_	_
+18	ici	ici	ADV	_	_	10	conj	_	_
+19	au	à+le	ADP	_	_	20	case	_	_
+20	Kenya	Kenya	PROPN	_	_	10	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	j'	je	PRON	_	_	4	nsubj	_	_
+3	ai	avoir	VERB	_	_	4	aux	_	_
+4	décidé	décider	VERB	_	_	0	root	_	_
+5	que	que	SCONJ	_	_	9	mark	_	_
+6	c'	ce	PRON	_	_	9	csubj	_	_
+7	était	être	AUX	_	_	9	cop	_	_
+8	le	le	DET	_	_	9	det	_	_
+9	Kenya	Kenya	PROPN	_	_	4	ccomp	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	4	discourse	_	_
+2	puis	puis	CCONJ	_	_	5	cc	_	_
+3	je	je	PRON	_	_	5	nsubj	_	_
+4	suis	être	AUX	_	_	5	aux	_	_
+5	revenue	revenir	VERB	_	_	0	root	_	_
+6	en	en	ADP	_	_	7	case	_	_
+7	cinquante	cinquante	NUM	_	_	5	nummod	_	_</conll>
+
+<conll>1	eh	eh	INTJ	_	_	3	discourse	_	_
+2	oui	oui	INTJ	_	_	1	discourse	_	_
+3	Dominique	Dominique	PROPN	_	_	0	root	_	_</conll>
+
+<conll>1	si	si	SCONJ	_	_	6	mark	_	_
+2	le	le	DET	_	_	4	det	_	_
+3	premier	premier	ADJ	_	_	4	amod	_	_
+4	tour	tour	NOUN	_	_	6	csubj	_	_
+5	a	avoir	VERB	_	_	6	aux	_	_
+6	été	être	AUX	_	_	14	parataxis	_	_
+7	un	un	DET	_	_	8	det	_	_
+8	avertissement	avertissement	NOUN	_	_	6	comp	_	_
+9	pour	pour	ADP	_	_	11	case	_	_
+10	le	le	DET	_	_	11	det	_	_
+11	gouvernement	gouvernement	NOUN	_	_	6	obl	_	_
+12	le	le	DET	_	_	13	dep	_	_
+13	second	second	ADJ	_	_	14	nsubj	_	_
+14	ressemble	ressembler	VERB	_	_	0	root	_	_
+15	fort	fort	ADJ	_	_	14	advmod	_	_
+16	à	à	ADP	_	_	18	case	_	_
+17	une	un	DET	_	_	18	det	_	_
+18	déroute	déroute	NOUN	_	_	14	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	rien	rien	PRON	_	_	4	nsubj	_	_
+3	n'	ne	PART	_	_	4	mark	_	_
+4	arrête	arrêter	VERB	_	_	0	root	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	vague	vague	NOUN	_	_	4	obj	_	_
+7	rose	rose	ADJ	_	_	6	amod	_	_
+8	écrivent	écrire	VERB	_	_	4	insert	_	_
+9	Les	le	DET	_	_	11	det	_	_
+10	Dernières	Dernières	ADJ	_	_	11	amod	_	_
+11	Nouvelles	Nouvelles	PROPN	_	_	8	csubj	_	_
+12	d'	de	ADP	_	_	13	case	_	_
+13	Alsace	Alsace	PROPN	_	_	11	nmod	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	3	case	_	_
+2	L'	le	DET	_	_	3	det	_	_
+3	indépendant	indépendant	NOUN	_	_	9	parataxis	_	_
+4	du	de+le	ADP	_	_	5	case	_	_
+5	midi	midi	NOUN	_	_	3	nmod	_	_
+6	c'	ce	PRON	_	_	9	nsubj	_	_
+7	est	être	AUX	_	_	9	cop	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	gifle	gifle	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	c'	ce	PRON	_	_	5	nsubj	_	_
+3	est	être	AUX	_	_	5	cop	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	joue	joue	NOUN	_	_	0	root	_	_
+6	de	de	ADP	_	_	7	case	_	_
+7	Nicolas	Nicolas	PROPN	_	_	5	nmod	_	_
+8	Sarkozy	Sarkozy	PROPN	_	_	7	flat	_	_
+9	qui	qui	PRON	_	_	10	csubj	_	_
+10	doit	devoir	VERB	_	_	5	acl	_	_
+11	être	être	AUX	_	_	10	xcomp	_	_
+12	brûlante	brûlant	ADJ	_	_	11	comp	_	_</conll>
+
+<conll>1	la	le	DET	_	_	2	det	_	_
+2	France	France	PROPN	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	cop	_	_
+4	rose	rose	ADJ	_	_	0	root	_	_
+5	constate	constater	VERB	_	_	4	insert	_	_
+6	La	le	DET	_	_	7	det	_	_
+7	Voix	Voix	PROPN	_	_	5	csubj	_	_
+8	du	de+le	ADP	_	_	9	case	_	_
+9	Nord	Nord	PROPN	_	_	7	nmod	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	3	case	_	_
+2	L'	le	DET	_	_	3	det	_	_
+3	Union	Union	PROPN	_	_	8	parataxis	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	Reims	Reims	PROPN	_	_	3	nmod	_	_
+6	pas	pas	PART	_	_	8	dep	_	_
+7	de	de	ADP	_	_	8	det	_	_
+8	rhétorique	rhétorique	NOUN	_	_	0	root	_	_
+9	de	de	ADP	_	_	10	case	_	_
+10	plateau	plateau	NOUN	_	_	8	nmod	_	_
+11	télévisé	téléviser	ADJ	_	_	10	amod	_	_
+12	qui	qui	PRON	_	_	13	csubj	_	_
+13	tienne	tenir	VERB	_	_	8	acl	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	5	nsubj	_	_
+2	est	être	AUX	_	_	5	cop	_	_
+3	bel et bien	bel et bien	ADV	_	_	5	ad	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	bérézina	bérézina	NOUN	_	_	0	root	_	_
+6	pour	pour	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	droite	droite	NOUN	_	_	5	nmod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	2	discourse	_	_
+2	vote	vote	NOUN	_	_	0	root	_	_
+3	sanction	sanction	NOUN	_	_	2	compound	_	_
+4	ou	ou	CCONJ	_	_	5	cc	_	_
+5	pas	pas	PART	_	_	2	conj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	5	nsubj	_	_
+2	était	être	AUX	_	_	5	cop	_	_
+3	bien	bien	ADV	_	_	5	advmod	_	_
+4	un	un	DET	_	_	5	det	_	_
+5	vote	vote	NOUN	_	_	0	root	_	_
+6	sanction	sanction	NOUN	_	_	5	compound	_	_
+7	pour	pour	ADP	_	_	8	case	_	_
+8	Jean-Christophe	Jean-Christophe	PROPN	_	_	5	nmod	_	_
+9	Giesbert	Giesbert	PROPN	_	_	8	flat	_	_
+10	dans	dans	ADP	_	_	12	case	_	_
+11	La	le	DET	_	_	12	det	_	_
+12	dépêche	dépêche	NOUN	_	_	5	nmod	_	_
+13	du	de+le	ADP	_	_	14	case	_	_
+14	midi	midi	NOUN	_	_	12	nmod	_	_
+15	avec	avec	ADP	_	_	18	case	_	_
+16	un	un	DET	_	_	18	det	_	_
+17	cinglant	cinglant	ADJ	_	_	18	amod	_	_
+18	désaveu	désaveu	NOUN	_	_	5	nmod	_	_
+19	pour	pour	ADP	_	_	20	case	_	_
+20	Nicolas	Nicolas	PROPN	_	_	18	nmod	_	_
+21	Sarkozy	Sarkozy	PROPN	_	_	20	flat	_	_
+22	et	et	CCONJ	_	_	24	cc	_	_
+23	le	le	DET	_	_	24	det	_	_
+24	gouvernement	gouvernement	NOUN	_	_	20	conj	_	_
+25	de	de	ADP	_	_	26	case	_	_
+26	François	François	PROPN	_	_	24	nmod	_	_
+27	Fillon	Fillon	PROPN	_	_	26	flat	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	faut	falloir	VERB	_	_	0	root	_	_
+3	s'	se	PRON	_	_	4	iobj	_	_
+4	appeler	appeler	VERB	_	_	2	xcomp	_	_
+5	Rachida	Rachida	PROPN	_	_	4	obj	_	_
+6	Dati	Dati	PROPN	_	_	5	flat	_	_
+7	écrit	écrire	VERB	_	_	2	insert	_	_
+8	aussi	aussi	ADV	_	_	7	advmod	_	_
+9	Libération	Libération	PROPN	_	_	7	csubj	_	_
+10	Champagne	Champagne	PROPN	_	_	9	flat	_	_
+11	pour	pour	ADP	_	_	12	mark	_	_
+12	oser	oser	VERB	_	_	2	advcl	_	_
+13	affirmer	affirmer	VERB	_	_	12	xcomp	_	_
+14	qu'	que	SCONJ	_	_	18	mark	_	_
+15	il	il	PRON	_	_	18	csubj	_	_
+16	ne	ne	PART	_	_	18	mark	_	_
+17	s'	se	PRON	_	_	18	iobj	_	_
+18	agit	agir	VERB	_	_	13	ccomp	_	_
+19	pas	pas	PART	_	_	18	mark	_	_
+20	d'	de	ADP	_	_	22	case	_	_
+21	un	un	DET	_	_	22	det	_	_
+22	vote	vote	NOUN	_	_	18	iobj	_	_
+23	sanction	sanction	NOUN	_	_	22	compound	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	3	case	_	_
+2	Le	le	DET	_	_	3	det	_	_
+3	Parisien	Parisien	PROPN	_	_	15	parataxis	_	_
+4	Aujourd'hui	aujourd'hui	ADV	_	_	3	conj	_	_
+5	en	en	ADP	_	_	6	case	_	_
+6	France	France	PROPN	_	_	4	dep	_	_
+7	à	à	ADP	_	_	9	case	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	une	une	NOUN	_	_	15	parataxis	_	_
+10	ce	ce	PRON	_	_	15	nsubj	_	_
+11	n'	ne	PART	_	_	15	mark	_	_
+12	est	être	AUX	_	_	15	cop	_	_
+13	plus	plus	PART	_	_	15	mark	_	_
+14	une	un	DET	_	_	15	det	_	_
+15	vague	vague	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	4	nsubj	_	_
+2	est	être	AUX	_	_	4	cop	_	_
+3	une	un	DET	_	_	4	det	_	_
+4	déferlante	déferlante	NOUN	_	_	0	root	_	_
+5	pour	pour	ADP	_	_	7	case	_	_
+6	la	le	DET	_	_	7	det	_	_
+7	gauche	gauche	NOUN	_	_	4	nmod	_	_</conll>
+
+<conll>1	à	à	ADP	_	_	3	case	_	_
+2	la	le	DET	_	_	3	det	_	_
+3	une	une	NOUN	_	_	13	parataxis	_	_
+4	de	de	ADP	_	_	5	case	_	_
+5	Libération	Libération	PROPN	_	_	3	nmod	_	_
+6	qui	qui	PRON	_	_	8	csubj	_	_
+7	ne	ne	PART	_	_	8	mark	_	_
+8	boude	bouder	VERB	_	_	5	acl	_	_
+9	pas	pas	PART	_	_	8	mark	_	_
+10	son	son	DET	_	_	11	det	_	_
+11	plaisir	plaisir	NOUN	_	_	8	obj	_	_
+12	une	un	DET	_	_	13	det	_	_
+13	caricature	caricature	NOUN	_	_	0	root	_	_
+14	de	de	ADP	_	_	15	case	_	_
+15	Nicolas	Nicolas	PROPN	_	_	13	nmod	_	_
+16	Sarkozy	Sarkozy	PROPN	_	_	15	flat	_	_
+17	tout	tout	ADV	_	_	18	advmod	_	_
+18	ratatiné	ratatiner	ADJ	_	_	15	amod	_	_
+19	sous	sous	ADP	_	_	21	case	_	_
+20	cette	ce	DET	_	_	21	det	_	_
+21	exclamation	exclamation	NOUN	_	_	18	obl	_	_
+22	et	et	CCONJ	_	_	21	dep	_	_
+23	bling	bling	INTJ	_	_	22	discourse	_	_</conll>
+
+<conll>1	dans	dans	ADP	_	_	3	case	_	_
+2	son	son	DET	_	_	3	det	_	_
+3	éditorial	éditorial	NOUN	_	_	8	parataxis	_	_
+4	dans	dans	ADP	_	_	5	case	_	_
+5	Libération	Libération	PROPN	_	_	3	nmod	_	_
+6	Laurent	Laurent	PROPN	_	_	8	nsubj	_	_
+7	Joffrin	Joffrin	PROPN	_	_	6	flat	_	_
+8	parle	parler	VERB	_	_	0	root	_	_
+9	lui	lui	PRON	_	_	8	dislocated	_	_
+10	aussi	aussi	ADV	_	_	9	dep	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	désaveu	désaveu	NOUN	_	_	8	iobj	_	_
+13	cinglant	cinglant	ADJ	_	_	12	amod	_	_
+14	même	même	ADV	_	_	15	dep	_	_
+15	si	si	SCONJ	_	_	24	mark	_	_
+16	dit	dire	VERB	_	_	15	discourse	_	_
+17	-il	il	PRON	_	_	16	csubj	_	_
+18	les	le	DET	_	_	19	det	_	_
+19	responsables	responsable	NOUN	_	_	24	nsubj	_	_
+20	de	de	ADP	_	_	22	case	_	_
+21	l'	le	DET	_	_	22	det	_	_
+22	UMP	UMP	PROPN	_	_	19	nmod	_	_
+23	s'	se	PRON	_	_	24	iobj	_	_
+24	obstinent	obstiner	VERB	_	_	0	root	_	_
+25	à	à	ADP	_	_	26	mark	_	_
+26	nier	nier	VERB	_	_	24	xcomp	_	_
+27	l'	le	DET	_	_	28	det	_	_
+28	évidence	évidence	NOUN	_	_	26	obj	_	_
+29	dans	dans	ADP	_	_	31	case	_	_
+30	un	un	DET	_	_	31	det	_	_
+31	accès	accès	NOUN	_	_	26	obl	_	_
+32	de	de	ADP	_	_	34	case	_	_
+33	mauvaise	mauvais	ADJ	_	_	34	det	_	_
+34	foi	foi	NOUN	_	_	31	nmod	_	_
+35	soviétique	soviétique	ADJ	_	_	34	amod	_	_
+36	et	et	CCONJ	_	_	39	cc	_	_
+37	dans	dans	ADP	_	_	39	case	_	_
+38	un	un	DET	_	_	39	det	_	_
+39	festival	festival	NOUN	_	_	31	conj	_	_
+40	de	de	ADP	_	_	41	case	_	_
+41	langue	langue	NOUN	_	_	39	nmod	_	_
+42	de	de	ADP	_	_	43	case	_	_
+43	bois	bois	NOUN	_	_	41	nmod	_	_</conll>
+
+<conll>1	l'	le	DET	_	_	2	det	_	_
+2	UMP	UMP	PROPN	_	_	3	nsubj	_	_
+3	voulait	vouloir	VERB	_	_	0	root	_	_
+4	croire	croire	VERB	_	_	3	xcomp	_	_
+5	à	à	ADP	_	_	7	case	_	_
+6	la	le	DET	_	_	7	det	_	_
+7	bourrasque	bourrasque	NOUN	_	_	4	iobj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	4	nsubj	_	_
+2	est	être	AUX	_	_	4	cop	_	_
+3	une	un	DET	_	_	4	det	_	_
+4	tornade	tornade	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	3	case	_	_
+2	Le	le	DET	_	_	3	det	_	_
+3	Figaro	Figaro	PROPN	_	_	8	parataxis	_	_
+4	aussi	aussi	ADV	_	_	3	dep	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	gauche	gauche	NOUN	_	_	8	nsubj	_	_
+7	a	avoir	VERB	_	_	8	aux	_	_
+8	transformé	transformer	VERB	_	_	0	root	_	_
+9	l'	le	DET	_	_	10	det	_	_
+10	essai	essai	NOUN	_	_	8	obj	_	_
+11	du	de+le	ADP	_	_	13	case	_	_
+12	premier	premier	ADJ	_	_	13	det	_	_
+13	tour	tour	NOUN	_	_	10	nmod	_	_
+14	Le	le	DET	_	_	15	det	_	_
+15	Figaro	Figaro	PROPN	_	_	0	root	_	_
+16	qui	qui	PRON	_	_	17	csubj	_	_
+17	reconnaît	reconnaître	VERB	_	_	15	acl	_	_
+18	l'	le	DET	_	_	20	det	_	_
+19	écrasante	écrasant	ADJ	_	_	20	amod	_	_
+20	victoire	victoire	NOUN	_	_	17	obj	_	_
+21	de	de	ADP	_	_	23	case	_	_
+22	la	le	DET	_	_	23	det	_	_
+23	gauche	gauche	NOUN	_	_	20	nmod	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	parti	parti	NOUN	_	_	29	nsubj	_	_
+3	socialiste	socialiste	ADJ	_	_	2	amod	_	_
+4	écrit	écrire	VERB	_	_	2	insert	_	_
+5	Étienne	Étienne	PROPN	_	_	4	csubj	_	_
+6	Mougeotte	Mougeotte	PROPN	_	_	5	flat	_	_
+7	désormais	désormais	ADV	_	_	9	dep	_	_
+8	au	à+le	ADP	_	_	9	case	_	_
+9	pouvoir	pouvoir	NOUN	_	_	2	nmod	_	_
+10	dans	dans	ADP	_	_	12	case	_	_
+11	la	le	DET	_	_	12	det	_	_
+12	majorité	majorité	NOUN	_	_	9	nmod	_	_
+13	des	de+le	ADP	_	_	15	case	_	_
+14	grandes	grand	ADJ	_	_	15	det	_	_
+15	villes	ville	NOUN	_	_	12	nmod	_	_
+16	et	et	CCONJ	_	_	18	cc	_	_
+17	des	de+le	ADP	_	_	18	case	_	_
+18	villes	ville	NOUN	_	_	15	conj	_	_
+19	moyennes	moyen	ADJ	_	_	18	amod	_	_
+20	des	de+le	ADP	_	_	21	case	_	_
+21	conseils	conseil	NOUN	_	_	15	conj	_	_
+22	généraux	général	ADJ	_	_	21	amod	_	_
+23	et	et	CCONJ	_	_	26	cc	_	_
+24	dans	dans	ADP	_	_	26	case	_	_
+25	vingt	vingt	NUM	_	_	26	nummod	_	_
+26	régions	région	NOUN	_	_	12	conj	_	_
+27	sur	sur	ADP	_	_	28	case	_	_
+28	vingt-deux	vingt-deux	NUM	_	_	25	nummod	_	_
+29	dispose	disposer	VERB	_	_	0	root	_	_
+30	d'	de	ADP	_	_	32	case	_	_
+31	une	un	DET	_	_	32	det	_	_
+32	force	force	NOUN	_	_	29	iobj	_	_
+33	de	de	ADP	_	_	34	case	_	_
+34	frappe	frappe	NOUN	_	_	32	nmod	_	_
+35	territoriale	territorial	ADJ	_	_	32	amod	_	_
+36	considérable	considérable	ADJ	_	_	32	amod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	4	discourse	_	_
+2	quelle	quel	PRON	_	_	3	dep	_	_
+3	leçon	leçon	NOUN	_	_	4	obj	_	_
+4	tirer	tirer	VERB	_	_	0	root	_	_
+5	de	de	ADP	_	_	7	case	_	_
+6	la	le	DET	_	_	7	det	_	_
+7	vague	vague	NOUN	_	_	4	iobj	_	_
+8	rose	rose	ADJ	_	_	7	amod	_	_</conll>
+
+<conll>1	faut	falloir	VERB	_	_	0	root	_	_
+2	-il	il	PRON	_	_	1	nsubj	_	_
+3	que	que	SCONJ	_	_	13	mark	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	gouvernement	gouvernement	NOUN	_	_	13	csubj	_	_
+6	pour	pour	ADP	_	_	7	mark	_	_
+7	tenir	tenir	VERB	_	_	13	advcl	_	_
+8	compte	compte	NOUN	_	_	7	obj	_	_
+9	du	de+le	ADP	_	_	10	case	_	_
+10	vote	vote	NOUN	_	_	8	nmod	_	_
+11	des	de+le	ADP	_	_	12	case	_	_
+12	Français	Français	PROPN	_	_	10	nmod	_	_
+13	change	changer	VERB	_	_	1	ccomp	_	_
+14	sa	son	DET	_	_	15	det	_	_
+15	politique	politique	NOUN	_	_	13	obj	_	_</conll>
+
+<conll>1	quelques	quelque	ADJ	_	_	2	det	_	_
+2	naïfs	naïf	NOUN	_	_	4	nsubj	_	_
+3	auraient	avoir	VERB	_	_	4	aux	_	_
+4	pu	pouvoir	VERB	_	_	0	root	_	_
+5	le	le	PRON	_	_	6	obj	_	_
+6	penser	penser	VERB	_	_	4	xcomp	_	_</conll>
+
+<conll>1	eh bien	eh bien	INTJ	_	_	2	discourse	_	_
+2	non	non	INTJ	_	_	0	root	_	_
+3	répond	répondre	VERB	_	_	2	insert	_	_
+4	Étienne	Étienne	PROPN	_	_	3	csubj	_	_
+5	Mougeotte	Mougeotte	PROPN	_	_	4	flat	_	_
+6	dans	dans	ADP	_	_	8	case	_	_
+7	Le	le	DET	_	_	8	det	_	_
+8	Figaro	Figaro	PROPN	_	_	3	obl	_	_
+9	au contraire	au contraire	ADV	_	_	11	advmod	_	_
+10	il	il	PRON	_	_	11	nsubj	_	_
+11	faut	falloir	VERB	_	_	0	root	_	_
+12	accélérer	accélérer	VERB	_	_	11	xcomp	_	_
+13	le	le	DET	_	_	14	det	_	_
+14	rythme	rythme	NOUN	_	_	12	obj	_	_
+15	du	de+le	ADP	_	_	16	case	_	_
+16	changement	changement	NOUN	_	_	14	nmod	_	_</conll>
+
+<conll>1	les	le	DET	_	_	2	det	_	_
+2	réformes	réforme	NOUN	_	_	4	dislocated	_	_
+3	plus	plus	PART	_	_	4	dep	_	_
+4	vite	vite	ADV	_	_	0	root	_	_
+5	et	et	CCONJ	_	_	7	cc	_	_
+6	plus	plus	PART	_	_	7	dep	_	_
+7	fort	fort	ADV	_	_	4	conj	_	_</conll>
+
+<conll>1	comme	comme	ADP	_	_	3	dep	_	_
+2	en	en	ADP	_	_	3	case	_	_
+3	écho	écho	NOUN	_	_	14	parataxis	_	_
+4	dans	dans	ADP	_	_	5	case	_	_
+5	Libération	Libération	PROPN	_	_	14	parataxis	_	_
+6	Laurent	Laurent	PROPN	_	_	14	nsubj	_	_
+7	Joffrin	Joffrin	PROPN	_	_	6	flat	_	_
+8	qui	qui	PRON	_	_	13	csubj	_	_
+9	n'	ne	PART	_	_	13	mark	_	_
+10	est	être	AUX	_	_	13	aux	_	_
+11	évidemment	évidemment	ADV	_	_	13	advmod	_	_
+12	pas	pas	PART	_	_	13	mark	_	_
+13	convaincu	convaincre	VERB	_	_	6	acl	_	_
+14	balaye	balayer	VERB	_	_	0	root	_	_
+15	d'	de	ADP	_	_	17	case	_	_
+16	un	un	DET	_	_	17	det	_	_
+17	ricanement	ricanement	NOUN	_	_	14	iobj	_	_
+18	la	le	DET	_	_	19	det	_	_
+19	pensée	pensée	NOUN	_	_	14	obj	_	_
+20	d'	de	ADP	_	_	21	case	_	_
+21	Étienne	Étienne	PROPN	_	_	19	nmod	_	_
+22	Mougeotte	Mougeotte	PROPN	_	_	21	flat	_	_</conll>
+
+<conll>1	les	le	DET	_	_	2	det	_	_
+2	Français	Français	PROPN	_	_	3	nsubj	_	_
+3	disent	dire	VERB	_	_	0	root	_	_
+4	qu'	que	SCONJ	_	_	6	mark	_	_
+5	on	on	PRON	_	_	6	csubj	_	_
+6	va	aller	VERB	_	_	3	ccomp	_	_
+7	dans	dans	ADP	_	_	10	case	_	_
+8	la	le	DET	_	_	10	det	_	_
+9	mauvaise	mauvais	ADJ	_	_	10	amod	_	_
+10	direction	direction	NOUN	_	_	6	iobj	_	_</conll>
+
+<conll>1	une	un	DET	_	_	3	det	_	_
+2	seule	seul	ADJ	_	_	3	amod	_	_
+3	réponse	réponse	NOUN	_	_	0	root	_	_
+4	du côté de	du côté de	ADP	_	_	6	case	_	_
+5	l'	le	DET	_	_	6	det	_	_
+6	UMP	UMP	PROPN	_	_	3	parataxis	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	faut	falloir	VERB	_	_	0	root	_	_
+3	y	y	PRON	_	_	4	obj	_	_
+4	aller	aller	VERB	_	_	2	xcomp	_	_
+5	plus	plus	PART	_	_	6	dep	_	_
+6	vite	vite	ADV	_	_	4	advmod	_	_</conll>
+
+<conll>1	voyons	voir	VERB	_	_	0	root	_	_
+2	maintenant	maintenant	ADV	_	_	1	advmod	_	_
+3	l'	le	DET	_	_	5	det	_	_
+4	autre	autre	ADJ	_	_	5	amod	_	_
+5	enjeu	enjeu	NOUN	_	_	1	obj	_	_
+6	largement	largement	ADV	_	_	7	advmod	_	_
+7	évoqué	évoquer	VERB	_	_	5	acl	_	_
+8	avant	avant	ADP	_	_	10	case	_	_
+9	les	le	DET	_	_	10	det	_	_
+10	municipales	municipale	NOUN	_	_	7	obl	_	_</conll>
+
+<conll>1	scrutin	scrutin	NOUN	_	_	0	root	_	_
+2	local	local	ADJ	_	_	1	amod	_	_
+3	ou	ou	CCONJ	_	_	4	cc	_	_
+4	national	national	ADJ	_	_	2	conj	_	_</conll>
+
+<conll>1	eh bien	eh bien	INTJ	_	_	3	discourse	_	_
+2	une	un	DET	_	_	3	det	_	_
+3	réponse	réponse	NOUN	_	_	0	root	_	_
+4	dans	dans	ADP	_	_	6	case	_	_
+5	Le	le	DET	_	_	6	det	_	_
+6	Journal	Journal	PROPN	_	_	3	nmod	_	_
+7	de	de	ADP	_	_	9	case	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	Haute	Haute	PROPN	_	_	6	nmod	_	_
+10	Marne	Marne	PROPN	_	_	9	flat	_	_</conll>
+
+<conll>1	à moins de	à moins de	ADP	_	_	2	mark	_	_
+2	considérer	considérer	VERB	_	_	17	parataxis	_	_
+3	que	que	SCONJ	_	_	15	mark	_	_
+4	tous	tout	ADJ	_	_	6	det	_	_
+5	les	le	DET	_	_	6	dep	_	_
+6	maires	maire	NOUN	_	_	15	csubj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	droite	droite	NOUN	_	_	6	nmod	_	_
+9	qui	qui	PRON	_	_	11	csubj	_	_
+10	ont	avoir	VERB	_	_	11	aux	_	_
+11	été	être	AUX	_	_	6	acl	_	_
+12	battus	battre	VERB	_	_	11	aux	_	_
+13	étaient	être	AUX	_	_	15	cop	_	_
+14	foncièrement	foncièrement	ADV	_	_	15	advmod	_	_
+15	mauvais	mauvais	ADJ	_	_	2	ccomp	_	_
+16	il	il	PRON	_	_	17	nsubj	_	_
+17	faut	falloir	VERB	_	_	0	root	_	_
+18	voir	voir	VERB	_	_	17	xcomp	_	_
+19	dans	dans	ADP	_	_	21	case	_	_
+20	le	le	DET	_	_	21	det	_	_
+21	résultat	résultat	NOUN	_	_	18	obl	_	_
+22	des	de+le	ADP	_	_	23	case	_	_
+23	municipales	municipale	NOUN	_	_	21	nmod	_	_
+24	et	et	CCONJ	_	_	26	cc	_	_
+25	des	de+le	ADP	_	_	26	case	_	_
+26	cantonales	cantonale	NOUN	_	_	23	conj	_	_
+27	un	un	DET	_	_	28	det	_	_
+28	message	message	NOUN	_	_	18	obj	_	_
+29	fort	fort	ADJ	_	_	28	amod	_	_
+30	envoyé	envoyer	VERB	_	_	28	acl	_	_
+31	à	à	ADP	_	_	33	case	_	_
+32	l'	le	DET	_	_	33	dep	_	_
+33	exécutif	exécutif	ADJ	_	_	30	comp	_	_
+34	message	message	NOUN	_	_	28	conj	_	_
+35	national	national	ADJ	_	_	34	amod	_	_
+36	donc	donc	ADV	_	_	35	advmod	_	_
+37	mais	mais	CCONJ	_	_	39	cc	_	_
+38	quel	quel	PRON	_	_	39	dep	_	_
+39	message	message	NOUN	_	_	28	conj	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	2	case	_	_
+2	Jules	Jules	PROPN	_	_	10	parataxis	_	_
+3	Clauwaert	Clauwaert	PROPN	_	_	2	flat	_	_
+4	dans	dans	ADP	_	_	5	case	_	_
+5	Nord	Nord	PROPN	_	_	10	parataxis	_	_
+6	Eclair	Eclair	PROPN	_	_	5	flat	_	_
+7	le	le	DET	_	_	8	det	_	_
+8	test	test	NOUN	_	_	10	nsubj	_	_
+9	politique	politique	ADJ	_	_	8	amod	_	_
+10	reste	rester	VERB	_	_	0	root	_	_
+11	à	à	ADP	_	_	12	mark	_	_
+12	déchiffrer	déchiffrer	VERB	_	_	10	xcomp	_	_</conll>
+
+<conll>1	vos	son	DET	_	_	2	det	_	_
+2	journaux	journal	NOUN	_	_	0	root	_	_
+3	Jean	Jean	PROPN	_	_	2	dislocated	_	_
+4	Christophe	Christophe	PROPN	_	_	3	flat	_	_
+5	qui	qui	PRON	_	_	6	csubj	_	_
+6	soulignent	souligner	VERB	_	_	2	acl	_	_
+7	également	également	ADV	_	_	6	advmod	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	faiblesse	faiblesse	NOUN	_	_	6	obj	_	_
+10	de	de	ADP	_	_	12	case	_	_
+11	la	le	DET	_	_	12	det	_	_
+12	mobilisation	mobilisation	NOUN	_	_	9	nmod	_	_
+13	des	de+le	ADP	_	_	14	case	_	_
+14	électeurs	électeur	NOUN	_	_	12	nmod	_	_
+15	hier	hier	ADV	_	_	12	dep	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	5	nsubj	_	_
+2	est	être	AUX	_	_	5	cop	_	_
+3	même	même	ADV	_	_	5	ad	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	triomphe	triomphe	NOUN	_	_	0	root	_	_
+6	d'	de	ADP	_	_	8	case	_	_
+7	un	un	DET	_	_	8	det	_	_
+8	revenant	revenant	NOUN	_	_	5	nmod	_	_
+9	écrit	écrire	VERB	_	_	5	insert	_	_
+10	L'	le	DET	_	_	11	det	_	_
+11	Alsace	Alsace	PROPN	_	_	9	csubj	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	5	nsubj	_	_
+2	l'	le	PRON	_	_	5	obj	_	_
+3	avait	avoir	VERB	_	_	5	aux	_	_
+4	un peu	un peu	ADV	_	_	5	advmod	_	_
+5	oublié	oublier	VERB	_	_	0	root	_	_
+6	après	après	ADP	_	_	8	case	_	_
+7	les	le	DET	_	_	8	det	_	_
+8	records	record	NOUN	_	_	5	obl	_	_
+9	de	de	ADP	_	_	11	case	_	_
+10	la	le	DET	_	_	11	det	_	_
+11	présidentielle	présidentielle	NOUN	_	_	8	nmod	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	l'	le	DET	_	_	3	det	_	_
+3	abstentionnisme	abstentionnisme	NOUN	_	_	4	nsubj	_	_
+4	est	être	AUX	_	_	0	root	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	retour	retour	NOUN	_	_	4	iobj	_	_
+7	et	et	CCONJ	_	_	11	cc	_	_
+8	avec	avec	ADP	_	_	9	case	_	_
+9	lui	lui	PRON	_	_	11	nmod	_	_
+10	le	le	DET	_	_	11	det	_	_
+11	fossé	fossé	NOUN	_	_	3	conj	_	_
+12	très	très	ADV	_	_	13	advmod	_	_
+13	large	large	ADJ	_	_	11	amod	_	_
+14	entre	entre	ADP	_	_	16	case	_	_
+15	le	le	DET	_	_	16	det	_	_
+16	pouvoir	pouvoir	NOUN	_	_	11	nmod	_	_
+17	et	et	CCONJ	_	_	19	cc	_	_
+18	les	le	DET	_	_	19	det	_	_
+19	citoyens	citoyen	NOUN	_	_	16	conj	_	_</conll>
+
+<conll>1	enfin	enfin	ADV	_	_	2	discourse	_	_
+2	reste	rester	VERB	_	_	0	root	_	_
+3	le	le	DET	_	_	4	det	_	_
+4	cas	cas	NOUN	_	_	2	nsubj	_	_
+5	Marseille	Marseille	PROPN	_	_	4	appos	_	_</conll>
+
+<conll>1	Marseille	Marseille	PROPN	_	_	12	nsubj	_	_
+2	fut	être	AUX	_	_	12	cop	_	_
+3	pour	pour	ADP	_	_	5	case	_	_
+4	l'	le	DET	_	_	5	det	_	_
+5	UMP	UMP	PROPN	_	_	12	nmod	_	_
+6	pour	pour	ADP	_	_	9	case	_	_
+7	toute	tout	ADJ	_	_	9	det	_	_
+8	la	le	DET	_	_	9	dep	_	_
+9	majorité	majorité	NOUN	_	_	5	conj	_	_
+10	présidentielle	présidentiel	ADJ	_	_	9	amod	_	_
+11	une	un	DET	_	_	12	det	_	_
+12	bouée	bouée	NOUN	_	_	0	root	_	_
+13	dans	dans	ADP	_	_	15	case	_	_
+14	le	le	DET	_	_	15	det	_	_
+15	naufrage	naufrage	NOUN	_	_	12	nmod	_	_
+16	d'	de	ADP	_	_	18	case	_	_
+17	un	un	DET	_	_	18	det	_	_
+18	soir	soir	NOUN	_	_	15	nmod	_	_
+19	de	de	ADP	_	_	20	case	_	_
+20	municipales	municipale	NOUN	_	_	18	nmod	_	_
+21	écrit	écrire	VERB	_	_	12	insert	_	_
+22	Roger	Roger	PROPN	_	_	21	csubj	_	_
+23	Antech	Antech	PROPN	_	_	22	flat	_	_
+24	dans	dans	ADP	_	_	26	case	_	_
+25	Midi	Midi	PROPN	_	_			_	_
+26	Libre	Libre	ADJ	_	_	21	advmod	_	_</conll>
+
+<conll>1	un	un	DET	_	_	2	det	_	_
+2	sauvetage	sauvetage	NOUN	_	_	0	root	_	_
+3	miraculeux	miraculeux	ADJ	_	_	2	amod	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	bien	bien	NOUN	_	_	3	obl	_	_
+6	des	de+le	ADP	_	_	7	case	_	_
+7	égards	égard	NOUN	_	_	5	nmod	_	_
+8	écrit	écrire	VERB	_	_	2	insert	_	_
+9	La	le	DET	_	_	8	csubj	_	_
+10	Provence	Provence	PROPN	_	_	9	dep	_	_</conll>
+
+<conll>1	Marseille	Marseille	PROPN	_	_	2	nsubj	_	_
+2	occupe	occuper	VERB	_	_	0	root	_	_
+3	une	un	DET	_	_	4	det	_	_
+4	place	place	NOUN	_	_	2	obj	_	_
+5	à part	à part	ADV	_	_	4	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	9	cc	_	_
+2	ce	ce	DET	_	_	3	det	_	_
+3	matin	matin	NOUN	_	_	9	dislocated	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	président	président	NOUN	_	_	9	nsubj	_	_
+6	et	et	CCONJ	_	_	8	cc	_	_
+7	le	le	DET	_	_	8	det	_	_
+8	gouvernement	gouvernement	NOUN	_	_	5	conj	_	_
+9	peuvent	pouvoir	VERB	_	_	0	root	_	_
+10	dire	dire	VERB	_	_	9	xcomp	_	_
+11	merci	merci	INTJ	_	_	10	comp	_	_
+12	Marseille	Marseille	PROPN	_	_	9	dislocated	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	advmod	_	_
+2	que	que	PRON	_	_	4	obj	_	_
+3	va	aller	VERB	_	_	0	root	_	_
+4	faire	faire	VERB	_	_	3	xcomp	_	_
+5	maintenant	maintenant	ADV	_	_	4	advmod	_	_
+6	le	le	DET	_	_	7	det	_	_
+7	président	président	NOUN	_	_	3	nsubj	_	_
+8	se	se	PRON	_	_	9	obj	_	_
+9	demande	demander	VERB	_	_	3	insert	_	_
+10	Le	le	DET	_	_	11	det	_	_
+11	Progrès	Progrès	PROPN	_	_	9	csubj	_	_
+12	à	à	ADP	_	_	13	case	_	_
+13	Lyon	Lyon	PROPN	_	_	9	obl	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	va	aller	VERB	_	_	0	root	_	_
+3	sans	sans	ADP	_	_	4	case	_	_
+4	doute	doute	NOUN	_	_	2	obl	_	_
+5	faire	faire	VERB	_	_	2	xcomp	_	_
+6	la	le	DET	_	_	8	det	_	_
+7	même	même	ADJ	_	_	8	amod	_	_
+8	chose	chose	NOUN	_	_	5	obj	_	_
+9	qu'	que	SCONJ	_	_	7	dep	_	_
+10	avant	avant	ADP	_	_	9	dep	_	_
+11	pronostique	pronostiquer	VERB	_	_	2	insert	_	_
+12	Francis	Francis	PROPN	_	_	11	csubj	_	_
+13	Brochet	Brochet	PROPN	_	_	12	flat	_	_
+14	mais	mais	CCONJ	_	_	15	cc	_	_
+15	autrement	autrement	ADV	_	_	5	advmod	_	_</conll>
+
+<conll>1	le	le	DET	_	_	3	det	_	_
+2	même	même	ADJ	_	_	3	amod	_	_
+3	fond	fond	NOUN	_	_	0	root	_	_
+4	sans	sans	ADP	_	_	6	case	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	forme	forme	NOUN	_	_	3	nmod	_	_</conll>
+
+<conll>1	autrement dit	autrement dit	ADV	_	_	3	advmod	_	_
+2	les	le	DET	_	_	3	det	_	_
+3	réformes	réforme	NOUN	_	_	0	root	_	_
+4	sans	sans	ADP	_	_	6	case	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	Rolex	Rolex	PROPN	_	_	3	nmod	_	_</conll>
+
+<conll>1	un	un	DET	_	_	3	det	_	_
+2	petit	petit	ADJ	_	_	3	amod	_	_
+3	peu	peu	NOUN	_	_	4	dep	_	_
+4	délicat	délicat	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	donc	donc	ADV	_	_	6	discourse	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	dans	dans	ADP	_	_	5	case	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	doute	doute	NOUN	_	_	6	parataxis	_	_
+6	peut-être	peut-être	ADV	_	_	0	root	_	_
+7	d'accord	d'accord	ADV	_	_	6	advmod	_	_
+8	que	que	PRON	_	_	6	dep	_	_
+9	l'	le	DET	_	_	10	det	_	_
+10	arbitre	arbitre	NOUN	_	_	15	csubj	_	_
+11	euh	euh	INTJ	_	_	10	discourse	_	_
+12	Erikson	Erikson	PROPN	_	_	10	conj	_	_
+13	s'	se	PRON	_	_	15	obj	_	_
+14	est	être	AUX	_	_	15	aux	_	_
+15	abstenu	abstenir	VERB	_	_	8	dep	_	_</conll>
+
+<conll>1	avec	avec	ADP	_	_	2	case	_	_
+2	Messi	Messi	PROPN	_	_	0	root	_	_
+3	qui	qui	PRON	_	_	4	csubj	_	_
+4	va	aller	VERB	_	_	2	acl	_	_
+5	chercher	chercher	VERB	_	_	4	xcomp	_	_
+6	oh	oh	INTJ	_	_	5	discourse	_	_
+7	le	le	DET	_	_	8	det	_	_
+8	corner	corner	NOUN	_	_	5	obj	_	_
+9	et	et	CCONJ	_	_	11	cc	_	_
+10	qui	qui	PRON	_	_	11	csubj	_	_
+11	va	aller	VERB	_	_	4	conj	_	_
+12	trouver	trouver	VERB	_	_	11	xcomp	_	_
+13	le	le	DET	_	_	14	det	_	_
+14	corner	corner	NOUN	_	_	12	obj	_	_
+15	ou	ou	CCONJ	_	_	17	cc	_	_
+16	la	le	DET	_	_	17	det	_	_
+17	touche	touche	NOUN	_	_	14	conj	_	_
+18	ou	ou	CCONJ	_	_	20	cc	_	_
+19	la	le	DET	_	_	20	det	_	_
+20	sortie	sortie	NOUN	_	_	14	conj	_	_
+21	de	de	ADP	_	_	22	case	_	_
+22	but	but	NOUN	_	_	20	nmod	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	3	nsubj	_	_
+2	ne	ne	PART	_	_	3	mark	_	_
+3	sait	savoir	VERB	_	_	0	root	_	_
+4	pas	pas	PART	_	_	3	mark	_	_
+5	trop	trop	ADV	_	_	3	advmod	_	_</conll>
+
+<conll>1	non	non	INTJ	_	_	0	root	_	_
+2	non	non	INTJ	_	_	1	conj	_	_
+3	non	non	INTJ	_	_	1	conj	_	_</conll>
+
+<conll>1	bien	bien	ADV	_	_	0	root	_	_
+2	sûr	sûr	ADJ	_	_	1	fixed	_	_
+3	bien	bien	ADV	_	_	1	conj	_	_
+4	sûr	sûr	ADJ	_	_	3	fixed	_	_</conll>
+
+<conll>1	en tout cas	en tout cas	ADV	_	_	4	advmod	_	_
+2	il	il	PRON	_	_	4	expl	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	a	avoir	VERB	_	_	0	root	_	_
+5	une	un	DET	_	_	6	det	_	_
+6	protestation	protestation	NOUN	_	_	4	obj	_	_</conll>
+
+<conll>1	ouais	ouais	INTJ	_	_	0	root	_	_
+2	ouais	ouais	INTJ	_	_	1	conj	_	_</conll>
+
+<conll>1	sortie	sortie	NOUN	_	_	0	root	_	_
+2	de	de	ADP	_	_	3	case	_	_
+3	but	but	NOUN	_	_	1	nmod	_	_
+4	sortie	sortie	NOUN	_	_	1	conj	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	but	but	NOUN	_	_	4	nmod	_	_
+7	puisque	puisque	SCONJ	_	_	10	mark	_	_
+8	il	il	PRON	_	_	10	csubj	_	_
+9	a	avoir	VERB	_	_	10	aux	_	_
+10	poussé	pousser	VERB	_	_	1	parataxis	_	_
+11	le	le	DET	_	_	12	det	_	_
+12	ballon	ballon	NOUN	_	_	10	obj	_	_
+13	trop	trop	ADV	_	_	14	advmod	_	_
+14	loin	loin	ADV	_	_	10	advmod	_	_
+15	Messi	Messi	PROPN	_	_	10	dislocated	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	il	il	PRON	_	_	4	expl	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	a	avoir	VERB	_	_	0	root	_	_
+5	une	un	DET	_	_	6	det	_	_
+6	protestation	protestation	NOUN	_	_	4	obj	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_</conll>
+
+<conll>1	ah	ah	INTJ	_	_	2	discourse	_	_
+2	non	non	INTJ	_	_	0	root	_	_</conll>
+
+<conll>1	ce	ce	PRON	_	_	4	nsubj	_	_
+2	sera	être	AUX	_	_	4	cop	_	_
+3	un	un	DET	_	_	4	det	_	_
+4	coup	coup	NOUN	_	_	0	root	_	_
+5	franc	franc	ADJ	_	_	4	amod	_	_
+6	Eugène	Eugène	PROPN	_	_	4	dislocated	_	_</conll>
+
+<conll>1	ce	ce	PRON	_	_	2	nsubj	_	_
+2	sera	être	AUX	_	_	0	root	_	_
+3	un	un	DET	_	_	4	det	_	_
+4	coup	coup	NOUN	_	_	2	nsubj	_	_
+5	franc	franc	ADJ	_	_	4	amod	_	_</conll>
+
+<conll>1	ah	ah	INTJ	_	_	3	discourse	_	_
+2	c'	ce	PRON	_	_	3	nsubj	_	_
+3	est	être	AUX	_	_	0	root	_	_
+4	peut-être	peut-être	ADV	_	_	3	advmod	_	_
+5	au	à+le	ADP	_	_	6	case	_	_
+6	départ	départ	NOUN	_	_	3	iobj	_	_
+7	alors	alors	ADV	_	_	6	discourse	_	_
+8	hein	hein	INTJ	_	_	7	discourse	_	_</conll>
+
+<conll>1	l'	le	DET	_	_	2	det	_	_
+2	arbitre	arbitre	NOUN	_	_	3	nsubj	_	_
+3	revient	revenir	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	7	case	_	_
+5	la	le	DET	_	_	7	det	_	_
+6	première	premier	ADJ	_	_	7	amod	_	_
+7	faute	faute	NOUN	_	_	3	iobj	_	_
+8	avec	avec	ADP	_	_	10	case	_	_
+9	un	un	DET	_	_	10	det	_	_
+10	avertissement	avertissement	NOUN	_	_	3	obl	_	_
+11	effectivement	effectivement	ADV	_	_	3	advmod	_	_
+12	pour	pour	ADP	_	_	13	case	_	_
+13	Diarra	Diarra	PROPN	_	_	10	nmod	_	_
+14	Gallas	Gallas	PROPN	_	_	13	conj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	9	discourse	_	_
+2	Eugène	Eugène	PROPN	_	_	9	dislocated	_	_
+3	donc	donc	ADV	_	_	9	advmod	_	_
+4	pour	pour	ADP	_	_	6	case	_	_
+5	cette	ce	DET	_	_	6	det	_	_
+6	action	action	NOUN	_	_	9	parataxis	_	_
+7	litigieuse	litigieux	ADJ	_	_	6	amod	_	_
+8	c'	ce	PRON	_	_	9	nsubj	_	_
+9	est	être	AUX	_	_	0	root	_	_
+10	du	de+le	ADP	_	_	11	case	_	_
+11	cinquante	cinquante	NUM	_	_	9	iobj	_	_
+12	cinquante	cinquante	NUM	_	_	11	nummod	_	_</conll>
+
+<conll>1	petite	petit	ADJ	_	_	2	amod	_	_
+2	obstruction	obstruction	NOUN	_	_	0	root	_	_
+3	de	de	ADP	_	_	4	case	_	_
+4	Gabi	Gabi	PROPN	_	_	2	nmod	_	_
+5	Heinze	Heinze	PROPN	_	_	4	flat	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	semblerait	sembler	VERB	_	_	0	root	_	_
+4	que	que	SCONJ	_	_	7	mark	_	_
+5	Gourcuff	Gourcuff	PROPN	_	_	7	csubj	_	_
+6	ait	avoir	VERB	_	_	7	aux	_	_
+7	perdu	perdre	VERB	_	_	3	ccomp	_	_
+8	le	le	DET	_	_	9	det	_	_
+9	ballon	ballon	NOUN	_	_	7	obj	_	_
+10	ouais	ouais	INTJ	_	_	9	discourse	_	_
+11	raison	raison	NOUN	_	_	3	dislocated	_	_
+12	pour	pour	ADP	_	_	13	case	_	_
+13	laquelle	lequel	PRON	_	_	20	obl	_	_
+14	peut-être	peut-être	ADV	_	_	20	advmod	_	_
+15	monsieur	Monsieur	NOUN	_	_	20	csubj	_	_
+16	Erikson	Erikson	PROPN	_	_	15	appos	_	_
+17	n'	ne	PART	_	_	20	mark	_	_
+18	a	avoir	VERB	_	_	20	aux	_	_
+19	pas	pas	PART	_	_	20	mark	_	_
+20	sifflé	siffler	VERB	_	_	11	acl	_	_
+21	le	le	DET	_	_	22	det	_	_
+22	penalty	penalty	NOUN	_	_	20	obj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	discourse	_	_
+2	Gallas	Gallas	PROPN	_	_	4	nsubj	_	_
+3	a	avoir	VERB	_	_	4	aux	_	_
+4	pris	prendre	VERB	_	_	0	root	_	_
+5	un	un	DET	_	_	6	det	_	_
+6	carton	carton	NOUN	_	_	4	obj	_	_
+7	je	je	PRON	_	_	9	csubj	_	_
+8	vous	vous	PRON	_	_	9	obj	_	_
+9	signale	signaler	VERB	_	_	6	discourse	_	_
+10	tout	tout	ADV	_	_	4	advmod	_	_
+11	de	de	ADP	_	_	10	fixed	_	_
+12	même	même	ADV	_	_	11	fixed	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	3	discourse	_	_
+2	c'	ce	PRON	_	_	5	nsubj	_	_
+3	est	être	AUX	_	_	5	cop	_	_
+4	un peu	un peu	ADV	_	_	5	advmod	_	_
+5	embêtant	embêtant	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	mais	mai	NOUN	_	_	2	mark	_	_
+2	enfin	enfin	ADV	_	_	0	root	_	_
+3	bon	bon	INTJ	_	_	2	discourse	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	3	discourse	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	coup	coup	NOUN	_	_	0	root	_	_
+4	franc	franc	ADJ	_	_	3	amod	_	_
+5	qui	qui	PRON	_	_	6	csubj	_	_
+6	va	aller	VERB	_	_	3	acl	_	_
+7	être	être	AUX	_	_	6	xcomp	_	_
+8	joué	jouer	VERB	_	_	7	aux	_	_
+9	non	non	ADV	_	_	10	dep	_	_
+10	pas	pas	PART	_	_	13	dep	_	_
+11	par	par	ADP	_	_	13	case	_	_
+12	euh	euh	INTJ	_	_	11	discourse	_	_
+13	Messi	Messi	PROPN	_	_	8	iobj	_	_
+14	euh	euh	INTJ	_	_	13	discourse	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	derrière	derrière	ADP	_	_	5	case	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	ballon	ballon	NOUN	_	_	2	iobj	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	6	cc	_	_
+2	c'	ce	PRON	_	_	6	nsubj	_	_
+3	est	être	AUX	_	_	6	cop	_	_
+4	peut-être	peut-être	ADV	_	_	6	advmod	_	_
+5	pas	pas	PART	_	_	6	mark	_	_
+6	lui	lui	PRON	_	_	0	root	_	_
+7	qui	qui	PRON	_	_	8	csubj	_	_
+8	va	aller	VERB	_	_	6	acl	_	_
+9	tirer	tirer	VERB	_	_	8	xcomp	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	4	nsubj	_	_
+2	sont	être	AUX	_	_	4	cop	_	_
+3	deux	deux	NUM	_	_	4	nummod	_	_
+4	Argentins	Argentin	PROPN	_	_	0	root	_	_
+5	hein	hein	INTJ	_	_	4	discourse	_	_</conll>
+
+<conll>1	l'	le	DET	_	_	3	det	_	_
+2	autre	autre	ADJ	_	_	3	amod	_	_
+3	Argentin	Argentin	PROPN	_	_	6	dislocated	_	_
+4	c'	ce	PRON	_	_	6	nsubj	_	_
+5	est	être	AUX	_	_	6	cop	_	_
+6	Rodriguez	Rodriguez	PROPN	_	_	0	root	_	_
+7	hein	hein	INTJ	_	_	6	discourse	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	cop	_	_
+3	Rodriguez	Rodriguez	PROPN	_	_	0	root	_	_
+4	Maxi	Maxi	PROPN	_	_	3	conj	_	_
+5	Rodriguez	Rodriguez	PROPN	_	_	4	flat	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	discourse	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	pied	pied	NOUN	_	_	0	root	_	_
+4	droit	droit	ADJ	_	_	3	amod	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	Rodriguez	Rodriguez	PROPN	_	_	3	nmod	_	_
+7	ou	ou	CCONJ	_	_	9	cc	_	_
+8	le	le	DET	_	_	9	det	_	_
+9	pied	pied	NOUN	_	_	3	conj	_	_
+10	gauche	gauche	ADJ	_	_	9	amod	_	_
+11	de	de	ADP	_	_	12	case	_	_
+12	Messi	Messi	PROPN	_	_	9	nmod	_	_</conll>
+
+<conll>1	ce	ce	PRON	_	_	4	nsubj	_	_
+2	sera	être	AUX	_	_	4	cop	_	_
+3	le	le	DET	_	_	4	dep	_	_
+4	droit	droit	ADJ	_	_	0	root	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	Rodriguez	Rodriguez	PROPN	_	_	4	obl	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	ballon	ballon	NOUN	_	_	0	root	_	_
+3	à	à	ADP	_	_	5	case	_	_
+4	la	le	DET	_	_	5	det	_	_
+5	surface	surface	NOUN	_	_	2	nmod	_	_
+6	de	de	ADP	_	_	7	case	_	_
+7	réparation	réparation	NOUN	_	_	5	nmod	_	_</conll>
+
+<conll>1	la	le	DET	_	_	2	det	_	_
+2	tête	tête	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	ah	ah	INTJ	_	_	3	discourse	_	_
+2	la	le	DET	_	_	3	det	_	_
+3	tête	tête	NOUN	_	_	0	root	_	_
+4	de	de	ADP	_	_	5	case	_	_
+5	Mexès	Mexès	PROPN	_	_	3	nmod	_	_
+6	qui	qui	PRON	_	_	7	csubj	_	_
+7	repousse	repousser	VERB	_	_	5	acl	_	_
+8	ce	ce	DET	_	_	9	det	_	_
+9	ballon	ballon	NOUN	_	_	7	obj	_	_
+10	de	de	ADP	_	_	12	case	_	_
+11	la	le	DET	_	_	12	det	_	_
+12	tête	tête	NOUN	_	_	7	obl	_	_
+13	en	en	ADP	_	_	14	case	_	_
+14	corner	corner	NOUN	_	_	7	iobj	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	saute	sauter	VERB	_	_	0	root	_	_
+3	plus	plus	PART	_	_	4	dep	_	_
+4	haut	haut	ADJ	_	_	2	advmod	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	que	que	SCONJ	_	_	8	mark	_	_
+7	les	le	DET	_	_	8	det	_	_
+8	attaquants	attaquant	NOUN	_	_	3	dep	_	_
+9	argentins	argentin	ADJ	_	_	8	amod	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	saute	sauter	VERB	_	_	0	root	_	_
+3	plus	plus	ADV	_	_	4	advmod	_	_
+4	haut	haut	ADJ	_	_	2	advmod	_	_
+5	aussi	aussi	ADV	_	_	2	advmod	_	_
+6	qu'	que	SCONJ	_	_	7	mark	_	_
+7	Agüero	Agüero	PROPN	_	_	3	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	expédie	expédier	VERB	_	_	0	root	_	_
+4	ce	ce	DET	_	_	5	det	_	_
+5	ballon	ballon	NOUN	_	_	3	obj	_	_
+6	en	en	ADP	_	_	7	case	_	_
+7	corner	corner	NOUN	_	_	3	iobj	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	4	expl	_	_
+2	n'	ne	PART	_	_	4	mark	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	avait	avoir	VERB	_	_	0	root	_	_
+5	pas	pas	PART	_	_	4	mark	_	_
+6	d'	de	ADP	_	_	8	case	_	_
+7	autre	autre	ADJ	_	_	8	amod	_	_
+8	solution	solution	NOUN	_	_	4	iobj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	c'	ce	PRON	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	cop	_	_
+4	Lionel	Lionel	PROPN	_	_	0	root	_	_
+5	Messi	Messi	PROPN	_	_	4	flat	_	_
+6	là-bas	là-bas	ADV	_	_	4	dep	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	sur	sur	ADP	_	_	10	case	_	_
+9	le	le	DET	_	_	10	det	_	_
+10	côté	côté	NOUN	_	_	4	nmod	_	_
+11	droit	droit	ADJ	_	_	10	amod	_	_
+12	qui	qui	PRON	_	_	13	csubj	_	_
+13	va	aller	VERB	_	_	4	acl	_	_
+14	tirer	tirer	VERB	_	_	13	xcomp	_	_
+15	ce	ce	DET	_	_	16	det	_	_
+16	corner	corner	NOUN	_	_	14	obj	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	4	nsubj	_	_
+2	ne	ne	PART	_	_	4	mark	_	_
+3	le	le	PRON	_	_	4	obj	_	_
+4	tire	tirer	VERB	_	_	0	root	_	_
+5	pas	pas	PART	_	_	4	mark	_	_
+6	d'ailleurs	d'ailleurs	ADV	_	_	4	advmod	_	_</conll>
+
+<conll>1	pour	pour	ADP	_	_	2	case	_	_
+2	Rodriguez	Rodriguez	PROPN	_	_	0	root	_	_</conll>
+
+<conll>1	corner	corner	NOUN	_	_	0	root	_	_
+2	à	à	ADP	_	_	3	case	_	_
+3	deux	deux	NUM	_	_	1	nummod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	Messi	Messi	PROPN	_	_	3	nsubj	_	_
+3	est	être	AUX	_	_	0	root	_	_
+4	sur	sur	ADP	_	_	6	case	_	_
+5	son	son	DET	_	_	6	det	_	_
+6	pied	pied	NOUN	_	_	3	iobj	_	_
+7	gauche	gauche	ADJ	_	_	6	amod	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	2	discourse	_	_
+2	Messi	Messi	PROPN	_	_	0	root	_	_
+3	qui	qui	PRON	_	_	4	csubj	_	_
+4	change	changer	VERB	_	_	2	acl	_	_
+5	pour	pour	ADP	_	_	6	case	_	_
+6	Papa	Papa	PROPN	_	_	4	obl	_	_
+7	maintenant	maintenant	ADV	_	_	2	advmod	_	_</conll>
+
+<conll>1	sur	sur	ADP	_	_	5	case	_	_
+2	son	son	DET	_	_	3	det	_	_
+3	pied	pied	NOUN	_	_			_	_
+4	gauche	gauche	ADJ	_	_	3	amod	_	_
+5	également	également	ADV	_	_	6	advmod	_	_
+6	Papa	Papa	PROPN	_	_	0	root	_	_
+7	qui	qui	PRON	_	_	8	csubj	_	_
+8	va	aller	VERB	_	_	6	acl	_	_
+9	mettre	mettre	VERB	_	_	8	xcomp	_	_
+10	le	le	DET	_	_	11	det	_	_
+11	ballon	ballon	NOUN	_	_	9	obj	_	_
+12	dans	dans	ADP	_	_	15	case	_	_
+13	la	le	DET	_	_	15	det	_	_
+14	petite	petit	ADJ	_	_	15	amod	_	_
+15	boîte	boîte	NOUN	_	_	9	iobj	_	_</conll>
+
+<conll>1	surface	surface	NOUN	_	_	0	root	_	_
+2	de	de	ADP	_	_	3	case	_	_
+3	réparation	réparation	NOUN	_	_	1	nmod	_	_
+4	avec	avec	ADP	_	_	5	case	_	_
+5	Agüero	Agüero	PROPN	_	_	1	nmod	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	cop	_	_
+3	Gutiérrez	Gutiérrez	PROPN	_	_	0	root	_	_</conll>
+
+<conll>1	la	le	DET	_	_	2	det	_	_
+2	frappe	frappe	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	l'	le	DET	_	_	2	det	_	_
+2	arrêt	arrêt	NOUN	_	_	0	root	_	_
+3	l'	le	DET	_	_	4	det	_	_
+4	arrêt	arrêt	NOUN	_	_	2	conj	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	Steve	Steve	PROPN	_	_	4	nmod	_	_
+7	Mandanda	Mandanda	PROPN	_	_	6	flat	_	_
+8	à	à	ADP	_	_	10	case	_	_
+9	la	le	DET	_	_	10	det	_	_
+10	suite	suite	NOUN	_	_	2	nmod	_	_
+11	de	de	ADP	_	_	13	case	_	_
+12	ce	ce	DET	_	_	13	det	_	_
+13	ballon	ballon	NOUN	_	_	10	nmod	_	_
+14	arraché	arracher	VERB	_	_	13	acl	_	_
+15	euh	euh	INTJ	_	_	14	discourse	_	_
+16	par	par	ADP	_	_	19	case	_	_
+17	les	le	DET	_	_	19	det	_	_
+18	euh	euh	INTJ	_	_	17	discourse	_	_
+19	Argentins	Argentin	PROPN	_	_	14	obl	_	_
+20	à	à	ADP	_	_	22	case	_	_
+21	la	le	DET	_	_	22	det	_	_
+22	défense	défense	NOUN	_	_	14	iobj	_	_
+23	de	de	ADP	_	_	25	case	_	_
+24	cette	ce	DET	_	_	25	det	_	_
+25	équipe	équipe	NOUN	_	_	22	nmod	_	_
+26	de	de	ADP	_	_	27	case	_	_
+27	France	France	PROPN	_	_	25	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	c'	ce	PRON	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	cop	_	_
+4	Gutiérrez	Gutiérrez	PROPN	_	_	0	root	_	_
+5	qui	qui	PRON	_	_	6	csubj	_	_
+6	frappe	frapper	VERB	_	_	4	acl	_	_
+7	à	à	ADP	_	_	10	case	_	_
+8	environ	environ	ADV	_	_	10	dep	_	_
+9	vingt-deux	vingt-deux	NUM	_	_	10	nummod	_	_
+10	mètres	mètre	NOUN	_	_	6	obl	_	_
+11	le	le	DET	_	_	12	det	_	_
+12	ballon	ballon	NOUN	_	_	6	obj	_	_
+13	dans	dans	ADP	_	_	15	case	_	_
+14	la	le	DET	_	_	15	det	_	_
+15	niche	niche	NOUN	_	_	6	iobj	_	_
+16	de	de	ADP	_	_	17	case	_	_
+17	Steve	Steve	PROPN	_	_	15	nmod	_	_
+18	Mandanda	Mandanda	PROPN	_	_	17	flat	_	_</conll>
+
+<conll>1	oui	oui	INTJ	_	_	4	discourse	_	_
+2	ça	ça	PRON	_	_	6	dislocated	_	_
+3	c'	ce	PRON	_	_	6	nsubj	_	_
+4	est	être	AUX	_	_	6	cop	_	_
+5	un	un	DET	_	_	6	det	_	_
+6	arrêt	arrêt	NOUN	_	_	0	root	_	_
+7	peut-être	peut-être	ADV	_	_	6	advmod	_	_
+8	pas	pas	PART	_	_	9	dep	_	_
+9	facile	facile	ADJ	_	_	6	amod	_	_
+10	c'	ce	PRON	_	_	11	csubj	_	_
+11	est	être	AUX	_	_	9	discourse	_	_
+12	vrai	vrai	ADJ	_	_	11	comp	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	ballon	ballon	NOUN	_	_	4	nsubj	_	_
+4	était	être	AUX	_	_	0	root	_	_
+5	en plein	en plein	ADV	_	_	8	dep	_	_
+6	sur	sur	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	poitrine	poitrine	NOUN	_	_	4	iobj	_	_
+9	de	de	ADP	_	_	10	case	_	_
+10	Mandanda	Mandanda	PROPN	_	_	8	nmod	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	3	nsubj	_	_
+2	a	avoir	VERB	_	_	3	aux	_	_
+3	pu	pouvoir	VERB	_	_	0	root	_	_
+4	le	le	PRON	_	_	5	obj	_	_
+5	capter	capter	VERB	_	_	3	xcomp	_	_
+6	tout à fait	tout à fait	ADV	_	_	8	advmod	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	normalement	normalement	ADV	_	_	5	advmod	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	3	advmod	_	_
+2	une	un	DET	_	_	3	det	_	_
+3	attaque	attaque	NOUN	_	_	0	root	_	_
+4	d'	de	ADP	_	_	5	case	_	_
+5	Agüero	Agüero	PROPN	_	_	3	nmod	_	_
+6	qui	qui	PRON	_	_	8	csubj	_	_
+7	est	être	AUX	_	_	8	cop	_	_
+8	seul	seul	ADJ	_	_	5	amod	_	_
+9	qui	qui	PRON	_	_	10	csubj	_	_
+10	entre	entrer	VERB	_	_	7	conj	_	_
+11	dans	dans	ADP	_	_	13	case	_	_
+12	la	le	DET	_	_	13	det	_	_
+13	surface	surface	NOUN	_	_	10	iobj	_	_
+14	de	de	ADP	_	_	15	case	_	_
+15	réparation	réparation	NOUN	_	_	13	nmod	_	_</conll>
+
+<conll>1	Mexès	Mexès	PROPN	_	_	3	csubj	_	_
+2	ne	ne	PART	_	_	3	mark	_	_
+3	peut	pouvoir	VERB	_	_	0	subj	_	_
+4	pas	pas	PART	_	_	3	mark	_	_
+5	le	le	PRON	_	_	6	obj	_	_
+6	contrer	contrer	VERB	_	_	3	xcomp	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	3	nsubj	_	_
+2	le	le	PRON	_	_	3	obj	_	_
+3	laisse	laisser	VERB	_	_	0	root	_	_
+4	jouer	jouer	VERB	_	_	3	xcomp	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	centre	centrer	VERB	_	_	0	root	_	_
+3	Agüero	Agüero	PROPN	_	_	2	dislocated	_	_
+4	pour	pour	ADP	_	_	5	case	_	_
+5	qui	qui	PRON	_	_	2	obl	_	_
+6	Rodriguez	Rodriguez	PROPN	_	_	5	conj	_	_
+7	Rodriguez	Rodriguez	PROPN	_	_	5	conj	_	_
+8	Rodriguez	Rodriguez	PROPN	_	_	5	conj	_	_</conll>
+
+<conll>1	oh la	oh la	INTJ	_	_	2	discourse	_	_
+2	Maxi	Maxi	PROPN	_	_	0	root	_	_
+3	Rodriguez	Rodriguez	PROPN	_	_	2	flat	_	_
+4	qui	qui	PRON	_	_	5	csubj	_	_
+5	va	aller	VERB	_	_	2	acl	_	_
+6	tirer	tirer	VERB	_	_	5	xcomp	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	but	but	NOUN	_	_	0	root	_	_
+3	le	le	DET	_	_	4	det	_	_
+4	but	but	NOUN	_	_	2	conj	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	Maxi	Maxi	PROPN	_	_	4	nmod	_	_
+7	Rodriguez	Rodriguez	PROPN	_	_	6	flat	_	_
+8	du	de+le	ADP	_	_	9	case	_	_
+9	pied	pied	NOUN	_	_	4	nmod	_	_
+10	du	de+le	ADP	_	_	11	case	_	_
+11	pied	pied	NOUN	_	_	9	conj	_	_
+12	non	non	INTJ	_	_	11	discourse	_	_
+13	de	de	ADP	_	_	14	case	_	_
+14	Gutiérrez	Gutiérrez	PROPN	_	_	6	conj	_	_
+15	pardon	pardon	NOUN	_	_	14	discourse	_	_</conll>
+
+<conll>1	Gutiérrez	Gutiérrez	PROPN	_	_	0	root	_	_
+2	Gutiérrez	Gutiérrez	PROPN	_	_	1	conj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	cop	_	_
+3	Gutiérrez	Gutiérrez	PROPN	_	_	0	root	_	_
+4	oh la la	oh la	INTJ	_	_	3	discourse	_	_
+5	qui	qui	PRON	_	_	6	csubj	_	_
+6	marque	marquer	VERB	_	_	3	acl	_	_
+7	ce	ce	DET	_	_	8	det	_	_
+8	but	but	NOUN	_	_	6	obj	_	_
+9	du	de+le	ADP	_	_	10	case	_	_
+10	pied	pied	NOUN	_	_	6	obl	_	_
+11	droit	droit	ADJ	_	_	10	amod	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	7	cc	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	côté	côté	NOUN	_	_	7	dislocated	_	_
+4	droit	droit	ADJ	_	_	3	amod	_	_
+5	complètement	complètement	ADV	_	_	7	advmod	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	seul	seul	ADJ	_	_	0	root	_	_
+8	dégarni	dégarnir	ADJ	_	_	7	conj	_	_</conll>
+
+<conll>1	Gutiérrez	Gutiérrez	PROPN	_	_	0	root	_	_
+2	qui	qui	PRON	_	_	3	csubj	_	_
+3	reste	rester	VERB	_	_	1	acl	_	_
+4	complètement	complètement	ADV	_	_	5	advmod	_	_
+5	seul	seul	ADJ	_	_	3	comp	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	3	nsubj	_	_
+2	a	avoir	VERB	_	_	3	aux	_	_
+3	pu	pouvoir	VERB	_	_	0	root	_	_
+4	armer	armer	VERB	_	_	3	xcomp	_	_
+5	son	son	DET	_	_	6	det	_	_
+6	tir	tir	NOUN	_	_	4	obj	_	_</conll>
+
+<conll>1	Mandanda	Mandanda	PROPN	_	_	3	nsubj	_	_
+2	a	avoir	VERB	_	_	3	aux	_	_
+3	plongé	plonger	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	bon	bon	INTJ	_	_	1	discourse	_	_
+3	il	il	PRON	_	_	4	nsubj	_	_
+4	pouvait	pouvoir	VERB	_	_	0	root	_	_
+5	pas	pas	PART	_	_	4	mark	_	_
+6	grand-chose	grand-chose	PRON	_	_	4	obj	_	_
+7	là	là	ADV	_	_	4	advmod	_	_
+8	sur	sur	ADP	_	_	10	case	_	_
+9	ce	ce	DET	_	_	10	det	_	_
+10	tir	tir	NOUN	_	_	7	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	6	cc	_	_
+2	Gutiérrez	Gutiérrez	PROPN	_	_	6	nsubj	_	_
+3	Gutiérrez	Gutiérrez	PROPN	_	_	2	conj	_	_
+4	donc	donc	ADV	_	_	3	discourse	_	_
+5	Gutiérrez	Gutiérrez	PROPN	_	_	2	conj	_	_
+6	marque	marquer	VERB	_	_	0	root	_	_
+7	ce	ce	DET	_	_	8	det	_	_
+8	but	but	NOUN	_	_	6	obj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	0	root	_	_
+2	que	que	PART	_	_	1	fixed	_	_
+3	c'	ce	PRON	_	_	4	csubj	_	_
+4	est	être	AUX	_	_	1	dep	_	_
+5	au	à+le	ADP	_	_	6	case	_	_
+6	moment	moment	NOUN	_	_	4	iobj	_	_
+7	où	où	PRON	_	_	13	advmod	_	_
+8	l'	le	DET	_	_	9	det	_	_
+9	équipe	équipe	NOUN	_	_	13	csubj	_	_
+10	de	de	ADP	_	_	11	case	_	_
+11	France	France	PROPN	_	_	9	nmod	_	_
+12	euh	euh	INTJ	_	_	11	discourse	_	_
+13	dominait	dominer	VERB	_	_	6	acl	_	_
+14	un peu	un peu	ADV	_	_	13	advmod	_	_
+15	globalement	globalement	ADV	_	_	1	advmod	_	_</conll>
+
+<conll>1	enfin	enfin	ADV	_	_	2	discourse	_	_
+2	quoique	quoique	SCONJ	_	_	6	mark	_	_
+3	là	là	ADV	_	_	6	advmod	_	_
+4	il	il	PRON	_	_	6	expl	_	_
+5	y	y	PRON	_	_	6	expl	_	_
+6	avait	avoir	VERB	_	_	0	root	_	_
+7	un	un	DET	_	_	9	det	_	_
+8	petit	petit	ADJ	_	_	9	amod	_	_
+9	relâchement	relâchement	NOUN	_	_	6	obj	_	_</conll>
+
+<conll>1	eh bien	eh bien	INTJ	_	_	7	discourse	_	_
+2	voilà	voilà	VERB	_	_	1	discourse	_	_
+3	j~	j~	PRON	_	_	7	nsubj	_	_
+4	j~	j~	PRON	_	_	3	conj	_	_
+5	j~	j~	PRON	_	_	3	conj	_	_
+6	j'	je	PRON	_	_	3	conj	_	_
+7	allais	aller	VERB	_	_	0	root	_	_
+8	vous	vous	PRON	_	_	9	iobj	_	_
+9	dire	dire	VERB	_	_	7	xcomp	_	_
+10	pas	pas	NOUN	_	_	11	dep	_	_
+11	tout à fait	tout à fait	ADV	_	_	13	dep	_	_
+12	d'	de	ADP	_	_	13	case	_	_
+13	accord	accord	NOUN	_	_	9	iobj	_	_
+14	avec	avec	ADP	_	_	15	case	_	_
+15	vous	lui	PRON	_	_	13	nmod	_	_
+16	parce que	parce que	SCONJ	_	_	26	mark	_	_
+17	depuis	depuis	ADP	_	_	20	case	_	_
+18	oui	oui	INTJ	_	_	17	discourse	_	_
+19	cinq	cinq	NUM	_	_	20	nummod	_	_
+20	minutes	minute	NOUN	_	_	26	parataxis	_	_
+21	effectivement	effectivement	ADV	_	_	26	advmod	_	_
+22	l'	le	DET	_	_	23	det	_	_
+23	équipe	équipe	NOUN	_	_	26	csubj	_	_
+24	de	de	ADP	_	_	25	case	_	_
+25	France	France	PROPN	_	_	23	nmod	_	_
+26	commençait	commencer	VERB	_	_	9	ccomp	_	_
+27	de	de	ADP	_	_	26	advmod	_	_
+28	nouveau	nouveau	ADJ	_	_	27	fixed	_	_
+29	à	à	ADP	_	_	30	mark	_	_
+30	reculer	reculer	VERB	_	_	26	xcomp	_	_
+31	oui	oui	INTJ	_	_	30	discourse	_	_
+32	et	et	CCONJ	_	_	33	cc	_	_
+33	commençait	commencer	VERB	_	_	26	conj	_	_
+34	à	à	ADP	_	_	35	mark	_	_
+35	lâcher	lâcher	VERB	_	_	33	xcomp	_	_
+36	son	son	DET	_	_	37	det	_	_
+37	emprise	emprise	NOUN	_	_	35	obj	_	_
+38	sur	sur	ADP	_	_	40	case	_	_
+39	l'	le	DET	_	_	40	det	_	_
+40	adversaire	adversaire	NOUN	_	_	37	nmod	_	_
+41	argentin	argentin	ADJ	_	_	40	amod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	10	cc	_	_
+2	les	le	DET	_	_	3	det	_	_
+3	Argentins	Argentin	PROPN	_	_	10	nsubj	_	_
+4	sous	sous	ADP	_	_	6	case	_	_
+5	les	le	DET	_	_	6	det	_	_
+6	ordres	ordre	NOUN	_	_	10	obl	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	Maradona	Maradona	PROPN	_	_	6	nmod	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	jouaient	jouer	VERB	_	_	0	root	_	_
+11	un peu	un peu	ADV	_	_	12	dep	_	_
+12	plus	plus	PART	_	_	13	dep	_	_
+13	haut	haut	ADJ	_	_	10	advmod	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	3	cc	_	_
+2	on	on	PRON	_	_	3	nsubj	_	_
+3	voyait	voir	VERB	_	_	0	root	_	_
+4	Maradona	Maradona	PROPN	_	_	3	obj	_	_
+5	faire	faire	VERB	_	_	3	xcomp	_	_
+6	de	de	ADP	_	_	8	det	_	_
+7	grands	grand	ADJ	_	_	8	amod	_	_
+8	signes	signe	NOUN	_	_	5	obj	_	_
+9	euh	euh	INTJ	_	_	8	discourse	_	_
+10	demandant	demander	VERB	_	_	5	ad	_	_
+11	à	à	ADP	_	_	13	case	_	_
+12	ses	son	DET	_	_	13	det	_	_
+13	joueurs	joueur	NOUN	_	_	10	iobj	_	_
+14	de	de	ADP	_	_	10	comp	_	_
+15	de	de	ADP	_	_	16	mark	_	_
+16	monter	monter	VERB	_	_	14	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	8	cc	_	_
+2	donc	donc	ADV	_	_	8	advmod	_	_
+3	l'	le	DET	_	_	4	det	_	_
+4	équipe	équipe	NOUN	_	_	8	dep	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	France	France	PROPN	_	_	4	nmod	_	_
+7	est	être	AUX	_	_	8	aux	_	_
+8	menée	mener	VERB	_	_	0	root	_	_
+9	un	un	NOUN	_	_	8	obj	_	_
+10	à	à	ADP	_	_	11	case	_	_
+11	zéro	zéro	NOUN	_	_	9	nmod	_	_</conll>
+
+<conll>1	voilà	voilà	VERB	_	_	0	root	_	_
+2	qui	qui	PRON	_	_	3	csubj	_	_
+3	change	changer	VERB	_	_	1	ccomp	_	_
+4	les	le	DET	_	_	5	det	_	_
+5	données	donnée	NOUN	_	_	3	obj	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	du	de+le	ADP	_	_	8	case	_	_
+8	problème	problème	NOUN	_	_	5	nmod	_	_</conll>
+
+<conll>1	parce que	parce que	SCONJ	_	_	0	root	_	_
+2	dans	dans	ADP	_	_	4	case	_	_
+3	des	de+le	ADP	_	_	4	case	_	_
+4	matchs	match	NOUN	_	_	23	parataxis	_	_
+5	de	de	ADP	_	_	7	case	_	_
+6	cette	ce	DET	_	_	7	det	_	_
+7	importance	importance	NOUN	_	_	4	nmod	_	_
+8	avec	avec	ADP	_	_	11	case	_	_
+9	de	de	ADP	_	_	11	case	_	_
+10	tels	tel	ADJ	_	_	11	amod	_	_
+11	joueurs	joueur	NOUN	_	_	23	parataxis	_	_
+12	ben	ben	INTJ	_	_	11	discourse	_	_
+13	quand	quand	SCONJ	_	_	15	mark	_	_
+14	on	on	PRON	_	_	15	csubj	_	_
+15	mène	mener	VERB	_	_	23	parataxis	_	_
+16	à	à	ADP	_	_	18	case	_	_
+17	la	le	DET	_	_	18	det	_	_
+18	marque	marque	NOUN	_	_	15	iobj	_	_
+19	euh	euh	INTJ	_	_	18	discourse	_	_
+20	on	on	PRON	_	_	23	csubj	_	_
+21	est	être	AUX	_	_	23	cop	_	_
+22	plus	plus	PART	_	_	23	dep	_	_
+23	confiant	confiant	ADJ	_	_	1	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	on	on	PRON	_	_	4	nsubj	_	_
+3	se	se	PRON	_	_	4	obj	_	_
+4	dit	dire	VERB	_	_	0	root	_	_
+5	que	que	SCONJ	_	_	8	mark	_	_
+6	on	on	PRON	_	_	8	csubj	_	_
+7	est	être	AUX	_	_	8	cop	_	_
+8	tranquille	tranquille	ADJ	_	_	4	ccomp	_	_</conll>
+
+<conll>1	attention	attention	NOUN	_	_	0	root	_	_
+2	aux	à+le	ADP	_	_	3	case	_	_
+3	contre-attaques	contre-attaque	NOUN	_	_	1	nmod	_	_
+4	françaises	français	ADJ	_	_	3	amod	_	_
+5	avec	avec	ADP	_	_	6	case	_	_
+6	Thierry	Thierry	PROPN	_	_	3	nmod	_	_
+7	Henry	Henry	PROPN	_	_	6	flat	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	frappe	frapper	VERB	_	_	0	root	_	_
+3	de	de	ADP	_	_	4	case	_	_
+4	loin	loin	ADV	_	_	2	advmod	_	_
+5	mais	mais	CCONJ	_	_	8	cc	_	_
+6	dans	dans	ADP	_	_	8	case	_	_
+7	les	le	DET	_	_	8	det	_	_
+8	nuages	nuage	NOUN	_	_	2	obl	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	discourse	_	_
+2	je	je	PRON	_	_	3	nsubj	_	_
+3	crois	croire	VERB	_	_	0	root	_	_
+4	que	que	SCONJ	_	_	7	mark	_	_
+5	là	là	ADV	_	_	4	discourse	_	_
+6	il	il	PRON	_	_	7	csubj	_	_
+7	a	avoir	VERB	_	_	3	ccomp	_	_
+8	il	il	PRON	_	_	10	csubj	_	_
+9	a	avoir	VERB	_	_	10	aux	_	_
+10	planté	planter	VERB	_	_	7	conj	_	_
+11	son	son	DET	_	_	12	det	_	_
+12	pied	pied	NOUN	_	_	10	obj	_	_
+13	dans	dans	ADP	_	_	15	case	_	_
+14	le	le	DET	_	_	15	det	_	_
+15	gazon	gazon	NOUN	_	_	10	obl	_	_
+16	alors	alors	ADV	_	_	15	discourse	_	_
+17	Gu~	Gu~	PROPN	_	_	0	root	_	_
+18	Gutiérrez	Gutiérrez	PROPN	_	_	17	conj	_	_
+19	hein	hein	INTJ	_	_	18	discourse	_	_
+20	il	il	PRON	_	_	23	nsubj	_	_
+21	s'	se	PRON	_	_	23	comp	_	_
+22	est	être	AUX	_	_	23	aux	_	_
+23	fait	faire	VERB	_	_	0	root	_	_
+24	mal	mal	NOUN	_	_	23	obj	_	_
+25	d'ailleurs	d'ailleurs	ADV	_	_	23	advmod	_	_
+26	la	le	DET	_	_	29	det	_	_
+27	la	le	DET	_	_	26	conj	_	_
+28	la	le	DET	_	_	26	conj	_	_
+29	frappe	frappe	NOUN	_	_	0	root	_	_
+30	de	de	ADP	_	_	31	case	_	_
+31	Gutiérrez	Gutiérrez	PROPN	_	_	29	nmod	_	_
+32	vraiment	vraiment	ADV	_	_	33	advmod	_	_
+33	seul	seul	ADJ	_	_	31	amod	_	_
+34	hein	hein	INTJ	_	_	33	discourse	_	_</conll>
+
+<conll>1	côté	côté	NOUN	_	_	6	dislocated	_	_
+2	droit	droit	ADJ	_	_	1	amod	_	_
+3	là	là	ADV	_	_	6	advmod	_	_
+4	il	il	PRON	_	_	6	expl	_	_
+5	y	y	PRON	_	_	6	expl	_	_
+6	a	avoir	VERB	_	_	0	root	_	_
+7	une	un	DET	_	_	8	det	_	_
+8	erreur	erreur	NOUN	_	_	6	obj	_	_
+9	défensive	défensif	ADJ	_	_	8	amod	_	_
+10	en tout cas	en tout cas	ADV	_	_	9	discourse	_	_
+11	une	un	DET	_	_	12	det	_	_
+12	erreur	erreur	NOUN	_	_	8	conj	_	_
+13	pour	pour	ADP	_	_	14	case	_	_
+14	le moins	le moins	ADV	_	_	15	dep	_	_
+15	de	de	ADP	_	_	12	dep	_	_
+16	de	de	ADP	_	_	17	case	_	_
+17	marquage	marquage	NOUN	_	_	15	conj	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	5	cc	_	_
+2	euh	euh	INTJ	_	_	1	discourse	_	_
+3	surtout	surtout	ADV	_	_	5	advmod	_	_
+4	il	il	PRON	_	_	5	nsubj	_	_
+5	frappe	frapper	VERB	_	_	0	root	_	_
+6	comme	comme	ADP	_	_	8	case	_	_
+7	une	un	DET	_	_	8	det	_	_
+8	mule	mule	NOUN	_	_	5	obl	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	a	avoir	VERB	_	_	0	root	_	_
+4	un peu	un peu	ADV	_	_	3	comp	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	chance	chance	NOUN	_	_	4	dep	_	_
+7	également	également	ADV	_	_	3	advmod	_	_</conll>
+
+<conll>1	car	car	CCONJ	_	_	3	cc	_	_
+2	c'	ce	PRON	_	_	3	nsubj	_	_
+3	est	être	AUX	_	_	0	root	_	_
+4	dans	dans	ADP	_	_	6	case	_	_
+5	un	un	DET	_	_	6	det	_	_
+6	trou	trou	NOUN	_	_	3	iobj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	souris	souris	NOUN	_	_	6	nmod	_	_
+9	hein	hein	INTJ	_	_	8	discourse	_	_
+10	oui	oui	INTJ	_	_	9	discourse	_	_
+11	euh	euh	INTJ	_	_	10	discourse	_	_
+12	qu'	que	SCONJ	_	_	3	ad	_	_
+13	il	il	PRON	_	_	14	csubj	_	_
+14	trouve	trouver	VERB	_	_	3	ccomp	_	_
+15	et	et	CCONJ	_	_	17	cc	_	_
+16	il	il	PRON	_	_	17	csubj	_	_
+17	rebondit	rebondir	VERB	_	_	14	parenth	_	_
+18	un peu	un peu	ADV	_	_	17	advmod	_	_
+19	je	je	PRON	_	_	20	csubj	_	_
+20	crois	croire	VERB	_	_	18	discourse	_	_
+21	le	le	DET	_	_	22	det	_	_
+22	ballon	ballon	NOUN	_	_	17	dislocated	_	_
+23	l'	le	DET	_	_	24	det	_	_
+24	ouverture	ouverture	NOUN	_	_	14	obj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	4	nsubj	_	_
+2	est	être	AUX	_	_	4	cop	_	_
+3	petit	petit	ADJ	_	_	4	det	_	_
+4	côté	côté	NOUN	_	_	0	root	_	_
+5	entre	entre	ADP	_	_	6	case	_	_
+6	Mandanda	Mandanda	PROPN	_	_	4	nmod	_	_
+7	et	et	CCONJ	_	_	9	cc	_	_
+8	son	son	DET	_	_	9	det	_	_
+9	poteau	poteau	NOUN	_	_	6	conj	_	_
+10	droit	droit	ADJ	_	_	9	amod	_	_
+11	hein	hein	INTJ	_	_	10	discourse	_	_</conll>
+
+<conll>1	ouais	ouais	INTJ	_	_	0	root	_	_
+2	ouais	ouais	INTJ	_	_	1	conj	_	_
+3	ouais	ouais	INTJ	_	_	1	conj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	cop	_	_
+3	vrai	vrai	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	3	discourse	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	dégagement	dégagement	NOUN	_	_	0	root	_	_
+4	maintenant	maintenir	VERB	_	_	3	acl	_	_
+5	de	de	ADP	_	_	6	case	_	_
+6	Carrisou	Carrisou	PROPN	_	_	3	nmod	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	le	le	DET	_	_	9	det	_	_
+9	dégagement	dégagement	NOUN	_	_	3	conj	_	_
+10	argentin	argentin	ADJ	_	_	9	amod	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	2	nsubj	_	_
+2	est	être	AUX	_	_	0	root	_	_
+3	à	à	ADP	_	_	5	case	_	_
+4	quatre	quatre	NUM	_	_	5	nummod	_	_
+5	minutes	minute	NOUN	_	_	2	iobj	_	_
+6	de	de	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	mi-temps	mi-temps	NOUN	_	_	5	nmod	_	_
+9	même	même	ADV	_	_	10	fixed	_	_
+10	pas	pas	PART	_	_	5	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	les	le	DET	_	_	3	det	_	_
+3	Argentins	Argentin	PROPN	_	_	4	nsubj	_	_
+4	mènent	mener	VERB	_	_	0	root	_	_
+5	un	un	NOUN	_	_	4	obj	_	_
+6	à	à	ADP	_	_	7	case	_	_
+7	zéro	zéro	NOUN	_	_	5	nmod	_	_</conll>
+
+<conll>1	Anelka	Anelka	PROPN	_	_	0	root	_	_
+2	Anelka	Anelka	PROPN	_	_	1	conj	_	_
+3	qui	qui	PRON	_	_	4	csubj	_	_
+4	veut	vouloir	VERB	_	_	2	acl	_	_
+5	donner	donner	VERB	_	_	4	xcomp	_	_
+6	sur	sur	ADP	_	_	8	case	_	_
+7	le	le	DET	_	_	8	det	_	_
+8	côté	côté	NOUN	_	_	5	obl	_	_
+9	gauche	gauche	ADJ	_	_	8	amod	_	_
+10	là-bas	là-bas	ADV	_	_	8	conj	_	_
+11	pour	pour	ADP	_	_	12	case	_	_
+12	Thierry	Thierry	PROPN	_	_	5	obl	_	_
+13	Henry	Henry	PROPN	_	_	12	flat	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	c'	ce	PRON	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	aux	_	_
+4	manqué	manquer	VERB	_	_	0	root	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	cop	_	_
+3	manqué	manquer	ADJ	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	4	cc	_	_
+2	c'	ce	PRON	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	aux	_	_
+4	récupéré	récupérer	VERB	_	_	0	root	_	_
+5	bien	bien	ADV	_	_	4	advmod	_	_
+6	sûr	sûr	ADJ	_	_	5	fixed	_	_
+7	par	par	ADP	_	_	9	case	_	_
+8	l'	le	DET	_	_	9	det	_	_
+9	équipe	équipe	NOUN	_	_	4	iobj	_	_
+10	argentine	argentin	ADJ	_	_	9	amod	_	_
+11	qui	qui	PRON	_	_	12	csubj	_	_
+12	sont	être	AUX	_	_	9	acl	_	_
+13	de	de	ADP	_	_	12	advmod	_	_
+14	nouveau	nouveau	ADJ	_	_	13	fixed	_	_
+15	en	en	ADP	_	_	16	case	_	_
+16	possession	possession	NOUN	_	_	12	iobj	_	_
+17	les	le	DET	_	_	18	det	_	_
+18	Argentins	Argentin	PROPN	_	_	0	root	_	_
+19	du	de+le	ADP	_	_	21	case	_	_
+20	euh	euh	INTJ	_	_	19	discourse	_	_
+21	ballon	ballon	NOUN	_	_	16	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	ça	ça	PRON	_	_	3	nsubj	_	_
+3	va	aller	VERB	_	_	0	root	_	_
+4	vite	vite	ADV	_	_	3	advmod	_	_
+5	comme	comme	ADP	_	_	7	case	_	_
+6	en	en	ADP	_	_	7	case	_	_
+7	début	début	NOUN	_	_	3	parataxis	_	_
+8	de	de	ADP	_	_	9	case	_	_
+9	match	match	NOUN	_	_	7	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	10	cc	_	_
+2	pour	pour	ADP	_	_	4	case	_	_
+3	l'	le	DET	_	_	4	det	_	_
+4	instant	instant	NOUN	_	_	10	parataxis	_	_
+5	l'	le	DET	_	_	6	det	_	_
+6	équipe	équipe	NOUN	_	_	10	nsubj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	France	France	PROPN	_	_	6	nmod	_	_
+9	n'	ne	PART	_	_	10	mark	_	_
+10	arrive	arriver	VERB	_	_	0	root	_	_
+11	pas	pas	PART	_	_	10	mark	_	_
+12	à	à	ADP	_	_	13	mark	_	_
+13	récupérer	récupérer	VERB	_	_	10	xcomp	_	_
+14	ce	ce	DET	_	_	15	det	_	_
+15	ballon	ballon	NOUN	_	_	13	obj	_	_</conll>
+
+<conll>1	elle	il	PRON	_	_	3	nsubj	_	_
+2	est	être	AUX	_	_	3	aux	_	_
+3	obligée	obliger	VERB	_	_	0	root	_	_
+4	de	de	ADP	_	_	5	mark	_	_
+5	commettre	commettre	VERB	_	_	3	xcomp	_	_
+6	des	de+le	ADP	_	_	7	case	_	_
+7	fautes	faute	NOUN	_	_	5	iobj	_	_</conll>
+
+<conll>1	c'	ce	PRON	_	_	3	nsubj	_	_
+2	était	être	AUX	_	_	3	cop	_	_
+3	Abidal	Abidal	PROPN	_	_	0	root	_	_
+4	là	là	ADV	_	_	3	discourse	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	0	root	_	_
+2	ouais	ouais	INTJ	_	_	1	discourse	_	_</conll>
+
+<conll>1	Abidal	Abidal	PROPN	_	_	0	root	_	_
+2	sur	sur	ADP	_	_	3	case	_	_
+3	Maxi	Maxi	PROPN	_	_	1	nmod	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	Rodriguez	Rodriguez	PROPN	_	_	3	dep	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	c'	ce	PRON	_	_	5	nsubj	_	_
+3	est	être	AUX	_	_	5	cop	_	_
+4	un	un	DET	_	_	5	det	_	_
+5	coup	coup	NOUN	_	_	0	root	_	_
+6	franc	franc	ADJ	_	_	5	amod	_	_
+7	dans	dans	ADP	_	_	9	case	_	_
+8	le	le	DET	_	_	9	det	_	_
+9	camp	camp	NOUN	_	_	5	nmod	_	_
+10	de	de	ADP	_	_	12	case	_	_
+11	l'	le	DET	_	_	12	det	_	_
+12	équipe	équipe	NOUN	_	_	9	nmod	_	_
+13	de	de	ADP	_	_	14	case	_	_
+14	France	France	PROPN	_	_	12	nmod	_	_
+15	comme	comme	ADP	_	_	5	parataxis	_	_
+16	au	à+le	ADP	_	_	15	dep	_	_
+17	en	en	PRON	_	_	16	conj	_	_
+18	début	début	NOUN	_	_	17	dep	_	_
+19	de	de	ADP	_	_	20	case	_	_
+20	rencontre	rencontre	NOUN	_	_	18	nmod	_	_</conll>
+
+<conll>1	là	là	ADV	_	_	3	advmod	_	_
+2	les	le	DET	_	_	3	det	_	_
+3	Français	Français	PROPN	_	_	0	root	_	_
+4	qui	qui	PRON	_	_	7	csubj	_	_
+5	sont	être	AUX	_	_	7	aux	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	dépassés	dépasser	VERB	_	_	3	acl	_	_
+8	par	par	ADP	_	_	10	case	_	_
+9	les	le	DET	_	_	10	det	_	_
+10	évènements	évènement	NOUN	_	_	7	iobj	_	_</conll>
+
+<conll>1	ils	il	PRON	_	_	5	nsubj	_	_
+2	se	se	PRON	_	_	5	obj	_	_
+3	sont	être	AUX	_	_	5	aux	_	_
+4	bien	bien	ADV	_	_	5	advmod	_	_
+5	repris	reprendre	VERB	_	_	0	root	_	_
+6	ensuite	ensuite	ADV	_	_	5	advmod	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	4	cc	_	_
+2	là	là	ADV	_	_	4	advmod	_	_
+3	ils	il	PRON	_	_	4	nsubj	_	_
+4	lâchent	lâcher	VERB	_	_	0	root	_	_
+5	de	de	ADP	_	_	4	advmod	_	_
+6	nouveau	nouveau	ADJ	_	_	5	fixed	_	_
+7	prise	prise	NOUN	_	_	4	obj	_	_
+8	à nouveau	à nouveau	ADV	_	_	4	advmod	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	0	root	_	_
+2	que	que	PART	_	_	1	fixed	_	_
+3	nous	nous	PRON	_	_	4	csubj	_	_
+4	sommes	être	AUX	_	_	1	dep	_	_
+5	à	à	ADP	_	_	7	case	_	_
+6	trois	trois	NUM	_	_	7	nummod	_	_
+7	minutes	minute	NOUN	_	_	4	iobj	_	_
+8	de	de	ADP	_	_	10	case	_	_
+9	la	le	DET	_	_	10	det	_	_
+10	mi-temps	mi-temps	NOUN	_	_	7	nmod	_	_</conll>
+
+<conll>1	eh	eh	INTJ	_	_	0	root	_	_
+2	oui	oui	INTJ	_	_	1	discourse	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	2	fixed	_	_
+2	que	que	PART	_	_	0	root	_	_
+3	le	le	DET	_	_	4	det	_	_
+4	ballon	ballon	NOUN	_	_	6	csubj	_	_
+5	maintenant	maintenant	ADV	_	_	6	advmod	_	_
+6	est	être	AUX	_	_	2	dep	_	_
+7	dans	dans	ADP	_	_	9	case	_	_
+8	les	le	DET	_	_	9	det	_	_
+9	pieds	pied	NOUN	_	_	6	obl	_	_
+10	là-bas	là-bas	ADV	_	_	6	advmod	_	_
+11	à droite	à droite	ADV	_	_	6	advmod	_	_
+12	de	de	ADP	_	_	6	comp	_	_
+13	je	je	PRON	_	_	14	dep	_	_
+14	pense	penser	VERB	_	_	0	root	_	_
+15	que	que	SCONJ	_	_	18	mark	_	_
+16	c'	ce	PRON	_	_	18	csubj	_	_
+17	est	être	AUX	_	_	18	cop	_	_
+18	Mascherano	Mascherano	PROPN	_	_	14	ccomp	_	_
+19	ou	ou	CCONJ	_	_	20	cc	_	_
+20	M~	M~	PROPN	_	_	18	conj	_	_
+21	euh	euh	INTJ	_	_	20	discourse	_	_
+22	peut~	peut~	ADV	_	_	18	conj	_	_
+23	peut-être	peut-être	ADV	_	_	18	conj	_	_
+24	euh	euh	INTJ	_	_	23	discourse	_	_
+25	oui	oui	INTJ	_	_	24	discourse	_	_
+26	c'	ce	PRON	_	_	28	nsubj	_	_
+27	était	être	AUX	_	_	28	cop	_	_
+28	lui	lui	PRON	_	_	0	root	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	5	cc	_	_
+2	le	le	DET	_	_	3	det	_	_
+3	ballon	ballon	NOUN	_	_	5	nsubj	_	_
+4	est	être	AUX	_	_	5	aux	_	_
+5	sorti	sortir	VERB	_	_	0	root	_	_
+6	pour	pour	ADP	_	_	9	case	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	l'	le	DET	_	_	9	det	_	_
+9	équipe	équipe	NOUN	_	_	5	obl	_	_
+10	de	de	ADP	_	_	11	case	_	_
+11	France	France	PROPN	_	_	9	nmod	_	_
+12	là	là	ADV	_	_	11	discourse	_	_
+13	non	non	INTJ	_	_	12	discourse	_	_
+14	pour	pour	ADP	_	_	16	case	_	_
+15	les	le	DET	_	_	16	det	_	_
+16	Argentins	Argentin	PROPN	_	_	9	conj	_	_</conll>
+
+<conll>1	sortie	sortie	NOUN	_	_	0	root	_	_
+2	en	en	ADP	_	_	3	case	_	_
+3	touche	touche	NOUN	_	_	1	nmod	_	_
+4	pour	pour	ADP	_	_	6	case	_	_
+5	les	le	DET	_	_	6	det	_	_
+6	Argentins	Argentin	PROPN	_	_	1	nmod	_	_
+7	avec	avec	ADP	_	_	9	case	_	_
+8	euh	euh	INTJ	_	_	7	discourse	_	_
+9	Zanetti	Zanetti	PROPN	_	_	1	nmod	_	_
+10	qui	qui	PRON	_	_	11	csubj	_	_
+11	va	aller	VERB	_	_	9	acl	_	_
+12	faire	faire	VERB	_	_	11	xcomp	_	_
+13	cette	ce	DET	_	_	14	det	_	_
+14	touche	touche	NOUN	_	_	12	obj	_	_
+15	là-bas	là-bas	ADV	_	_	12	advmod	_	_
+16	euh	euh	INTJ	_	_	15	discourse	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	joueur	joueur	NOUN	_	_	0	root	_	_
+3	qui	qui	PRON	_	_	4	csubj	_	_
+4	joue	jouer	VERB	_	_	2	acl	_	_
+5	depuis	depuis	ADP	_	_	7	case	_	_
+6	des	de+le	ADP	_	_	7	case	_	_
+7	années	année	NOUN	_	_	4	obl	_	_
+8	à	à	ADP	_	_	7	dep	_	_
+9	à	à	ADP	_	_	11	case	_	_
+10	l'	le	DET	_	_	11	det	_	_
+11	Inter	Inter	PROPN	_	_	8	conj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	0	root	_	_
+2	que	que	PART	_	_	1	fixed	_	_
+3	le	le	DET	_	_	4	det	_	_
+4	ballon	ballon	NOUN	_	_	6	csubj	_	_
+5	est	être	AUX	_	_	6	aux	_	_
+6	revenu	revenir	VERB	_	_	1	dep	_	_
+7	maintenant	maintenant	ADV	_	_	6	advmod	_	_
+8	dans	dans	ADP	_	_	10	case	_	_
+9	le	le	DET	_	_	10	det	_	_
+10	camp	camp	NOUN	_	_	6	iobj	_	_
+11	ouh	ouh	INTJ	_	_	10	discourse	_	_
+12	à nouveau	à nouveau	ADV	_	_	15	dep	_	_
+13	dans	dans	ADP	_	_	15	case	_	_
+14	les	le	DET	_	_	15	det	_	_
+15	pieds	pied	NOUN	_	_	10	conj	_	_
+16	de	de	ADP	_	_	17	case	_	_
+17	Zanetti	Zanetti	PROPN	_	_	15	nmod	_	_
+18	là-bas	là-bas	ADV	_	_	10	conj	_	_
+19	sur	sur	ADP	_	_	21	case	_	_
+20	la	le	DET	_	_	21	det	_	_
+21	droite	droite	NOUN	_	_	10	conj	_	_
+22	tout	tout	ADJ	_	_	25	amod	_	_
+23	près de	près de	ADP	_	_	25	case	_	_
+24	la	le	DET	_	_	25	det	_	_
+25	ligne	ligne	NOUN	_	_	10	conj	_	_
+26	de	de	ADP	_	_	27	case	_	_
+27	touche	touche	NOUN	_	_	25	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	donne	donner	VERB	_	_	0	root	_	_
+4	à	à	ADP	_	_	5	case	_	_
+5	Gaga	Gaga	PROPN	_	_	3	iobj	_	_
+6	à	à	ADP	_	_	7	case	_	_
+7	Gago	Gago	PROPN	_	_	5	conj	_	_
+8	effectivement	effectivement	ADV	_	_	7	discourse	_	_
+9	Gago	Gago	PROPN	_	_	5	conj	_	_
+10	pardon	pardon	NOUN	_	_	9	discourse	_	_
+11	Gago	Gago	PROPN	_	_	0	root	_	_
+12	qui	qui	PRON	_	_	14	csubj	_	_
+13	est	être	AUX	_	_	14	aux	_	_
+14	contré	contrer	VERB	_	_	11	acl	_	_
+15	qui	qui	PRON	_	_	17	csubj	_	_
+16	est	être	AUX	_	_	17	aux	_	_
+17	contré	contrer	VERB	_	_	14	conj	_	_</conll>
+
+<conll>1	Heinze	Heinze	PROPN	_	_	0	root	_	_
+2	Heinze	Heinze	PROPN	_	_	1	conj	_	_
+3	qui	qui	PRON	_	_	4	csubj	_	_
+4	change	changer	VERB	_	_	2	acl	_	_
+5	de côté	de côté	ADV	_	_	4	comp	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	6	nsubj	_	_
+2	on	on	PRON	_	_	1	conj	_	_
+3	n'	ne	PART	_	_	6	mark	_	_
+4	a	avoir	VERB	_	_	6	aux	_	_
+5	pas	pas	PART	_	_	6	mark	_	_
+6	pu	pouvoir	VERB	_	_	0	root	_	_
+7	le	le	PRON	_	_	8	obj	_	_
+8	passer	passer	VERB	_	_	6	xcomp	_	_
+9	à droite	à droite	ADV	_	_	8	comp	_	_</conll>
+
+<conll>1	on	on	PRON	_	_	2	nsubj	_	_
+2	va	aller	VERB	_	_	0	root	_	_
+3	essayer	essayer	VERB	_	_	2	xcomp	_	_
+4	à gauche	à gauche	ADV	_	_	3	advmod	_	_
+5	avec	avec	ADP	_	_	6	case	_	_
+6	Papa	Papa	PROPN	_	_	3	obl	_	_
+7	maintenant	maintenir	VERB	_	_	9	dep	_	_
+8	très	très	ADV	_	_	9	advmod	_	_
+9	offensif	offensif	ADJ	_	_	6	amod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	pas	pas	PART	_	_	3	dep	_	_
+3	mal	mal	ADJ	_	_	0	root	_	_
+4	du tout	du tout	ADV	_	_	3	advmod	_	_
+5	ce	ce	DET	_	_	6	det	_	_
+6	petit	petit	NOUN	_	_	0	root	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	3	nsubj	_	_
+2	me	me	PRON	_	_	3	iobj	_	_
+3	fait	faire	VERB	_	_	0	root	_	_
+4	penser	penser	VERB	_	_	3	xcomp	_	_
+5	à	à	ADP	_	_	6	case	_	_
+6	Bixente	Bixente	PROPN	_	_	4	iobj	_	_
+7	là	là	ADV	_	_	6	discourse	_	_</conll>
+
+<conll>1	euh	euh	INTJ	_	_	3	discourse	_	_
+2	il	il	PRON	_	_	4	nsubj	_	_
+3	est	être	AUX	_	_	4	cop	_	_
+4	petit	petit	ADJ	_	_	0	root	_	_
+5	et	et	CCONJ	_	_	7	cc	_	_
+6	très	très	ADV	_	_	7	advmod	_	_
+7	vif	vif	ADJ	_	_	4	conj	_	_
+8	très	très	ADV	_	_	9	advmod	_	_
+9	offensif	offensif	ADJ	_	_	4	conj	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	court	courir	VERB	_	_	0	root	_	_
+4	dans	dans	ADP	_	_	6	case	_	_
+5	son	son	DET	_	_	6	det	_	_
+6	couloir	couloir	NOUN	_	_	3	obl	_	_
+7	euh	euh	INTJ	_	_	6	discourse	_	_
+8	le	le	DET	_	_	11	det	_	_
+9	dénommé	dénommer	ADJ	_	_	11	amod	_	_
+10	euh	euh	INTJ	_	_	9	discourse	_	_
+11	Papa	Papa	PROPN	_	_	3	dislocated	_	_</conll>
+
+<conll>1	le	le	DET	_	_	2	det	_	_
+2	ballon	ballon	NOUN	_	_	0	root	_	_
+3	récupéré	récupérer	VERB	_	_	2	acl	_	_
+4	par	par	ADP	_	_	5	case	_	_
+5	Heinze	Heinze	PROPN	_	_	3	iobj	_	_
+6	maintenant	maintenant	ADV	_	_	3	advmod	_	_</conll>
+
+<conll>1	les	le	DET	_	_	2	det	_	_
+2	Français	Français	PROPN	_	_	0	root	_	_
+3	qui	qui	PRON	_	_	5	csubj	_	_
+4	sont	être	AUX	_	_	5	aux	_	_
+5	obligés	obliger	VERB	_	_	2	acl	_	_
+6	de	de	ADP	_	_	7	mark	_	_
+7	courir	courir	VERB	_	_	5	xcomp	_	_
+8	après	après	ADP	_	_	10	case	_	_
+9	ce	ce	DET	_	_	10	det	_	_
+10	ballon	ballon	NOUN	_	_	7	obl	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	encore	encore	ADV	_	_	3	advmod	_	_
+3	Papa	Papa	PROPN	_	_	0	root	_	_
+4	justement	justement	ADV	_	_	3	ad	_	_
+5	qui	qui	PRON	_	_	6	csubj	_	_
+6	franchit	franchir	VERB	_	_	3	acl	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	ligne	ligne	NOUN	_	_	6	obj	_	_
+9	médiane	médian	ADJ	_	_	8	amod	_	_
+10	qui	qui	PRON	_	_	11	csubj	_	_
+11	accélère	accélérer	VERB	_	_	6	conj	_	_
+12	maintenant	maintenant	ADV	_	_	11	advmod	_	_
+13	qui	qui	PRON	_	_	14	csubj	_	_
+14	va	aller	VERB	_	_	6	conj	_	_
+15	trouver	trouver	VERB	_	_	14	xcomp	_	_
+16	Agüero	Agüero	PROPN	_	_	15	obj	_	_</conll>
+
+<conll>1	Agüero	Agüero	PROPN	_	_	0	root	_	_
+2	en	en	ADP	_	_	3	case	_	_
+3	retrait	retrait	NOUN	_	_	1	nmod	_	_
+4	pour	pour	ADP	_	_	6	case	_	_
+5	euh	euh	INTJ	_	_	4	discourse	_	_
+6	Gago	Gago	PROPN	_	_	3	nmod	_	_</conll>
+
+<conll>1	Gago	Gago	PROPN	_	_	0	root	_	_
+2	pour	pour	ADP	_	_	7	case	_	_
+3	euh	euh	INTJ	_	_	2	discourse	_	_
+4	euh	euh	INTJ	_	_	3	discourse	_	_
+5	de	de	ADP	_	_	7	dep	_	_
+6	nouveau	nouveau	ADJ	_	_	5	fixed	_	_
+7	Papa	Papa	PROPN	_	_	1	nmod	_	_</conll>
+
+<conll>1	ballon	ballon	NOUN	_	_	0	root	_	_
+2	contré	contrer	VERB	_	_	1	acl	_	_</conll>
+
+<conll>1	mais	mais	CCONJ	_	_	3	cc	_	_
+2	ça	ça	PRON	_	_	3	nsubj	_	_
+3	continue	continuer	VERB	_	_	0	root	_	_
+4	de	de	ADP	_	_	5	mark	_	_
+5	circuler	circuler	VERB	_	_	3	xcomp	_	_
+6	avec	avec	ADP	_	_	9	case	_	_
+7	et	et	CCONJ	_	_	6	discourse	_	_
+8	oui	oui	INTJ	_	_	7	discourse	_	_
+9	Messi	Messi	PROPN	_	_	5	obl	_	_
+10	maintenant	maintenant	ADV	_	_	12	ad	_	_
+11	avec	avec	ADP	_	_	12	case	_	_
+12	Messi	Messi	PROPN	_	_	9	conj	_	_</conll>
+
+<conll>1	Messi	Messi	PROPN	_	_	5	dislocated	_	_
+2	techniquement	techniquement	ADV	_	_	5	advmod	_	_
+3	c'	ce	PRON	_	_	5	nsubj	_	_
+4	est	être	AUX	_	_	5	cop	_	_
+5	fantastique	fantastique	ADJ	_	_	0	root	_	_
+6	hein	hein	INTJ	_	_	5	discourse	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	vient	venir	VERB	_	_	0	root	_	_
+3	de	de	ADP	_	_	5	mark	_	_
+4	s'	se	PRON	_	_	5	obj	_	_
+5	échapper	échapper	VERB	_	_	2	xcomp	_	_
+6	de	de	ADP	_	_	7	mark	_	_
+7	sortir	sortir	VERB	_	_	5	conj	_	_
+8	d'	de	ADP	_	_	10	case	_	_
+9	un	un	DET	_	_	10	det	_	_
+10	piège	piège	NOUN	_	_	7	iobj	_	_
+11	tendu	tendre	VERB	_	_	10	acl	_	_
+12	par	par	ADP	_	_	14	case	_	_
+13	trois	trois	NUM	_	_	14	nummod	_	_
+14	joueurs	joueur	NOUN	_	_	11	iobj	_	_
+15	français	français	ADJ	_	_	14	amod	_	_</conll>
+
+<conll>1	il	il	PRON	_	_	2	nsubj	_	_
+2	peut	pouvoir	VERB	_	_	0	root	_	_
+3	donner	donner	VERB	_	_	2	xcomp	_	_
+4	derrière	derrière	ADP	_	_	8	case	_	_
+5	où	où	PRON	_	_	9	advmod	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	Heinze	Heinze	PROPN	_	_	8	csubj	_	_
+8	a	avoir	VERB	_	_	3	ccomp	_	_
+9	récupéré	récupérer	VERB	_	_	8	aux	_	_
+10	ce	ce	DET	_	_	11	det	_	_
+11	ballon	ballon	NOUN	_	_	9	obj	_	_
+12	et	et	CCONJ	_	_	14	cc	_	_
+13	l'	le	PRON	_	_	14	obj	_	_
+14	écarte	écarter	VERB	_	_	9	conj	_	_
+15	là-bas	là-bas	ADV	_	_	14	comp	_	_
+16	côté	côté	NOUN	_	_	15	conj	_	_
+17	droit	droit	ADJ	_	_	16	amod	_	_
+18	Zanetti	Zanetti	PROPN	_	_	14	ad	_	_
+19	pour	pour	ADP	_	_	20	case	_	_
+20	Zanetti	Zanetti	PROPN	_	_	18	conj	_	_</conll>
+
+<conll>1	alors	alors	ADV	_	_	0	root	_	_
+2	que	que	PART	_	_	1	fixed	_	_
+3	Heinze	Heinze	PROPN	_	_	14	dislocated	_	_
+4	c'	ce	PRON	_	_	5	csubj	_	_
+5	est	être	AUX	_	_	3	parenth	_	_
+6	quand	quand	PRON	_	_	5	advmod	_	_
+7	même	même	ADV	_	_	6	fixed	_	_
+8	assez	assez	ADV	_	_	9	advmod	_	_
+9	extraordinaire	extraordinaire	ADJ	_	_	5	comp	_	_
+10	hein	hein	INTJ	_	_	9	discourse	_	_
+11	c'	ce	PRON	_	_	14	csubj	_	_
+12	est	être	AUX	_	_	14	cop	_	_
+13	le	le	DET	_	_	14	det	_	_
+14	patron	patron	NOUN	_	_	1	dep	_	_
+15	de	de	ADP	_	_	17	case	_	_
+16	la	le	DET	_	_	17	det	_	_
+17	défense	défense	NOUN	_	_	14	nmod	_	_</conll>
+
+<conll>1	et	et	CCONJ	_	_	3	cc	_	_
+2	il	il	PRON	_	_	3	nsubj	_	_
+3	joue	jouer	VERB	_	_	0	root	_	_
+4	bien	bien	ADV	_	_	3	advmod	_	_
+5	ce	ce	DET	_	_	6	det	_	_
+6	rôle	rôle	NOUN	_	_	3	obj	_	_
+7	hein	hein	INTJ	_	_	6	discourse	_	_</conll>
+
+<conll>1	oh la	oh la	INTJ	_	_	4	discourse	_	_
+2	il	il	PRON	_	_	4	expl	_	_
+3	y	y	PRON	_	_	4	expl	_	_
+4	a	avoir	VERB	_	_	0	root	_	_
+5	il	il	PRON	_	_	7	expl	_	_
+6	y	y	PRON	_	_	7	expl	_	_
+7	a	avoir	VERB	_	_	0	root	_	_
+8	une	un	DET	_	_	10	det	_	_
+9	mauvais	mauvais	ADJ	_	_	10	amod	_	_
+10	séquence	séquence	NOUN	_	_	7	obj	_	_
+11	hein	hein	INTJ	_	_	10	discourse	_	_
+12	pour	pour	ADP	_	_	14	case	_	_
+13	l'	le	DET	_	_	14	det	_	_
+14	équipe	équipe	NOUN	_	_	7	obl	_	_
+15	de	de	ADP	_	_	16	case	_	_
+16	France	France	PROPN	_	_	14	nmod	_	_
+17	actuellement	actuellement	ADV	_	_	7	advmod	_	_
+18	oui	oui	INTJ	_	_	17	discourse	_	_
+19	qui	qui	PRON	_	_	21	csubj	_	_
+20	se	se	PRON	_	_	21	iobj	_	_
+21	fait	faire	VERB	_	_	14	acl	_	_
+22	là	là	ADV	_	_	21	advmod	_	_
+23	vraiment	vraiment	ADV	_	_	24	advmod	_	_
+24	balader	balader	VERB	_	_	21	xcomp	_	_
+25	hein	hein	INTJ	_	_	24	discourse	_	_</conll>
+
+<conll>1	avant	avant	ADP	_	_	2	case	_	_
+2	même que	même que	SCONJ	_	_	14	mark	_	_
+3	de	de	ADP	_	_	14	parataxis	_	_
+4	nouveau	nouveau	ADJ	_	_	3	fixed	_	_
+5	Gutiérrez	Gutiérrez	PROPN	_	_	14	dislocated	_	_
+6	le	le	DET	_	_	7	det	_	_
+7	buteur	buteur	NOUN	_	_	5	conj	_	_
+8	justement	justement	ADV	_	_	7	dep	_	_
+9	à	à	ADP	_	_	12	case	_	_
+10	la	le	DET	_	_	12	det	_	_
+11	quarantième	quarantième	ADJ	_	_	12	amod	_	_
+12	minute	minute	NOUN	_	_	7	nmod	_	_
+13	il	il	PRON	_	_	14	nsubj	_	_
+14	rentre	rentrer	VERB	_	_	0	root	_	_
+15	dans	dans	ADP	_	_	17	case	_	_
+16	la	le	DET	_	_	17	det	_	_
+17	surface	surface	NOUN	_	_	14	iobj	_	_
+18	de	de	ADP	_	_	19	case	_	_
+19	réparation	réparation	NOUN	_	_	17	nmod	_	_
+20	pour	pour	ADP	_	_	21	case	_	_
+21	Lionel	Lionel	PROPN	_	_	14	obl	_	_
+22	Messi	Messi	PROPN	_	_	21	flat	_	_</conll>
+
+<conll>1	Messi	Messi	PROPN	_	_	0	root	_	_
+2	qui	qui	PRON	_	_	10	csubj	_	_
+3	rentre	rentrer	VERB	_	_	10	aux	_	_
+4	dans	dans	ADP	_	_	6	case	_	_
+5	la	le	DET	_	_	6	det	_	_
+6	surface	surface	NOUN	_	_	10	iobj	_	_
+7	de	de	ADP	_	_	8	case	_	_
+8	réparation	réparation	NOUN	_	_	6	nmod	_	_
+9	qui	qui	PRON	_	_	10	csubj	_	_
+10	est	être	AUX	_	_	1	acl	_	_
+11	stoppé	stopper	VERB	_	_	10	aux	_	_</conll>
+
+<conll>1	un	un	DET	_	_	2	det	_	_
+2	Français	Français	PROPN	_	_	0	root	_	_
+3	deux	deux	NUM	_	_	4	nummod	_	_
+4	Français	Français	PROPN	_	_	2	conj	_	_
+5	qui	qui	PRON	_	_	7	csubj	_	_
+6	euh	euh	INTJ	_	_	5	discourse	_	_
+7	tentent	tenter	VERB	_	_	4	acl	_	_
+8	de	de	ADP	_	_	9	mark	_	_
+9	repousser	repousser	VERB	_	_	7	xcomp	_	_
+10	les	le	DET	_	_	11	det	_	_
+11	assauts	assaut	NOUN	_	_	9	obj	_	_</conll>
+
+<conll>1	mes	son	DET	_	_	3	det	_	_
+2	chers	cher	ADJ	_	_	3	amod	_	_
+3	compatriotes	compatriote	NOUN	_	_	5	dislocated	_	_
+4	je	je	PRON	_	_	5	nsubj	_	_
+5	voudrais	vouloir	VERB	_	_	0	root	_	_
+6	d'abord	d'abord	ADV	_	_	5	advmod	_	_
+7	exprimer	exprimer	VERB	_	_	5	xcomp	_	_
+8	ma	son	DET	_	_	9	det	_	_
+9	sympathie	sympathie	NOUN	_	_	7	obj	_	_
+10	à	à	ADP	_	_	12	case	_	_
+11	toutes	tout	PRON	_	_	12	dep	_	_
+12	celles	celui	PRON	_	_	7	iobj	_	_
+13	et	et	CCONJ	_	_	16	cc	_	_
+14	à	à	ADP	_	_	16	case	_	_
+15	tous	tout	PRON	_	_	16	dep	_	_
+16	ceux	celui	PRON	_	_	12	conj	_	_
+17	qui	qui	PRON	_	_	18	csubj	_	_
+18	vivent	vivre	VERB	_	_	16	acl	_	_
+19	ces	ce	DET	_	_	21	det	_	_
+20	derniers	dernier	ADJ	_	_	21	amod	_	_
+21	jours	jours	NOUN	_	_	18	obj	_	_
+22	de	de	ADP	_	_	23	case	_	_
+23	mille	mille	NUM	_	_	21	nummod	_	_
+24	neuf	neuf	NUM	_	_	23	nummod	_	_
+25	cent	cent	NUM	_	_	24	nummod	_	_
+26	quatre-vingt-dix-neuf	quatre-vingt-dix-neuf	NUM	_	_	25	nummod	_	_
+27	dans	dans	ADP	_	_	29	case	_	_
+28	l'	le	DET	_	_	29	det	_	_
+29	épreuve	épreuve	NOUN	_	_	18	iobj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	pense	penser	VERB	_	_	0	root	_	_
+3	aux	à+le	ADP	_	_	13	case	_	_
+4	nombreuses	nombreux	ADJ	_	_	5	det	_	_
+5	victimes	victime	NOUN	_	_			_	_
+6	de	de	ADP	_	_	8	case	_	_
+7	la	le	DET	_	_	8	det	_	_
+8	tempête	tempête	NOUN	_	_	5	nmod	_	_
+9	et	et	CCONJ	_	_	13	cc	_	_
+10	à	à	ADP	_	_	13	case	_	_
+11	toutes	tout	ADJ	_	_	13	det	_	_
+12	les	le	DET	_	_	13	dep	_	_
+13	familles	famille	NOUN	_	_	2	iobj	_	_
+14	endeuillées	endeuiller	VERB	_	_	13	acl	_	_
+15	dont	dont	PRON	_	_	19	dep	_	_
+16	nous	nous	PRON	_	_	17	csubj	_	_
+17	partageons	partager	VERB	_	_	13	acl	_	_
+18	la	le	DET	_	_	19	det	_	_
+19	peine	peine	NOUN	_	_	17	obj	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	2	nsubj	_	_
+2	pense	penser	VERB	_	_	0	root	_	_
+3	à	à	ADP	_	_	5	case	_	_
+4	nos	son	DET	_	_	5	det	_	_
+5	concitoyens	concitoyen	NOUN	_	_	2	iobj	_	_
+6	cruellement	cruellement	ADV	_	_	7	advmod	_	_
+7	touchés	toucher	VERB	_	_	5	acl	_	_
+8	dans	dans	ADP	_	_	10	case	_	_
+9	leur	son	DET	_	_	10	det	_	_
+10	vie	vie	NOUN	_	_	7	obl	_	_
+11	quotidienne	quotidien	ADJ	_	_	10	amod	_	_
+12	à	à	ADP	_	_	13	case	_	_
+13	ceux	celui	PRON	_	_	5	conj	_	_
+14	dont	dont	PRON	_	_	16	dep	_	_
+15	les	le	DET	_	_	16	det	_	_
+16	biens	bien	NOUN	_	_	18	csubj	_	_
+17	ont	avoir	VERB	_	_	18	aux	_	_
+18	été	être	AUX	_	_	13	acl	_	_
+19	détruits	détruire	VERB	_	_	18	aux	_	_
+20	à	à	ADP	_	_	21	case	_	_
+21	ceux	celui	PRON	_	_	5	conj	_	_
+22	qui	qui	PRON	_	_	23	csubj	_	_
+23	craignent	craindre	VERB	_	_	21	acl	_	_
+24	pour	pour	ADP	_	_	26	case	_	_
+25	leur	son	DET	_	_	26	det	_	_
+26	activité	activité	NOUN	_	_	23	iobj	_	_
+27	et	et	CCONJ	_	_	29	cc	_	_
+28	leur	son	DET	_	_	29	det	_	_
+29	emploi	emploi	NOUN	_	_	26	conj	_	_
+30	à	à	ADP	_	_	31	case	_	_
+31	ceux	celui	PRON	_	_	5	conj	_	_
+32	qui	qui	PRON	_	_	33	csubj	_	_
+33	souffrent	souffrir	VERB	_	_	31	acl	_	_
+34	de	de	ADP	_	_	35	mark	_	_
+35	voir	voir	VERB	_	_	33	xcomp	_	_
+36	notre	son	DET	_	_	37	det	_	_
+37	patrimoine	patrimoine	NOUN	_	_	35	obj	_	_
+38	notre	son	DET	_	_	39	det	_	_
+39	littoral	littoral	NOUN	_	_	37	conj	_	_
+40	nos	son	DET	_	_	41	det	_	_
+41	forêts	forêt	NOUN	_	_	37	conj	_	_
+42	nos	son	DET	_	_	43	det	_	_
+43	monuments	monument	NOUN	_	_	37	conj	_	_
+44	défigurés	défigurer	VERB	_	_	43	acl	_	_</conll>
+
+<conll>1	je	je	PRON	_	_	3	nsubj	_	_
+2	vous	vous	PRON	_	_	3	iobj	_	_
+3	redis	redire	VERB	_	_	0	root	_	_
+4	mon	son	DET	_	_	5	det	_	_
+5	émotion	émotion	NOUN	_	_	3	obj	_	_
+6	mais	mais	CCONJ	_	_	9	cc	_	_
+7	aussi	aussi	ADV	_	_	6	dep	_	_
+8	ma	son	DET	_	_	9	det	_	_
+9	fierté	fierté	NOUN	_	_	5	conj	_	_
+10	devant	devant	ADP	_	_	13	case	_	_
+11	l'	le	DET	_	_	13	det	_	_
+12	exceptionnel	exceptionnel	ADJ	_	_	13	amod	_	_
+13	élan	élan	NOUN	_	_	3	obl	_	_
+14	de	de	ADP	_	_	15	case	_	_
+15	solidarité	solidarité	NOUN	_	_	13	nmod	_	_
+16	qui	qui	PRON	_	_	17	csubj	_	_
+17	anime	animer	VERB	_	_	15	acl	_	_
+18	tant	tant	ADV	_	_	17	comp	_	_
+19	de	un	ADP	_	_	20	case	_	_
+20	bénévoles	bénévole	ADJ	_	_	18	dep	_	_
+21	et	et	CCONJ	_	_	23	cc	_	_
+22	d'	de	ADP	_	_	23	case	_	_
+23	associations	association	NOUN	_	_	20	conj	_	_
+24	mobilisés	mobilisé	ADJ	_	_	23	amod	_	_
+25	aux	à+le	ADP	_	_	26	case	_	_
+26	côtés	côté	NOUN	_	_	24	obl	_	_
+27	des	de+le	ADP	_	_	28	case	_	_
+28	services	service	NOUN	_	_	26	nmod	_	_
+29	publics	public	ADJ	_	_	28	amod	_	_
+30	civils	civil	ADJ	_	_	29	conj	_	_
+31	et	et	CCONJ	_	_	32	cc	_	_
+32	militaires	militaire	NOUN	_	_	29	conj	_	_
+33	et	et	CCONJ	_	_	35	cc	_	_
+34	des	de+le	ADP	_	_	35	case	_	_
+35	élus	élu	NOUN	_	_	28	conj	_	_</conll>
+
+<conll>1	en	en	ADP	_	_	3	case	_	_
+2	ces	ce	DET	_	_	3	det	_	_
+3	heures	heure	NOUN	_	_	6	parataxis	_	_
+4	difficiles	difficile	ADJ	_	_	3	amod	_	_
+5	nous	nous	PRON	_	_	6	nsubj	_	_
+6	ressentons	ressentir	VERB	_	_	0	root	_	_
+7	profondément	profondément	ADV	_	_	6	advmod	_	_
+8	la	le	DET	_	_	9	det	_	_
+9	fragilité	fragilité	NOUN	_	_	6	obj	_	_
+10	des	de+le	ADP	_	_	11	case	_	_
+11	choses	chose	NOUN	_	_	9	nmod	_	_
+12	la	le	DET	_	_	13	det	_	_
+13	précarité	précarité	NOUN	_	_	9	conj	_	_
+14	de	de	ADP	_	_	15	case	_	_
+15	ce	ce	PRON	_	_	13	nmod	_	_
+16	qui	qui	PRON	_	_	18	csubj	_	_
+17	nous	nous	PRON	_	_	18	iobj	_	_
+18	semblait	sembler	VERB	_	_	15	acl	_	_
+19	acquis	acquis	ADJ	_	_	18	comp	_	_</conll>
+
+<conll>1	nous	nous	PRON	_	_	2	nsubj	_	_
+2	voyons	voir	VERB	_	_	0	root	_	_
+3	combien	combien	PRON	_	_	2	obj	_	_
+4	tout	tout	PRON	_	_	5	csubj	_	_
+5	peut	pouvoir	VERB	_	_	3	dep	_	_
+6	être	être	AUX	_	_	5	xcomp	_	_
+7	parfois	parfois	ADV	_	_	8	advmod	_	_
+8	remis	remettre	VERB	_	_	6	aux	_	_
+9	en	en	ADP	_	_	10	case	_	_
+10	cause	cause	NOUN	_	_	8	iobj	_	_
+11	du fait de	du fait de	ADP	_	_	13	case	_	_
+12	l'	le	DET	_	_	13	det	_	_
+13	inconscience	inconscience	NOUN	_	_	8	obl	_	_
+14	des	de+le	ADP	_	_	15	case	_	_
+15	hommes	homme	NOUN	_	_	13	nmod	_	_
+16	ou	ou	CCONJ	_	_	18	cc	_	_
+17	du	de+le	ADP	_	_	18	case	_	_
+18	déchaînement	déchaînement	NOUN	_	_	13	conj	_	_
+19	des	de+le	ADP	_	_	20	case	_	_
+20	éléments	élément	NOUN	_	_	18	nmod	_	_
+21	naturels	naturel	ADJ	_	_	20	amod	_	_</conll>
+
+<conll>1	nous	nous	PRON	_	_	2	nsubj	_	_
+2	mesurons	mesurer	VERB	_	_	0	root	_	_
+3	aussi	aussi	ADV	_	_	2	advmod	_	_
+4	l'	le	DET	_	_	5	det	_	_
+5	importance	importance	NOUN	_	_	2	obj	_	_
+6	du	de+le	ADP	_	_	7	case	_	_
+7	rôle	rôle	NOUN	_	_	5	nmod	_	_
+8	de	de	ADP	_	_	10	case	_	_
+9	l'	le	DET	_	_	10	det	_	_
+10	État	État	PROPN	_	_	7	nmod	_	_
+11	dans	dans	ADP	_	_	13	case	_	_
+12	notre	son	DET	_	_	13	det	_	_
+13	société	société	NOUN	_	_	5	nmod	_	_
+14	un	un	DET	_	_	15	det	_	_
+15	État	État	PROPN	_	_	10	conj	_	_
+16	sur	sur	ADP	_	_	17	case	_	_
+17	lequel	lequel	PRON	_	_	18	obl	_	_
+18	pèsent	peser	VERB	_	_	15	acl	_	_
+19	des	de+le	ADP	_	_	20	case	_	_
+20	responsabilités	responsabilité	NOUN	_	_	18	csubj	_	_
+21	essentielles	essentiel	ADJ	_	_	20	amod	_	_
+22	le	le	DET	_	_	23	det	_	_
+23	service	service	NOUN	_	_	20	conj	_	_
+24	public	public	ADJ	_	_	23	amod	_	_
+25	la	le	DET	_	_	26	det	_	_
+26	sécurité	sécurité	NOUN	_	_	20	conj	_	_
+27	la	le	DET	_	_	28	det	_	_
+28	solidarité	solidarité	NOUN	_	_	20	conj	_	_
+29	un	un	DET	_	_	30	det	_	_
+30	État	État	PROPN	_	_	10	conj	_	_
+31	auquel	à+lequel	PRON	_	_	33	obj	_	_
+32	il	il	PRON	_	_	33	csubj	_	_
+33	appartient	appartenir	VERB	_	_	30	acl	_	_
+34	de	de	ADP	_	_	35	mark	_	_
+35	prévoir	prévoir	VERB	_	_	33	xcomp	_	_
+36	de	de	ADP	_	_	37	mark	_	_
+37	faire	faire	VERB	_	_	35	conj	_	_
+38	face	face	NOUN	_	_	37	obj	_	_
+39	d'	de	ADP	_	_	40	mark	_	_
+40	assurer	assurer	VERB	_	_	35	conj	_	_
+41	la	le	DET	_	_	42	det	_	_
+42	coordination	coordination	NOUN	_	_	40	obj	_	_
+43	des	de+le	ADP	_	_	44	case	_	_
+44	moyens	moyens	NOUN	_	_	42	nmod	_	_
+45	du	de+le	ADP	_	_	46	case	_	_
+46	pays	pays	NOUN	_	_	44	nmod	_	_</conll>
+
+<conll>1	nous	nous	PRON	_	_	2	nsubj	_	_
+2	mesurons	mesurer	VERB	_	_	0	root	_	_
+3	surtout	surtout	ADV	_	_	2	advmod	_	_
+4	le	le	DET	_	_	5	det	_	_
+5	prix	prix	NOUN	_	_	2	obj	_	_
+6	de	de	ADP	_	_	8	case	_	_
+7	l'	le	DET	_	_	8	det	_	_
+8	aide	aide	NOUN	_	_	5	nmod	_	_
+9	fraternelle	fraternel	ADJ	_	_	8	amod	_	_
+10	du	de+le	ADP	_	_	11	case	_	_
+11	soutien	soutien	NOUN	_	_	8	conj	_	_
+12	spontané	spontané	ADJ	_	_	11	amod	_	_
+13	de	de	ADP	_	_	15	case	_	_
+14	la	le	DET	_	_	15	det	_	_
+15	main	main	NOUN	_	_	8	conj	_	_
+16	tendue	tendre	ADJ	_	_	15	amod	_	_
+17	qui	qui	PRON	_	_	20	csubj	_	_
+18	sont	être	AUX	_	_	20	cop	_	_
+19	le	le	DET	_	_	20	det	_	_
+20	ciment	ciment	NOUN	_	_	15	dep	_	_
+21	même	même	ADV	_	_	20	dep	_	_
+22	de	de	ADP	_	_	24	case	_	_
+23	la	le	DET	_	_	24	det	_	_
+24	nation	nation	NOUN	_	_	20	nmod	_	_</conll>
+
+<conll>1	au	à+le	ADP	_	_	6	case	_	_
+2	moment	moment	NOUN	_	_			_	_
+3	où	où	PRON	_	_	6	conj	_	_
+4	où	où	PRON	_	_	6	conj	_	_
+5	nous	nous	PRON	_	_	6	csubj	_	_
+6	touchons	toucher	VERB	_	_	19	parataxis	_	_
+7	aux	à+le	ADP	_	_	8	case	_	_
+8	portes	porte	NOUN	_	_	6	iobj	_	_
+9	de	de	ADP	_	_	11	case	_	_
+10	l'	le	DET	_	_	11	det	_	_
+11	an	an	NOUN	_	_	8	nmod	_	_
+12	deux	deux	NUM	_	_	11	nummod	_	_
+13	mille	mille	NUM	_	_	12	nummod	_	_
+14	rien	rien	PRON	_	_	19	nsubj	_	_
+15	n'	ne	PART	_	_	19	mark	_	_
+16	est	être	AUX	_	_	19	cop	_	_
+17	décidément	décidément	ADV	_	_	19	ad	_	_
+18	plus	plus	PART	_	_	19	dep	_	_
+19	moderne	moderne	ADJ	_	_	0	root	_	_
+20	plus	plus	PART	_	_	21	dep	_	_
+21	nécessaire	nécessaire	ADJ	_	_	19	conj	_	_
+22	plus	plus	PART	_	_	23	dep	_	_
+23	solide	solide	ADJ	_	_	19	conj	_	_
+24	que	que	SCONJ	_	_	26	mark	_	_
+25	le	le	DET	_	_	26	det	_	_
+26	sentiment	sentiment	NOUN	_	_	22	dep	_	_
+27	d'	de	ADP	_	_	28	mark	_	_
+28	appartenir	appartenir	VERB	_	_	26	acl	_	_
+29	à	à	ADP	_	_	32	case	_	_
+30	une	un	DET	_	_	32	det	_	_
+31	même	même	ADJ	_	_	32	amod	_	_
+32	communauté	communauté	NOUN	_	_	28	iobj	_	_
+33	et	et	CCONJ	_	_	36	cc	_	_
+34	d'	de	ADP	_	_	36	case	_	_
+35	être	être	AUX	_	_	36	cop	_	_
+36	responsables	responsable	ADJ	_	_	28	conj	_	_
+37	les uns	l'un	PRON	_	_	36	ad	_	_
+38	des	de+le	ADP	_	_	39	case	_	_
+39	autres	autre	ADJ	_	_	37	amod	_	_</conll>
+
+<conll>1	la	le	DET	_	_	2	det	_	_
+2	France	France	PROPN	_	_	4	nsubj	_	_
+3	blessée	blesser	ADJ	_	_	2	amod	_	_
+4	veut	vouloir	VERB	_	_	0	root	_	_
+5	se	se	PRON	_	_	6	iobj	_	_
+6	retrouver	retrouver	VERB	_	_	4	xcomp	_	_
+7	rassemblée	rassembler	ADJ	_	_	6	comp	_	_
+8	et	et	CCONJ	_	_	9	cc	_	_
+9	fraternelle	fraternel	ADJ	_	_	7	conj	_	_</conll>
+
+<conll>1	parce que	parce que	SCONJ	_	_	6	mark	_	_
+2	nos	son	DET	_	_	3	det	_	_
+3	compatriotes	compatriote	NOUN	_	_	6	csubj	_	_
+4	ont	avoir	VERB	_	_	6	aux	_	_
+5	toujours	toujours	ADV	_	_	6	advmod	_	_
+6	su	savoir	VERB	_	_	15	parataxis	_	_
+7	dans	dans	ADP	_	_	9	case	_	_
+8	l'	le	DET	_	_	9	det	_	_
+9	épreuve	épreuve	NOUN	_	_	6	obl	_	_
+10	faire	faire	VERB	_	_	6	xcomp	_	_
+11	parler	parler	VERB	_	_	10	xcomp	_	_
+12	leur	son	DET	_	_	13	det	_	_
+13	coeur	coeur	NOUN	_	_	11	obj	_	_
+14	je	je	PRON	_	_	15	nsubj	_	_
+15	voudrais	vouloir	VERB	_	_	0	root	_	_
+16	dire	dire	VERB	_	_	15	xcomp	_	_
+17	merci	merci	INTJ	_	_	16	discourse	_	_
+18	à	à	ADP	_	_	16	comp	_	_
+19	tous	tout	ADJ	_	_	21	det	_	_
+20	les	le	DET	_	_	21	dep	_	_
+21	Français	Français	PROPN	_	_	18	comp	_	_</conll>
+
+<conll>1	ce	ce	DET	_	_	2	det	_	_
+2	soir	soir	NOUN	_	_	4	dislocated	_	_
+3	nous	nous	PRON	_	_	4	nsubj	_	_
+4	vivons	vivre	VERB	_	_	0	root	_	_
+5	ensemble	ensemble	ADV	_	_	4	advmod	_	_
+6	un	un	DET	_	_	7	det	_	_
+7	moment	moment	NOUN	_	_	4	obj	_	_
+8	fort	fort	ADJ	_	_	7	amod	_	_
+9	et	et	CCONJ	_	_	10	cc	_	_
+10	singulier	singulier	ADJ	_	_	8	conj	_	_</conll>
+
+<conll>1	ce	ce	PRON	_	_	18	nsubj	_	_
+2	qui	qui	PRON	_	_	3	csubj	_	_
+3	paraissait	paraître	VERB	_	_	1	acl	_	_
+4	très	très	ADV	_	_	5	advmod	_	_
+5	lointain	lointain	ADJ	_	_	3	comp	_	_
+6	et	et	CCONJ	_	_	10	cc	_	_
+7	qui	qui	PRON	_	_	10	csubj	_	_
+8	a	avoir	VERB	_	_	10	aux	_	_
+9	longtemps	longtemps	ADV	_	_	10	advmod	_	_
+10	symbolisé	symboliser	VERB	_	_	3	conj	_	_
+11	le	le	DET	_	_	12	det	_	_
+12	futur	futur	NOUN	_	_	10	obj	_	_
+13	l'	le	DET	_	_	14	det	_	_
+14	an	an	NOUN	_	_	12	conj	_	_
+15	deux	deux	NUM	_	_	14	nummod	_	_
+16	mille	mille	NUM	_	_	15	nummod	_	_
+17	est	être	AUX	_	_	18	aux	_	_
+18	devenu	devenir	VERB	_	_	0	root	_	_
+19	contemporain	contemporain	ADJ	_	_	18	comp	_	_
+20	immédiat	immédiat	ADJ	_	_	19	conj	_	_</conll>
+
+
+
+
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="arborator-draft.js"></script>
+    <script>
+	window.onload = function () { 
+		new ArboratorDraft(); // START
+        }
+    </script>
+</body>
+
+</html>
