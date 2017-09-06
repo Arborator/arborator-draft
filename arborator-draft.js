@@ -134,17 +134,21 @@ function drawConll(conllElement) { // for each <conll> section:
 	conll.html(conll.html().trim())
 	var pnode = d3.select(conllElement.parentNode);
 	var toggle = false;
-	var showHideConll = pnode.insert('div').html("View Conll").attr("class", 'showHideConll')
+	pnode.insert('a').html('<img src="'+base64Logo+'" alt="Arborator" title="arborator" class="arboratorlogo">').attr('href', 'https://arborator.github.io/').attr('target', '_blank');
+	var showHideConll = pnode.insert('div').html('<div class="center" fit>VIEW CONLL</div> <paper-ripple fit></paper-ripple>').attr("class", 'button raised');
+
+
+	// <div class="button raised"> <div class="center" fit>SUBMIT</div> <paper-ripple fit></paper-ripple>  </div>
 	
 	var conllContent = conll.html().trim();
 	conll.remove(); // remove the old conll because it's place wasn't good
 	conll = pnode.insert('conll').html(conllContent).attr('class', 'conll'); //re insert to bind the content
-	pnode.insert('a').html('<img src="'+base64Logo+'" alt="Arborator" title="arborator">').attr('href', 'https://arborator.github.io/').attr('target', '_blank');
+	
 	
 	showHideConll.on("click", ()=>{
 		log(111,toggle);
 		conll.style("display", toggle ? "none" : "block");
-		showHideConll.html(toggle ? "View Conll": "Hide Conll");
+		showHideConll.html(toggle ? '<div class="center" fit>VIEW CONLL</div> <paper-ripple fit></paper-ripple>': '<div class="center" fit>HIDE CONLL</div> <paper-ripple fit></paper-ripple>');
 		toggle = !toggle;
 	});
 
