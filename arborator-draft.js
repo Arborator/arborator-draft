@@ -108,8 +108,13 @@ function drawConll(conllElement) { // for each <conll> section:
 	conll.html(conll.html().trim())
 	var pnode = d3.select(conllElement.parentNode);
 	var toggle = false;
-	pnode.insert('div',':first-child'); // just to get a new line
+	// pnode.insert('div',':first-child'); // just to get a new line
 	var showHideConll = pnode.insert('div').html("View Conll").attr("class", 'showHideConll')
+	
+	var conllContent = conll.html().trim();
+	conll.remove(); // remove the old conll because it's place wasn't good
+	conll = pnode.insert('conll').html(conllContent).attr('class', 'conll'); // re insert to bind the content
+	
 	showHideConll.on("click", ()=>{
 		log(111,toggle);
 		conll.style("display", toggle ? "none" : "block");
