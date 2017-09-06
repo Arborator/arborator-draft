@@ -55,8 +55,7 @@ this.ArboratorDraft = function() {
 
 
 function progressiveReadConll() {
-	// draw each conll tags progressively (only conll tags) 
-	// TODO : change drawConll() to also load progressively inside a conll tag 
+	// draw each conll tags progressively (only conll tags)
 	var conllLoop = d3.selectAll('conll')['_groups'][0]; // need to go out d3js to load it progressively
 	var i = 0;
 	function waitBetweenElements(range) {
@@ -73,6 +72,34 @@ function progressiveReadConll() {
 	}
 
 	waitBetweenElements(conllLoop.length);
+}
+
+
+function progressiveReadInsideConll(trees, pnode) {
+	// draw each tree INSIDE a conll progressively
+	var iWait = 0;
+	function waitBetweenElements(range) {
+		setTimeout(function () {
+
+			pushAndDrawSVG(trees[iWait], pnode);
+
+			iWait++;
+			if (iWait < range) {
+				waitBetweenElements(range);
+			}
+		}, 10)
+	}
+	waitBetweenElements(trees.length);
+}
+
+function pushAndDrawSVG(element, pnode) {
+	conlltrees.push(element);
+	var data=conllNodesToTree(element);
+	trees.push(data.tree);
+	uextras.push(data.uextra)						 
+	var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
+	divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
+	draw(divsvgbox, data.tree);
 }
 
 function readConll() {
@@ -108,12 +135,11 @@ function drawConll(conllElement) { // for each <conll> section:
 	conll.html(conll.html().trim())
 	var pnode = d3.select(conllElement.parentNode);
 	var toggle = false;
-	// pnode.insert('div',':first-child'); // just to get a new line
 	var showHideConll = pnode.insert('div').html("View Conll").attr("class", 'showHideConll')
 	
 	var conllContent = conll.html().trim();
 	conll.remove(); // remove the old conll because it's place wasn't good
-	conll = pnode.insert('conll').html(conllContent).attr('class', 'conll'); // re insert to bind the content
+	conll = pnode.insert('conll').html(conllContent).attr('class', 'conll'); //re insert to bind the content
 	
 	showHideConll.on("click", ()=>{
 		log(111,toggle);
@@ -121,16 +147,17 @@ function drawConll(conllElement) { // for each <conll> section:
 		showHideConll.html(toggle ? "View Conll": "Hide Conll");
 		toggle = !toggle;
 	});
+
 	var treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
-	for (let singleConll of treelines) { // for each conll tree:
-		conlltrees.push(singleConll);
-		var data=conllNodesToTree(singleConll);
-		trees.push(data.tree);
-		uextras.push(data.uextra)						 
-		var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
-		divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
-		draw(divsvgbox, data.tree);
+
+	if(progressiveLoading){
+		progressiveReadInsideConll(treelines, pnode);
+	}else{
+		for (let singleConll of treelines) { // for each conll tree at once, can block the browser
+			pushAndDrawSVG(singleConll, pnode);
+		}
 	}
+	
 }
 
 
