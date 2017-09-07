@@ -32,6 +32,7 @@ conlls = {
 	14: 	{"id": 0, "t":1, "lemma": 3, "cat": 5, "gov":9, "func":11}, 
 	4: 	{"t":0, "lemma": 0, "cat": 1, "gov":2, "func":3} 
 }
+isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // needed for bezier bounding box bug
 
 // debug:
 log = console.log.bind(console);
@@ -62,8 +63,6 @@ function progressiveReadConll() {
 		setTimeout(function () {
 
 			drawConll(conllLoop[i]);
-			console.log(i);
-
 			i++;
 			if (i < range) {
 				waitBetweenElements(range);
@@ -281,8 +280,12 @@ function getSVGPath(startPoint,endPoint,computedStyle) {
 	var yy = Math.max(y1-x1x2-wordDistanceFactor*Math.abs(endPoint['id']-startPoint['id']),-tokDepDist);
 	var yy = Math.min(yy,y1)-depMinHeight;
 	var cstr="M"+x1+","+y1+" C"+x1+","+yy+" "+x2+","+yy+" "+x2+","+(y2-2); // -2 so that the arrow is really pointed
-	return cstr;
+	//(x0,y0) is start point; (x1,y1),(x2,y2) is control points; (x3,y3) is end point.
+	return {cstr:cstr,  x0:x1,y0:y1,  x1:x1,y1:yy,  x2:x2,y2:yy,x3:x2,y3:(y2-2)};
 }
+
+
+
 
 
 function arrowhead(x,y) {
@@ -326,6 +329,7 @@ function draw(div, tree) {
 		})
 		.attr("y", svgDefaultHeight-fontSize);			
 	svg.attr("width", runningWidth); // adapt svg width
+
 	// draw dependency links
 	group.selectAll("text").each(function(d) { // for each token:
 		var txt = d3.select(this); 
@@ -339,8 +343,12 @@ function draw(div, tree) {
 					var y=svgDefaultHeight-fontSize*2;
 					return "M"+x+","+(y-2)+"L"+x+","+0; // -2 so that the arrow is really pointed
 				}
-				// normal link:
-				else return getSVGPath(tree[govid],tree[txt.attr("id")], getComputedStyle(this));
+				else // normal link:
+				{	
+					pathInfo=getSVGPath(tree[govid],tree[txt.attr("id")], getComputedStyle(this))
+					return pathInfo.cstr ;
+				}
+				
 			});
 			group.append("path")
 			.attr("class", "arrowhead")
@@ -349,21 +357,38 @@ function draw(div, tree) {
 			});
 			var label=tree[d3.select(this).attr("id")]["gov"][govid];
 			var depLineBbox=ligneDep.node().getBBox();
-			group.append('text') 
+			
 			// TODO: move the "root" label to a good position! (possibly to a group that has to be transformed separately!)
 			// TODO: handle mutliple governors!
-			.attr("class", "deprel")
-			.text(function(d){return label})
-			.attr("x", function(d) {
-				relFontSize = parseInt(getComputedStyle(this).fontSize, 10);
-				var w = this.getComputedTextLength(); //<-- length of this node
-				return depLineBbox.x + depLineBbox.width/2 - w/2})
-			.attr("y", function(d) {
-				funcCurveDist = parseInt(getComputedStyle(this).getPropertyValue('--funcCurveDist'));
-				return depLineBbox.y-funcCurveDist});
-			if (govid!=0) { // if not root, check how high we got
-				var smallY = depLineBbox.y-funcCurveDist-relFontSize
+			if (govid!=0) // normal link:
+			{
+				group.append('text') 
+				.attr("class", "deprel")
+				.text(function(d){return label})
+				.attr("x", function(d) {
+					relFontSize = parseInt(getComputedStyle(this).fontSize, 10);
+					var w = this.getComputedTextLength(); //<-- length of this node
+					return depLineBbox.x + depLineBbox.width/2 - w/2})
+				.attr("y", function(d) {
+						funcCurveDist = parseInt(getComputedStyle(this).getPropertyValue('--funcCurveDist'));
+						if (isFirefox)
+						{
+							// firefox needs: stackoverflow.com/questions/24809978/calculating-the-bounding-box-of-cubic-bezier-curve
+							const {x0, y0, x1, y1, x2, y2, x3, y3} = pathInfo // firefox
+							y = bezierMinMax(x0, y0, x1, y1, x2, y2, x3, y3).min.y-funcCurveDist;
+							return y; // firefox
+						}
+						else 
+						{
+							// standard Chrome etc
+							y = depLineBbox.y-funcCurveDist
+							return y; 
+						}
+					})
+				// if not root, check how high we got:
+				var smallY = y-relFontSize
 				smallestY = smallY < smallestY ? smallY : smallestY;
+				
 			}
 		}
 		
@@ -371,6 +396,65 @@ function draw(div, tree) {
 	group.attr("transform", "translate(" + 0 + "," + (-smallestY) + ")");
 	svg.attr("height", svgDefaultHeight-smallestY); // adapt svg height
 }
+
+
+
+//(x0,y0) is start point; (x1,y1),(x2,y2) is control points; (x3,y3) is end point.
+function bezierMinMax(x0, y0, x1, y1, x2, y2, x3, y3) {
+    var tvalues = [], xvalues = [], yvalues = [],
+        a, b, c, t, t1, t2, b2ac, sqrtb2ac;
+    for (var i = 0; i < 2; ++i) {
+        if (i == 0) {
+            b = 6 * x0 - 12 * x1 + 6 * x2;
+            a = -3 * x0 + 9 * x1 - 9 * x2 + 3 * x3;
+            c = 3 * x1 - 3 * x0;
+        } else {
+            b = 6 * y0 - 12 * y1 + 6 * y2;
+            a = -3 * y0 + 9 * y1 - 9 * y2 + 3 * y3;
+            c = 3 * y1 - 3 * y0;
+        }
+        if (Math.abs(a) < 1e-12) {
+            if (Math.abs(b) < 1e-12) {
+                continue;
+            }
+            t = -c / b;
+            if (0 < t && t < 1) {
+                tvalues.push(t);
+            }
+            continue;
+        }
+        b2ac = b * b - 4 * c * a;
+        if (b2ac < 0) {
+            continue;
+        }
+        sqrtb2ac = Math.sqrt(b2ac);
+        t1 = (-b + sqrtb2ac) / (2 * a);
+        if (0 < t1 && t1 < 1) {
+            tvalues.push(t1);
+        }
+        t2 = (-b - sqrtb2ac) / (2 * a);
+        if (0 < t2 && t2 < 1) {
+            tvalues.push(t2);
+        }
+    }
+
+    var j = tvalues.length, mt;
+    while (j--) {
+        t = tvalues[j];
+        mt = 1 - t;
+        xvalues[j] = (mt * mt * mt * x0) + (3 * mt * mt * t * x1) + (3 * mt * t * t * x2) + (t * t * t * x3);
+        yvalues[j] = (mt * mt * mt * y0) + (3 * mt * mt * t * y1) + (3 * mt * t * t * y2) + (t * t * t * y3);
+    }
+
+    xvalues.push(x0,x3);
+    yvalues.push(y0,y3);
+
+    return {
+        min: {x: Math.min.apply(0, xvalues), y: Math.min.apply(0, yvalues)},
+        max: {x: Math.max.apply(0, xvalues), y: Math.max.apply(0, yvalues)}
+    };
+}
+
 
 // base 64 logo of arborator for the link image
 base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAXCAYAAABEQGxzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABtQAAAbUBnmWvHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANXSURBVFiFtZhLbA1RGMd/59x7e5XeVrXU45aF9ztCLEQ3gojMwkZiJ7GYRDALhAUJa/FIZjk7EYKWCIMQG0qIx4JIQyREqxWP1uNyH729MxYzreu29zF3xj85mznf+X///8x3Zr4zwrZtqoWqaDXALKClggHwqYLx3jD1wWo1Ca+GVEWbAmwGFGAjECsWK22oyQkyYRsPWRLAbcAEbhim/tmLvooMqYq2HMeAAqwGZLk18USINb1RGjKSn1GLmpzgzOLfXrQBWMBjHHOmYerPyy0oakhVtGbgALANaPWioiEj2fGijmguT5mweThjkGdTsyTDlhe6fPQA54Fjhql/HStglCFV0WLAPmAvJcqpGOKJEOvej2P6r9CouZy0uT47TVdT1ittIRLASeCEYeqJ/Il/SkdVtJVAF3CEKswA1A0Kpv0ebQYgZAnaeqIs7A9XQ52PGI7GLlfzCEYMqYq2FegE4n4ytSRDiBLbsjEtaUyX3YKVIg50utoB15CqaBuBC0Ct3wxNqbGfTj7mDUSY9aN8XIWoBS64Hgj1PR1oBm5RZYkVYlDaLO6PlIyZkJV8q7Vf9dTnJAHcREAA66+du3laAvuBaQGQArDsS6TsN0cA44ZEDJgUVF4cD/sl0BYgKVfmphioLf1a7qvLca81PSPIvC7aJLAsSMZJaWk1pmVRR9+jFh3zkwwF9l74B0sk8C4AIgu4C+y2RHamgINjBaXDNu0LkiQj1fePZfAyDFwFllax2AIeABeBS4apfxyeeNd8uLVQck7A5Xkp+suUo090hoFTwE4q26A2jol2oMMw9b4icWeB9cCi4Qs3Z6forh/yJ7c0PgLHhW3bwx3CHWDiGIE28BDnSXQYpt5blloI8bbp0BNgJcD9eIb78Uxgyoto3GSY+u2RXk5VtFU4phrcgEf8NfHBa4a3kw8dwRZHXzZnMeekgpM+Gilgu2Hq7VDQnKqKthpYC7Qbpt7jJ8vryQdj3Q2i9/L8ZCwn/DCVxAdgi2Hqz4YveD7gVYpdm/dsBXkxK/8Lf9Fu+78YUhVtBfAECKxhc+H9POQXqqK14HzbgujRgjuxVgNV0SI4dT3FB42vfwq+T1oF2AC8ABqBeneMd4eFI/Yb8AXoA7qBNwT41+cPAlA7a3SX2xoAAAAASUVORK5CYII=';
