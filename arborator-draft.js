@@ -50,12 +50,32 @@ base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAXCAYAAABEQGxz
 svgIdIndex = 0;
 
 // public initialisation function
-this.ArboratorDraft = function() {
+this.ArboratorDraft = function(visuMode = 0) {
 	// main function called from html file
-	$( ".expander" ).click(function(){
-		log(99,$(this).next('conll'));
-		$(this).next('conll').toggle();});    
-	readConll();
+	if(visuMode==0){
+		$( ".expander" ).click(function(){
+			log(99,$(this).next('conll'));
+			$(this).next('conll').toggle();});    
+		readConll();
+	}else{
+		console.log('visumode');
+		trees=[]; 
+		uextras=[]; 
+		conlltrees=[]; 
+		$('conll').hide();
+		this.refresh(  $('#conllarea').text() );
+	}
+}
+
+// public function
+ArboratorDraft.prototype.refresh = function (content) {
+	$('#svgwell').html('');
+	$('#svgwell').append( $("<conll></conll>").attr('id', 'transformhere').text( content ) );
+	// well.append("conll:conll").attr('id', 'transformhere').html( $('#conllarea').html() );
+	var conll = d3.selectAll('#transformhere')['_groups'][0][0];
+	console.log(conll);
+	drawConll(conll);
+	console.log('drawn');
 }
 
 function progressiveReadConll() {
