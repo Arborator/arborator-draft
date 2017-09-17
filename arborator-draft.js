@@ -19,6 +19,8 @@
 
 // global variables:
 fontSize = 0; // computed from css value for .token in arborator-draft.css
+lemmaHeight = 0;
+posHeight = 0;
 svgDefaultHeight = 500;
 el=10; // type of conll (10, 14, or 4), computed in conllNodesToTree
 trees=[]; // list of tree objects
@@ -27,6 +29,7 @@ conlltrees=[]; // list of conll strings
 defaultCat="_"
 shownfeatures=["t", "cat", "lemma","gloss"]; // recomputed in readConll
 progressiveLoading = true; // false to make it load all trees at once (may overload the browser)
+pngBtn = false;
 conlls = {	
 	10: 	{"id": 0, "t":1, "lemma": 2, "cat": 3, "xpos":4, "morph":5, "gov":6, "func":7, "xgov":8, "gloss":9}, 
 	14: 	{"id": 0, "t":1, "lemma": 3, "cat": 5, "gov":9, "func":11}, 
@@ -41,19 +44,19 @@ log = console.log.bind(console);
 lemmaColor = '#006400';
 posColor = '#9e04de';
 
+// base 64 logo of arborator for the link image
+base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAXCAYAAABEQGxzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABtQAAAbUBnmWvHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANXSURBVFiFtZhLbA1RGMd/59x7e5XeVrXU45aF9ztCLEQ3gojMwkZiJ7GYRDALhAUJa/FIZjk7EYKWCIMQG0qIx4JIQyREqxWP1uNyH729MxYzreu29zF3xj85mznf+X///8x3Zr4zwrZtqoWqaDXALKClggHwqYLx3jD1wWo1Ca+GVEWbAmwGFGAjECsWK22oyQkyYRsPWRLAbcAEbhim/tmLvooMqYq2HMeAAqwGZLk18USINb1RGjKSn1GLmpzgzOLfXrQBWMBjHHOmYerPyy0oakhVtGbgALANaPWioiEj2fGijmguT5mweThjkGdTsyTDlhe6fPQA54Fjhql/HStglCFV0WLAPmAvJcqpGOKJEOvej2P6r9CouZy0uT47TVdT1ittIRLASeCEYeqJ/Il/SkdVtJVAF3CEKswA1A0Kpv0ebQYgZAnaeqIs7A9XQ52PGI7GLlfzCEYMqYq2FegE4n4ytSRDiBLbsjEtaUyX3YKVIg50utoB15CqaBuBC0Ct3wxNqbGfTj7mDUSY9aN8XIWoBS64Hgj1PR1oBm5RZYkVYlDaLO6PlIyZkJV8q7Vf9dTnJAHcREAA66+du3laAvuBaQGQArDsS6TsN0cA44ZEDJgUVF4cD/sl0BYgKVfmphioLf1a7qvLca81PSPIvC7aJLAsSMZJaWk1pmVRR9+jFh3zkwwF9l74B0sk8C4AIgu4C+y2RHamgINjBaXDNu0LkiQj1fePZfAyDFwFllax2AIeABeBS4apfxyeeNd8uLVQck7A5Xkp+suUo090hoFTwE4q26A2jol2oMMw9b4icWeB9cCi4Qs3Z6forh/yJ7c0PgLHhW3bwx3CHWDiGIE28BDnSXQYpt5blloI8bbp0BNgJcD9eIb78Uxgyoto3GSY+u2RXk5VtFU4phrcgEf8NfHBa4a3kw8dwRZHXzZnMeekgpM+Gilgu2Hq7VDQnKqKthpYC7Qbpt7jJ8vryQdj3Q2i9/L8ZCwn/DCVxAdgi2Hqz4YveD7gVYpdm/dsBXkxK/8Lf9Fu+78YUhVtBfAECKxhc+H9POQXqqK14HzbgujRgjuxVgNV0SI4dT3FB42vfwq+T1oF2AC8ABqBeneMd4eFI/Yb8AXoA7qBNwT41+cPAlA7a3SX2xoAAAAASUVORK5CYII=';
+
+svgIdIndex = 0;
+
 // public initialisation function
 this.ArboratorDraft = function() {
 	// main function called from html file
-// 	$("conll").css("white-space", "pre"); //.css("display", "none"); 
-// 	$("conll").before("<div class='expander'>View Conll</div>");
 	$( ".expander" ).click(function(){
 		log(99,$(this).next('conll'));
 		$(this).next('conll').toggle();});    
 	readConll();
 }
-
-
-
 
 function progressiveReadConll() {
 	// draw each conll tags progressively (only conll tags)
@@ -94,11 +97,27 @@ function pushAndDrawSVG(element, pnode) {
 	conlltrees.push(element);
 	var data=conllNodesToTree(element);
 	trees.push(data.tree);
-	uextras.push(data.uextra)						 
+	uextras.push(data.uextra)
+	
+	// add the save png button according to boolean option (default = false)
+	if(pngBtn){
+		var btn = pnode.insert('button').attr("class", "btn btn-primary").attr("id", "svgbtn"+svgIdIndex).html('Save PNG');
+		$("#svgbtn"+svgIdIndex).click(function(){
+			console.log("svgIdIndex",this.id);
+			savePng(this.id);
+		});
+	}
+	
 	var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
 	divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
 	draw(divsvgbox, data.tree);
+
+	svgIdIndex=svgIdIndex +1;
 }
+
+
+
+
 
 function readConll() {
 	// reads the conll representation of the whole treebank that is in the conll field
@@ -285,9 +304,6 @@ function getSVGPath(startPoint,endPoint,computedStyle) {
 }
 
 
-
-
-
 function arrowhead(x,y) {
 	// gives path for arrowhead x,y startpoint (end of arrow)
 	var size = 5;
@@ -310,16 +326,19 @@ function draw(div, tree) {
 	.attr("height", svgDefaultHeight);
 	var group = svg.append("g");
 	// write tokens:
-	texts = group.selectAll("text")
+	var eachTexts = group.selectAll("text")
 		.data(treeArray)
-		.enter()
-		.append('text')
+		.enter();
+
+		var runningWidth2 = 0;
+
+	eachTexts.append('text')
 		.attr("class", "token")
-		.text(function(d){return d["t"]})
+		.text(function(d){return d["t"];})
 		.attr("id",function(d) {return d["id"];})
 		.attr("x", function(d) {
-			var w = this.getComputedTextLength()
-			var wordDistance = parseInt(getComputedStyle(this).getPropertyValue('--wordDistance'));
+			var w = this.getComputedTextLength();
+			wordDistance = parseInt(getComputedStyle(this).getPropertyValue('--wordDistance'));
 			var x = runningWidth; //<-- previous length to return
 			runningWidth += w + wordDistance; //<-- total
 			tree[d["id"]]["x"]=x;
@@ -327,7 +346,8 @@ function draw(div, tree) {
 			fontSize = parseInt(getComputedStyle(this).fontSize, 10);
 			return x;
 		})
-		.attr("y", svgDefaultHeight-fontSize);			
+		.attr("y", svgDefaultHeight-fontSize);	
+		
 	svg.attr("width", runningWidth); // adapt svg width
 
 	// draw dependency links
@@ -393,10 +413,50 @@ function draw(div, tree) {
 		}
 		
 	});	
-	group.attr("transform", "translate(" + 0 + "," + (-smallestY) + ")");
-	svg.attr("height", svgDefaultHeight-smallestY); // adapt svg height
-}
 
+
+	// write lemmas
+	eachTexts.append('text')
+		.attr("class", "lemma")
+		.text(function(d){return d["lemma"];})
+		.attr("id",function(d) {return d["id"];})
+		.attr("x", function(d) {
+			var lemmaLength = this.getComputedTextLength();
+			var w = tree[d["id"]]["w"];
+			wordDistance = parseInt(getComputedStyle(this).getPropertyValue('--wordDistance'));
+			var x = tree[d["id"]]["x"] ; //<-- previous length to return
+			lemmaHeight = parseInt(getComputedStyle(this).fontSize, 20);
+			return x;
+		})
+		.attr("y", svgDefaultHeight-fontSize+lemmaHeight);
+
+	// write pos
+	eachTexts.append('text')
+		.attr("class", "postag")
+		.text(function(d){return d["cat"];})
+		.attr("id",function(d) {return d["id"];})
+		.attr("x", function(d) {
+			var posLength = this.getComputedTextLength();
+			var w = tree[d["id"]]["w"];
+			wordDistance = parseInt(getComputedStyle(this).getPropertyValue('--wordDistance'));
+			if(posLength>w+10){
+				var x = tree[d["id"]]["x"] - posLength/3 ; //<-- previous length to return
+			}else{
+				var x = tree[d["id"]]["x"] ; //<-- previous length to return
+			}
+			posHeight = parseInt(getComputedStyle(this).fontSize, 20);
+			return x;
+		})
+		.attr("y", svgDefaultHeight-fontSize+lemmaHeight+posHeight);
+
+
+	group.attr("transform", "translate(" + 0 + "," + (-smallestY) + ")");
+	svg.attr("height", svgDefaultHeight-smallestY+posHeight+lemmaHeight+fontSize); // adapt svg height
+
+	svg.attr("id", "svg"+svgIdIndex);
+	svg.attr("version", '1.1'); // to prepare ddl of svg
+	svg.attr("xmlns", "http://www.w3.org/2000/svg"); // to prepare ddl of svg
+}
 
 
 //(x0,y0) is start point; (x1,y1),(x2,y2) is control points; (x3,y3) is end point.
@@ -455,9 +515,58 @@ function bezierMinMax(x0, y0, x1, y1, x2, y2, x3, y3) {
     };
 }
 
+// TODO fix this png export : why does it render so badly at the end ?? (to test it --> pngBtn=true;)
+function savePng(btnId) {
+	console.log(btnId);
+	var id = btnId.replace("svgbtn","");
+	// var canvas = document.getElementById('canvas'+svgIndex);
+	// var canvas = $("#canvas"+svgIndex);
+	var canvas = document.createElement('canvas');
+	console.log("canvas", canvas);
+	
+	var svg = document.getElementById("svg"+id);
+	var bb = svg.getBBox()
+	canvas.height = bb.height/2+bb.height/7;
+	canvas.width= bb.width;
+	console.log(svg, typeof(svg));
+	var ctx = canvas.getContext('2d');
+	console.log(ctx);
+	var data = (new XMLSerializer()).serializeToString(svg);
+	var DOMURL = window.URL || window.webkitURL || window;
 
-// base 64 logo of arborator for the link image
-base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAXCAYAAABEQGxzAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABtQAAAbUBnmWvHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANXSURBVFiFtZhLbA1RGMd/59x7e5XeVrXU45aF9ztCLEQ3gojMwkZiJ7GYRDALhAUJa/FIZjk7EYKWCIMQG0qIx4JIQyREqxWP1uNyH729MxYzreu29zF3xj85mznf+X///8x3Zr4zwrZtqoWqaDXALKClggHwqYLx3jD1wWo1Ca+GVEWbAmwGFGAjECsWK22oyQkyYRsPWRLAbcAEbhim/tmLvooMqYq2HMeAAqwGZLk18USINb1RGjKSn1GLmpzgzOLfXrQBWMBjHHOmYerPyy0oakhVtGbgALANaPWioiEj2fGijmguT5mweThjkGdTsyTDlhe6fPQA54Fjhql/HStglCFV0WLAPmAvJcqpGOKJEOvej2P6r9CouZy0uT47TVdT1ittIRLASeCEYeqJ/Il/SkdVtJVAF3CEKswA1A0Kpv0ebQYgZAnaeqIs7A9XQ52PGI7GLlfzCEYMqYq2FegE4n4ytSRDiBLbsjEtaUyX3YKVIg50utoB15CqaBuBC0Ct3wxNqbGfTj7mDUSY9aN8XIWoBS64Hgj1PR1oBm5RZYkVYlDaLO6PlIyZkJV8q7Vf9dTnJAHcREAA66+du3laAvuBaQGQArDsS6TsN0cA44ZEDJgUVF4cD/sl0BYgKVfmphioLf1a7qvLca81PSPIvC7aJLAsSMZJaWk1pmVRR9+jFh3zkwwF9l74B0sk8C4AIgu4C+y2RHamgINjBaXDNu0LkiQj1fePZfAyDFwFllax2AIeABeBS4apfxyeeNd8uLVQck7A5Xkp+suUo090hoFTwE4q26A2jol2oMMw9b4icWeB9cCi4Qs3Z6forh/yJ7c0PgLHhW3bwx3CHWDiGIE28BDnSXQYpt5blloI8bbp0BNgJcD9eIb78Uxgyoto3GSY+u2RXk5VtFU4phrcgEf8NfHBa4a3kw8dwRZHXzZnMeekgpM+Gilgu2Hq7VDQnKqKthpYC7Qbpt7jJ8vryQdj3Q2i9/L8ZCwn/DCVxAdgi2Hqz4YveD7gVYpdm/dsBXkxK/8Lf9Fu+78YUhVtBfAECKxhc+H9POQXqqK14HzbgujRgjuxVgNV0SI4dT3FB42vfwq+T1oF2AC8ABqBeneMd4eFI/Yb8AXoA7qBNwT41+cPAlA7a3SX2xoAAAAASUVORK5CYII=';
+	
+  
+	var img = new Image();
+	var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+	var url = DOMURL.createObjectURL(svgBlob);
+  
+	img.onload = function () {
+		
+		console.log(bb.height, bb.y, bb.width, bb.x);
+	  ctx.drawImage(img, 0, 0, bb.width, bb.height, 0, 0, bb.width, bb.height);
+	  DOMURL.revokeObjectURL(url);
+  
+	  var imgURI = canvas
+		  .toDataURL('image/png')
+		  .replace('image/png', 'image/octet-stream');
+		  console.log(imgURI);
+  
+		var evt = new MouseEvent('click', {
+		view: window,
+		bubbles: false,
+		cancelable: true
+		});
+
+		var a = document.createElement('a');
+		a.setAttribute('download', 'svg'+id+'.png');
+		a.setAttribute('href', imgURI );
+		a.setAttribute('target', '_blank');
+
+		a.dispatchEvent(evt);
+	};
+  
+	img.src = url;
+}
 
 
 }());
