@@ -71,11 +71,8 @@ this.ArboratorDraft = function(visuMode = 0) {
 ArboratorDraft.prototype.refresh = function (content) {
 	$('#svgwell').html('');
 	$('#svgwell').append( $("<conll></conll>").attr('id', 'transformhere').text( content ) );
-	// well.append("conll:conll").attr('id', 'transformhere').html( $('#conllarea').html() );
 	var conll = d3.selectAll('#transformhere')['_groups'][0][0];
-	console.log(conll);
 	drawConll(conll);
-	console.log('drawn');
 }
 
 function progressiveReadConll() {
