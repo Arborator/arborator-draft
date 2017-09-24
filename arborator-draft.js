@@ -58,29 +58,57 @@ this.ArboratorDraft = function(visuMode = 0) {
 			$(this).next('conll').toggle();});    
 		readConll();
 	}else{
-		console.log('visumode');
+		console.log('[ArboratorDraft] visumode');
 		trees=[]; 
 		uextras=[]; 
 		conlltrees=[]; 
 		$('conll').hide();
-		this.refresh(  $('#conllarea').text() );
+		refresh( $('#conllarea').text() );
 	}
 }
 
+
+
 // public function
-ArboratorDraft.prototype.refresh = function (content) {
+ArboratorDraft.prototype.emptyThenRefresh = function(content) {	
+	empty().done( refresh( content ) );
+}
+
+
+function refresh(content) {
 	$('#svgwell').html('');
 	$('#svgwell').append( $("<conll></conll>").attr('id', 'transformhere').text( content ) );
 	var conll = d3.selectAll('#transformhere')['_groups'][0][0];
 	drawConll(conll);
+	return;
 }
+
+function sleep(milliseconds) {
+	var start = new Date().getTime();
+	for (var i = 0; i < 1e7; i++) {
+	  if ((new Date().getTime() - start) > milliseconds){
+		break;
+	  }
+	}
+  }
+
+function empty() {
+	console.log("empty");
+	var def = new jQuery.Deferred();
+	clearTimeout(readInsideConllTimeout);
+	treelines = [];
+	$('#svgwell').html('');
+	def.resolve();
+	return def.promise();
+}
+
 
 function progressiveReadConll() {
 	// draw each conll tags progressively (only conll tags)
 	var conllLoop = d3.selectAll('conll')['_groups'][0]; // need to go out d3js to load it progressively
 	var i = 0;
 	function waitBetweenElements(range) {
-		setTimeout(function () {
+		readConllTimeout = setTimeout(function () {
 
 			drawConll(conllLoop[i]);
 			i++;
@@ -97,7 +125,7 @@ function progressiveReadInsideConll(trees, pnode) {
 	// draw each tree INSIDE a conll progressively
 	var iWait = 0;
 	function waitBetweenElements(range) {
-		setTimeout(function () {
+		readInsideConllTimeout = setTimeout(function () {
 
 			pushAndDrawSVG(trees[iWait], pnode);
 
@@ -187,7 +215,7 @@ function drawConll(conllElement) { // for each <conll> section:
 		toggle = !toggle;
 	});
 
-	var treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
+	treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
 
 	if(progressiveLoading){
 		progressiveReadInsideConll(treelines, pnode);

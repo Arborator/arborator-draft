@@ -112,3 +112,7 @@
 	-webkit-transition: all 0.2s ease-in-out;
 	opacity: .9;
   }
+
+	.svgbox {
+		overflow-x: auto;
+	}
