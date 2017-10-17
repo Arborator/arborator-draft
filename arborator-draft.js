@@ -340,7 +340,9 @@ function getSVGPath(startPoint,endPoint,computedStyle) {
 	var tokDepDist = parseInt(computedStyle.getPropertyValue('--tokDepDist'));
 	var depMinHeight = parseInt(computedStyle.getPropertyValue('--depMinHeight'));
 	var wordDistanceFactor = parseInt(computedStyle.getPropertyValue('--wordDistanceFactor'));
+	if(reverseMode) wordDistanceFactor = -Math.abs(wordDistanceFactor);
 	var startOffset = parseInt(computedStyle.getPropertyValue('--startOffset'));
+	if(reverseMode) startOffset = -Math.abs(startOffset);
 	var startOff=(startPoint['id']-endPoint['id']>0)?-startOffset:startOffset
 	var x1 = startPoint['x']+startPoint['w']/2+startOff;
 	var x2 = endPoint['x']+endPoint['w']/2;
