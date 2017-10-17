@@ -30,6 +30,7 @@ defaultCat="_"
 shownfeatures=["t", "cat", "lemma","gloss"]; // recomputed in readConll
 progressiveLoading = true; // false to make it load all trees at once (may overload the browser)
 pngBtn = false;
+reverseMode = false; // set true for right to left conll
 conlls = {	
 	10: 	{"id": 0, "t":1, "lemma": 2, "cat": 3, "xpos":4, "morph":5, "gov":6, "func":7, "xgov":8, "gloss":9}, 
 	14: 	{"id": 0, "t":1, "lemma": 3, "cat": 5, "gov":9, "func":11}, 
@@ -50,8 +51,9 @@ base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAXCAYAAABEQGxz
 svgIdIndex = 0;
 
 // public initialisation function
-this.ArboratorDraft = function(visuMode = 0) {
+this.ArboratorDraft = function(visuMode = 0, reverse = false) {
 	// main function called from html file
+	if(reverse) reverseMode = true;
 	if(visuMode==0){
 		$( ".expander" ).click(function(){
 			log(99,$(this).next('conll'));
@@ -70,7 +72,9 @@ this.ArboratorDraft = function(visuMode = 0) {
 
 
 // public function
-ArboratorDraft.prototype.emptyThenRefresh = function(content) {	
+ArboratorDraft.prototype.emptyThenRefresh = function(content, reverse = false) {	
+	// if(reverse) reverseMode = true;
+	reverseMode = !reverseMode;
 	empty().done( refresh( content ) );
 }
 
@@ -232,6 +236,8 @@ function conllNodesToTree(treeline) {
 	// reads a conll representation of a single tree TODO: replace jquery by d3
 	
 	var nodes = treeline.split('\n');
+	if(reverseMode)nodes.reverse();
+	// nodes = nodes.reverse();
 	var tree={};
 	var uextra={};
 	var lastid=0;
@@ -371,9 +377,11 @@ function draw(div, tree) {
 	.attr("height", svgDefaultHeight);
 	var group = svg.append("g");
 	// write tokens:
+	if(reverseMode) treeArray.reverse();
 	var eachTexts = group.selectAll("text")
 		.data(treeArray)
 		.enter();
+
 
 		var runningWidth2 = 0;
 
