@@ -72,9 +72,9 @@ this.ArboratorDraft = function(visuMode = 0, reverse = false) {
 
 
 // public function
-ArboratorDraft.prototype.emptyThenRefresh = function(content, reverse = false) {	
-	// if(reverse) reverseMode = true;
-	reverseMode = !reverseMode;
+ArboratorDraft.prototype.emptyThenRefresh = function(content, reverse = false, toggle = false) {	
+	if(reverse) reverseMode = true; // to set reverse or not
+	if(toggle) reverseMode = !reverseMode; // to toggle reverse
 	empty().done( refresh( content ) );
 }
 
@@ -328,7 +328,11 @@ function conllNodesToTree(treeline) {
 	var sentence="";
 	words.forEach(function (word, i) {
 		sentence+=word;
-		if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==true)) sentence+=" ";
+		if(!reverseMode){
+			if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==true)) sentence+=" ";
+		}else{
+			sentence+=" ";
+		}
 	});
 	return {tree:tree, uextra:uextra, sentence:sentence};
 }
