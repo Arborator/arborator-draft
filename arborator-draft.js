@@ -274,7 +274,7 @@ function conllNodesToTree(treeline) {
 					tree[id]["gloss"]=elements[conlls[el]["gloss"]];
 					if (tree[id]["gloss"]=="SpaceAfter=No"){
 						tree[id]["gloss"]="_";
-						tree[id]["NoSpaceAfter"]=true;
+						tree[id]["NoSpaceAfter"]=false;
 					}
 					var xgov = elements[conlls[el]["xgov"]];
 					if (xgov.indexOf(':') > -1){
@@ -329,7 +329,7 @@ function conllNodesToTree(treeline) {
 	words.forEach(function (word, i) {
 		sentence+=word;
 		if(!reverseMode){
-			if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==true)) sentence+=" ";
+			if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==false)) sentence+=" ";
 		}else{
 			sentence+=" ";
 		}
