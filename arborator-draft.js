@@ -17,6 +17,8 @@
  *
  */
 
+var drag = d3.drag();
+
 // global variables:
 fontSize = 0; // computed from css value for .token in arborator-draft.css
 lemmaHeight = 0;
@@ -29,7 +31,8 @@ conlltrees=[]; // list of conll strings
 defaultCat="_"
 shownfeatures=["t", "cat", "lemma","gloss"]; // recomputed in readConll
 progressiveLoading = true; // false to make it load all trees at once (may overload the browser)
-pngBtn = false;
+pngBtn = true;
+svgBtn = true;
 reverseMode = false; // set true for right to left conll
 conlls = {	
 	10: 	{"id": 0, "t":1, "lemma": 2, "cat": 3, "xpos":4, "morph":5, "gov":6, "func":7, "xgov":8, "gloss":9}, 
@@ -68,8 +71,6 @@ this.ArboratorDraft = function(visuMode = 0, reverse = false) {
 		refresh( $('#conllarea').text() );
 	}
 }
-
-
 
 // public function
 ArboratorDraft.prototype.emptyThenRefresh = function(content, reverse = false, toggle = false) {	
@@ -150,13 +151,23 @@ function pushAndDrawSVG(element, pnode) {
 	
 	// add the save png button according to boolean option (default = false)
 	if(pngBtn){
-		var btn = pnode.insert('button').attr("class", "btn btn-primary").attr("id", "svgbtn"+svgIdIndex).html('Save PNG');
-		$("#svgbtn"+svgIdIndex).click(function(){
+		var btn = pnode.insert('button').attr("class", "btn btn-primary").attr("id", "pngbtn"+svgIdIndex).html('Save PNG');
+		$("#pngbtn"+svgIdIndex).click(function(){
 			console.log("svgIdIndex",this.id);
 			savePng(this.id);
 		});
 	}
+
+	if(svgBtn){
+		var btn = pnode.insert('button').attr("class", "btn btn-success").attr("id", "svgbtn"+svgIdIndex).html('Save SVG');
+		$("#svgbtn"+svgIdIndex).click(function(){
+			console.log("svgIdIndex",this.id);
+			saveSvg(this.id);
+		});
+	}
 	
+	
+
 	var divsvgbox = pnode.insert('div').attr("class", 'svgbox');  	
 	divsvgbox.insert('div').html(data.sentence).attr("class", 'sentencebox'); 
 	draw(divsvgbox, data.tree);
@@ -204,7 +215,6 @@ function drawConll(conllElement) { // for each <conll> section:
 	pnode.insert('a').html('<img src="'+base64Logo+'" alt="Arborator" title="arborator" class="arboratorlogo">').attr('href', 'https://arborator.github.io/').attr('target', '_blank');
 	var showHideConll = pnode.insert('div').html('<div class="center" fit>VIEW CONLL</div> <paper-ripple fit></paper-ripple>').attr("class", 'button raised');
 
-
 	// <div class="button raised"> <div class="center" fit>SUBMIT</div> <paper-ripple fit></paper-ripple>  </div>
 	
 	var conllContent = conll.html().trim();
@@ -218,6 +228,7 @@ function drawConll(conllElement) { // for each <conll> section:
 		showHideConll.html(toggle ? '<div class="center" fit>VIEW CONLL</div> <paper-ripple fit></paper-ripple>': '<div class="center" fit>HIDE CONLL</div> <paper-ripple fit></paper-ripple>');
 		toggle = !toggle;
 	});
+
 
 	treelines = conll.html().trim().split(/\n\s*\n\s*\n*/);	
 
@@ -274,7 +285,7 @@ function conllNodesToTree(treeline) {
 					tree[id]["gloss"]=elements[conlls[el]["gloss"]];
 					if (tree[id]["gloss"]=="SpaceAfter=No"){
 						tree[id]["gloss"]="_";
-						tree[id]["NoSpaceAfter"]=true;
+						tree[id]["NoSpaceAfter"]=false;
 					}
 					var xgov = elements[conlls[el]["xgov"]];
 					if (xgov.indexOf(':') > -1){
@@ -329,7 +340,7 @@ function conllNodesToTree(treeline) {
 	words.forEach(function (word, i) {
 		sentence+=word;
 		if(!reverseMode){
-			if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==true)) sentence+=" ";
+			if (i+1 in tree && !(("NoSpaceAfter" in tree[i+1]) && tree[i+1]["NoSpaceAfter"]==false)) sentence+=" ";
 		}else{
 			sentence+=" ";
 		}
@@ -470,7 +481,8 @@ function draw(div, tree) {
 				
 			}
 		}
-		
+		// txt.on("click", started);
+		txt.on("drag", function(d){console.log('draggg')});
 	});	
 
 
@@ -574,58 +586,176 @@ function bezierMinMax(x0, y0, x1, y1, x2, y2, x3, y3) {
     };
 }
 
-// TODO fix this png export : why does it render so badly at the end ?? (to test it --> pngBtn=true;)
-function savePng(btnId) {
-	console.log(btnId);
-	var id = btnId.replace("svgbtn","");
-	// var canvas = document.getElementById('canvas'+svgIndex);
-	// var canvas = $("#canvas"+svgIndex);
+function svg2Data(svg) {
+	var tempCSS = document.createElement("style");
+	tempCSS.innerHTML = '.token {  font: 18px DejaVu Sans;  fill: black;  font-family:sans-serif;   text-align: center; }   .lemma {  font: 15px DejaVu Sans;  fill: black;  font-family:sans-serif;  text-align: center;  font-style: italic; }   .postag {  font: 11px DejaVu Sans;  fill: #E03737;   text-align: center; }   .deprel {  font: 12px Arial;  fill: #1d2ec1;  font-style: oblique;  font-family:sans-serif;  }   .arrowhead {  fill: white;  stroke: black;  stroke-width: .8; }  .curve {  stroke: black;  stroke-width: 1;  fill: none;     .arboratorlogo {  transition: all 0.4s ease-in-out;  -webkit-transition: all 0.4s ease-in-out;   }    .arboratorlogo:hover {  transform: scale(1.1);     transition: all 0.2s ease-in-out;  -webkit-transition: all 0.2s ease-in-out;  opacity: .9;   }   .svgbox {   overflow-x: auto;  }"';
+	svg.appendChild(tempCSS);
+	return svg.outerHTML;
+}
+
+function png2Data(svg) {
 	var canvas = document.createElement('canvas');
-	console.log("canvas", canvas);
+	var tempCSS = document.createElement("style");
+	tempCSS.innerHTML = '.token {  font: 18px DejaVu Sans;  fill: black;  font-family:sans-serif;   text-align: center; }   .lemma {  font: 15px DejaVu Sans;  fill: black;  font-family:sans-serif;  text-align: center;  font-style: italic; }   .postag {  font: 11px DejaVu Sans;  fill: #E03737;   text-align: center; }   .deprel {  font: 12px Arial;  fill: #1d2ec1;  font-style: oblique;  font-family:sans-serif;  }   .arrowhead {  fill: white;  stroke: black;  stroke-width: .8; }  .curve {  stroke: black;  stroke-width: 1;  fill: none;}';
+	svg.insertBefore(tempCSS, svg.firstChild);	// === the missing prepend option
+
+	var bb = svg.getBBox();
+	// canvas.height = bb.height*5;
+	// canvas.width = bb.width*5;
+	// svg.width = svg.width*3;
+	// svg.height = svg.height*3;
+	// svg.setAttribute('width', bb.width*5);
+	// svg.setAttribute('height', bb.height*5);
+	var data = (new XMLSerializer()).serializeToString(svg);
+	console.log('svgData', data);
+	canvg(canvas, data);
+	return canvas.toDataURL().replace('data:image/png;base64,','');
 	
+}
+
+function savePng(btnId) {
+	var id = btnId.replace("pngbtn","");
+	var canvas = document.createElement('canvas');
+	var tempCSS = document.createElement("style");
+	tempCSS.innerHTML = '.token {  font: 18px DejaVu Sans;  fill: black;  font-family:sans-serif;   text-align: center; }   .lemma {  font: 15px DejaVu Sans;  fill: black;  font-family:sans-serif;  text-align: center;  font-style: italic; }   .postag {  font: 11px DejaVu Sans;  fill: #E03737;   text-align: center; }   .deprel {  font: 12px Arial;  fill: #1d2ec1;  font-style: oblique;  font-family:sans-serif;  }   .arrowhead {  fill: white;  stroke: black;  stroke-width: .8; }  .curve {  stroke: black;  stroke-width: 1;  fill: none;}';
 	var svg = document.getElementById("svg"+id);
-	var bb = svg.getBBox()
-	canvas.height = bb.height/2+bb.height/7;
-	canvas.width= bb.width;
-	console.log(svg, typeof(svg));
+	svg.appendChild(tempCSS);
+	var bb = svg.getBBox();
+	canvas.height = bb.height*5;
+	canvas.width = bb.width*5;
 	var ctx = canvas.getContext('2d');
-	console.log(ctx);
 	var data = (new XMLSerializer()).serializeToString(svg);
 	var DOMURL = window.URL || window.webkitURL || window;
-
-	
-  
-	var img = new Image();
+	var img = new Image(); 
 	var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
 	var url = DOMURL.createObjectURL(svgBlob);
-  
 	img.onload = function () {
-		
-		console.log(bb.height, bb.y, bb.width, bb.x);
-	  ctx.drawImage(img, 0, 0, bb.width, bb.height, 0, 0, bb.width, bb.height);
-	  DOMURL.revokeObjectURL(url);
-  
-	  var imgURI = canvas
-		  .toDataURL('image/png')
-		  .replace('image/png', 'image/octet-stream');
-		  console.log(imgURI);
-  
+		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);//, 0, 0, ctx.width, ctx.height);
+		DOMURL.revokeObjectURL(url);
+		var imgURI = canvas
+			.toDataURL('image/png')
+			.replace('image/png', 'image/octet-stream');
 		var evt = new MouseEvent('click', {
-		view: window,
-		bubbles: false,
-		cancelable: true
+			view: window,
+			bubbles: false,
+			cancelable: true
 		});
-
 		var a = document.createElement('a');
 		a.setAttribute('download', 'svg'+id+'.png');
 		a.setAttribute('href', imgURI );
 		a.setAttribute('target', '_blank');
-
 		a.dispatchEvent(evt);
 	};
-  
 	img.src = url;
 }
 
+function saveSvg(btnId) {
+	console.log(btnId);
+	var id = btnId.replace("svgbtn","");
+	var canvas = document.createElement('canvas');
+	console.log("canvas", canvas);
+	
+
+	var tempCSS = document.createElement("style");
+	tempCSS.innerHTML = '.token {  font: 18px DejaVu Sans;  fill: black;  font-family:sans-serif;   text-align: center; }   .lemma {  font: 15px DejaVu Sans;  fill: black;  font-family:sans-serif;  text-align: center;  font-style: italic; }   .postag {  font: 11px DejaVu Sans;  fill: #E03737;   text-align: center; }   .deprel {  font: 12px Arial;  fill: #1d2ec1;  font-style: oblique;  font-family:sans-serif;  }   .arrowhead {  fill: white;  stroke: black;  stroke-width: .8; }  .curve {  stroke: black;  stroke-width: 1;  fill: none;     .arboratorlogo {  transition: all 0.4s ease-in-out;  -webkit-transition: all 0.4s ease-in-out;   }    .arboratorlogo:hover {  transform: scale(1.1);     transition: all 0.2s ease-in-out;  -webkit-transition: all 0.2s ease-in-out;  opacity: .9;   }   .svgbox {   overflow-x: auto;  }" width="1140" height="470.1878970357652"';
+
+	var svg = document.getElementById("svg"+id);
+	// svg.setAttribute('width', 1140); svg.setAttribute('height', 1470.1878970357652);
+	svg.appendChild(tempCSS);
+
+	var svgData = svg.outerHTML;
+	var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+	var svgUrl = URL.createObjectURL(svgBlob);
+	var downloadLink = document.createElement("a");
+	downloadLink.href = svgUrl;
+	downloadLink.download = "treeSvg"+id+".svg";
+	document.body.appendChild(downloadLink);
+	downloadLink.click();
+	document.body.removeChild(downloadLink);
+	
+}
+
+
+function exportPngZip() {
+	var zip = new JSZip();
+	var folder = zip.folder("pngfiles");
+	var svgList = $('svg');
+	var svgD3List = window.d3.selectAll("svg");//.attr("xmlns", "http://www.w3.org/2000/svg");
+	console.log(2222,svgD3List);
+	$.each( svgD3List['_groups'][0], function( index, value ){
+		console.log('value', index, value);
+		var pngData = png2Data(value);
+		folder.file('tree'+value.id+'.png', pngData, {base64: true});
+	});
+	zip.generateAsync({type:"blob"})
+		.then(function(content) {
+			saveAs(content, "export.zip");
+	});
+}
+
+function exportSvgZip() {
+	var zip = new JSZip();
+	var folder = zip.folder("svgfiles");
+	var svgList = $('svg');
+	$.each( svgList, function( index, value ){
+		var svgData = svg2Data(value);
+		folder.file('tree'+svg.id+'.svg', svgData);
+	});
+	
+	// Add an top-level, arbitrary text file with contents
+	// zip.file("Hello.txt", "Hello World\n");
+
+	// Generate a directory within the Zip file structure
+	// var img = zip.folder("images");
+
+	// Add a file to the directory, in this case an image with data URI as contents
+	// img.file("smile.gif", imgData, {base64: true});
+
+	zip.generateAsync({type:"blob"})
+		.then(function(content) {
+			saveAs(content, "export.zip");
+	});
+}
+
+$("#btnSvgZip").on("click", function (){
+	exportSvgZip();
+});
+
+$("#btnPngZip").on("click", function (){
+	exportPngZip();
+	// var svg = document.getElementById('svg0');
+	// png2Data(svg);
+});
+
+/** DRAG TESTS */
+/** small test volontarilly disabled for now 
+
+// function started() { console.log("drag started") };
+function started() {
+	var circle = d3.select(this).classed("dragging", true);
+  
+	d3.event.on("drag", dragged).on("end", ended);
+  
+	function dragged(d) {
+	  circle.raise().attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+	}
+  
+	function ended() {
+	  circle.classed("dragging", false);
+	}
+  }
+$(".token").on("click", function (){
+	console.log("token class clicked");
+	// started();
+});
+// d3.selectAll(".token").call(d3.drag().on("start", started));
+	
+function clickTest(d) 
+{
+    console.log("yoooo"); //considering dot has a title attribute
+}
+
+*/
+/** END DRAG TESTS */
 
 }());
