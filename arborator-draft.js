@@ -481,10 +481,255 @@ function draw(div, tree) {
 				
 			}
 		}
-		// txt.on("click", started);
-		txt.on("drag", function(d){console.log('draggg')});
+		txt.classed("pointer", true);
+		initX = 0, initY = 0;
+		txt.on("mousedown", function(d){
+			console.log('d', d, 'txt', txt._groups[0]);
+			console.log(d3.event);
+			
+			var clickX = d3.event.offsetX;
+			var clickY = d3.event.offsetY;
+			initX = d3.event.offsetX;
+			initY = d3.event.offsetY;
+			var  x = clickX, y = clickY;
+			var cpx = clickX+(x-clickX)*2, cpy = (y-clickY)+(y-clickY)*2;
+			console.log('click', clickX, clickY);
+			const path = d3.path();
+			// path.moveTo(clickX, clickY);
+			// path.arcTo(clickX-20, clickY-20, 150, 150, 60);
+			// path.lineTo(clickX-20, clickY-100);
+			// path.arcTo(clickX, clickY, 100, 200, 60);
+
+			// path.quadraticCurveTo(cpx, cpy, x, y);
+			group.append("path").attr("id", "editArc").attr("d", path.toString())
+			.attr("stroke", "orange")
+			.attr("stroke-width", 1)
+			.attr("fill", "none");
+			// group.append("g").attr("class", "u-point");
+			const points = [[clickX, clickY], [cpx, cpy], [x, y]],
+			drawEditArc = () => {
+				// const path = d3.path();
+				path.moveTo(...points[0]);
+				path.quadraticCurveTo(...points[1], ...points[2]);
+				return path;
+			};
+			draggable(svg, points, drawEditArc);
+		});
+
+		function update(chart, points, drawEditArc) {
+			chart.select("#editArc").attr("d", drawEditArc());
+			console.log('updato');
+			// chart.select("#editArc").selectAll(".u-point")
+			// 	.data(points)
+			// 	// .join(enter =>
+			// 	// 	enter
+			// 	// 	.append("g")
+			// 	// 	.classed("u-point", true)
+			// 	// 	.call(g => {
+			// 	// 		g.append("circle").attr("r", 3);
+			// 	// 	})
+			// 	// )
+			// 	.attr("transform", d => `translate(${d})`);
+		}
+
+		function draggable(chart, points, drawEditArc) {
+			console.log('draggggabllo');
+			update(chart, points, drawEditArc);
+		  
+			const dist = p => {
+			  const m = d3.mouse(d3.select("#editArc"));
+			  return Math.sqrt((p[0] - m[0]) ** 2 + (p[1] - m[1]) ** 2);
+			};
+		  
+			var subject, dx, dy;
+		  
+			function dragSubject() {
+			  subject = d3.least(points, (a, b) => dist(a) - dist(b));
+			  if (dist(subject) > 48) subject = null;
+			  if (subject)
+				d3.select("#editArc")
+				  .style("cursor", "hand")
+				  .style("cursor", "grab");
+			  else d3.select("#editArc").style("cursor", null);
+			  return subject;
+			}
+		  
+			d3.select("#editArc")
+			  .on("mousemove", dragSubject)
+			  .call(
+				d3.drag()
+				  .subject(dragSubject)
+				  .on("start", () => {
+					console.log('start');
+					if (subject) {
+					  d3.select("#editArc").style("cursor", "grabbing");
+					  dx = subject[0] - d3.event.x;
+					  dy = subject[1] - d3.event.y;
+					}
+				  })
+				  .on("drag", () => {
+					console.log('dragging');
+					if (subject) {
+					  subject[0] = d3.event.x + dx;
+					  subject[1] = d3.event.y + dy;
+					}
+				  })
+				  .on("end", () => {
+					console.log('end dragging');
+					d3.select("#editArc").style("cursor", "grab");
+				  })
+				  .on("start.render drag.render end.render", () =>
+					update(chart, points, labels, lines, draw)
+				  )
+			  );
+		}
+
+		txt.on("drag", function(d){
+			console.log('draggg', d);
+			var x = d3.event.offsetX, y = d3.event.offsetY;
+			var cpx = initX+(x-initX)*2, cpy = (y-initY)+(y-initY)*2;
+			const points = [[initX, initY], [cpx, cpy], [x, y]];
+			var path = group.select("#editArc");
+			path.quadraticCurveTo(...points[1], ...points[2]);
+		});
 	});	
 
+	// {
+	// 	const path = d3.path(),
+	// 	  x0 = 40,
+	// 	  y0 = 100,
+	// 	  cpx1 = 150,
+	// 	  cpy1 = 280,
+	// 	  cpx2 = 150,
+	// 	  cpy2 = 30,
+	// 	  x = 350,
+	// 	  y = 50;
+	  
+	// 	path.moveTo(x0, y0);
+	// 	path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, x, y);
+	  
+	// 	const chart = svg`<svg viewBox="0 0 450 300" class="chart">
+	// 	 <path class="u-path" d="${path}" />
+	// 	</svg>`;
+	  
+	// 	// return chart;
+	  
+	// 	/**
+	// 	 *  Add control elements and prepare interactions
+	// 	 */
+	  
+	// 	const points = [[x0, y0], [cpx1, cpy1], [cpx2, cpy2], [x, y]],
+	// 	  labels = ["Start", "Control1", "Control2", "End"],
+	// 	  lines = [[points[0], points[1]], [points[2], points[3]]],
+	// 	  draw = () => {
+	// 		const path = d3.path();
+	// 		path.moveTo(...points[0]);
+	// 		path.bezierCurveTo(...points[1], ...points[2], ...points[3]);
+	// 		return path;
+	// 	  };
+	  
+	// 	draggable(chart, points, labels, lines, draw);
+	  
+	// 	return chart;
+	//   }
+
+	/**
+	 * function to update arc/curve from https://observablehq.com/@d3/d3-path
+	 * @param {*} chart : svg object ?
+	 * @param {*} points 
+	 * @param {*} labels : labels to appear
+	 * @param {*} lines 
+	 * @param {*} draw 
+	 */
+	function update(chart, points, labels, lines, draw) {
+		d3.select(chart)
+		  .select(".u-path")
+		  .attr("d", draw());
+	  
+		d3.select(chart)
+		  .selectAll(".u-point")
+		  .data(points)
+		  .join(enter =>
+			enter
+			  .append("g")
+			  .classed("u-point", true)
+			  .call(g => {
+				g.append("circle").attr("r", 3);
+				g.append("text")
+				  .text((d, i) => labels[i])
+				  .attr("dy", d => (d[1] > 100 ? 15 : -5));
+			  })
+		  )
+		  .attr("transform", d => `translate(${d})`);
+	  
+		d3.select(chart)
+		  .selectAll(".u-line")
+		  .data(lines)
+		  .join("line")
+		  .attr("x1", d => d[0][0])
+		  .attr("y1", d => d[0][1])
+		  .attr("x2", d => d[1][0])
+		  .attr("y2", d => d[1][1])
+		  .classed("u-line", true);
+	  }
+
+	/**
+	 * function to simulate drag from https://observablehq.com/@d3/d3-path
+	 * @param {*} chart 
+	 * @param {*} points 
+	 * @param {*} labels 
+	 * @param {*} lines 
+	 * @param {*} draw 
+	 */
+	function draggable(chart, points, labels, lines, draw) {
+		update(chart, points, labels, lines, draw);
+	  
+		const dist = p => {
+		  const m = d3.mouse(chart);
+		  return Math.sqrt((p[0] - m[0]) ** 2 + (p[1] - m[1]) ** 2);
+		};
+	  
+		var subject, dx, dy;
+	  
+		function dragSubject() {
+		  subject = d3.least(points, (a, b) => dist(a) - dist(b));
+		  if (dist(subject) > 48) subject = null;
+		  if (subject)
+			d3.select(chart)
+			  .style("cursor", "hand")
+			  .style("cursor", "grab");
+		  else d3.select(chart).style("cursor", null);
+		  return subject;
+		}
+	  
+		d3.select(chart)
+		  .on("mousemove", dragSubject)
+		  .call(
+			d3
+			  .drag()
+			  .subject(dragSubject)
+			  .on("start", () => {
+				if (subject) {
+				  d3.select(chart).style("cursor", "grabbing");
+				  dx = subject[0] - d3.event.x;
+				  dy = subject[1] - d3.event.y;
+				}
+			  })
+			  .on("drag", () => {
+				if (subject) {
+				  subject[0] = d3.event.x + dx;
+				  subject[1] = d3.event.y + dy;
+				}
+			  })
+			  .on("end", () => {
+				d3.select(chart).style("cursor", "grab");
+			  })
+			  .on("start.render drag.render end.render", () =>
+				// update(chart, points, labels, lines, draw)
+				console.log('updato')
+			  )
+		  );
+	}
 
 	// write lemmas
 	eachTexts.append('text')
@@ -728,34 +973,33 @@ $("#btnPngZip").on("click", function (){
 });
 
 /** DRAG TESTS */
-/** small test volontarilly disabled for now 
 
-// function started() { console.log("drag started") };
-function started() {
-	var circle = d3.select(this).classed("dragging", true);
+
+function started() { console.log("drag started") };
+// function started() {
+// 	var circle = d3.select(this).classed("dragging", true);
   
-	d3.event.on("drag", dragged).on("end", ended);
+// 	d3.event.on("drag", dragged).on("end", ended);
   
-	function dragged(d) {
-	  circle.raise().attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-	}
+// 	function dragged(d) {
+// 	  circle.raise().attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+// 	}
   
-	function ended() {
-	  circle.classed("dragging", false);
-	}
-  }
+// 	function ended() {
+// 	  circle.classed("dragging", false);
+// 	}
+// }
 $(".token").on("click", function (){
 	console.log("token class clicked");
-	// started();
+	started();
 });
-// d3.selectAll(".token").call(d3.drag().on("start", started));
+d3.selectAll(".token").call(d3.drag().on("start", started));
 	
 function clickTest(d) 
 {
     console.log("yoooo"); //considering dot has a title attribute
 }
 
-*/
-/** END DRAG TESTS */
+
 
 }());
