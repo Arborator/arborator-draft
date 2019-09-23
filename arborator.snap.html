@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Arborator</title>
+
+  <link rel="icon" href="img/arborator_logo.png">
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="css/bootstrap-material-design.css" rel="stylesheet">
+
+  <!-- ArboratorDraft CSS -->
+  <link href="css/arborator-draft.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css" crossorigin="anonymous" >
+
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    .conll {
+      /* display:none; toggles to inline */
+      /* unicode-bidi: embed;
+      font-family: monospace; */
+      white-space: pre;
+      margin-bottom: 0.6em;
+      border-bottom: 1px solid #aaa;
+      padding: 0.5em 0 0.17em 0;
+      tab-size: 12;
+      background-color: #fff;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    }
+
+    .textual textarea {
+      font-size: .7em;
+      tab-size: 12;
+      -moz-tab-size: 12;
+      opacity: 1;
+      background-color: white;
+    }
+
+    textarea,
+    pre {
+      -moz-tab-size: 20;
+      -o-tab-size: 20;
+      -webkit-tab-size: 20;
+      tab-size: 20;
+    }
+
+    textarea {
+      -webkit-appearance: textarea;
+      background-color: white;
+      -webkit-rtl-ordering: logical;
+      user-select: text;
+      flex-direction: column;
+      resize: auto;
+      cursor: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border-width: 1px;
+      border-style: solid;
+      border-color: initial;
+      border-image: initial;
+      padding: 2px;
+      box-sizing: border-box;
+      font-family: monospace;
+      border-color: rgb(169, 169, 169);
+      text-rendering: auto;
+      color: initial;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+      margin: 0em;
+      font: 13.3333px Arial;
+      -webkit-writing-mode: horizontal-tb;
+      writing-mode: horizontal-tb;
+    }
+    .totalheight {
+      height:100%;
+    }
+  </style>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/material.js"></script>  
+   <script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script> 
+  <!-- <script src="js/d3.js"></script> -->
+  
+  
+  <script language="javascript" type="text/javascript" src="js/snap.svg-min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="js/jquery.easing.min.js"></script>
+
+  <!-- <script src="js/arborator-draft.js"></script> -->
+  <script language="javascript" type="text/javascript" src="js/arborator-draft.js"></script>
+
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.js"></script>
+
+
+</head>
+
+<body>
+
+
+
+  <!-- Navigation -->
+  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+      <i class="fa fa-bars"></i>
+    </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+          <i class="fa fa-times"></i>
+        </a>
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#top">Arborator</a>
+      </li>
+      <li>
+        <a class="js-scroll-trigger" href="#top">Home</a>
+      </li>
+      <li>
+        <a class="js-scroll-trigger" href="#about">Visualization</a>
+      </li>
+      <li>
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="header bg-grey" id="top">
+
+    <div class="text-vertical-center">
+      <!-- <img src="img/arborator_logo.svg"></img> -->
+      <object height="200" data="img/arborator_logo.svg" type="image/svg+xml"><a href="http://arborator.github.io"></a></object>
+      <h5>Arborator live</h5>
+      <a href="index.html" class="btn btn-primary btn-dark btn-lg btn-raised js-scroll-trigger">Home</a>
+    </div>
+  </header>
+
+  <a href="https://github.com/arborator"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/121cd7cbdc3e4855075ea8b558508b91ac463ac2/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png"></a>
+
+  <!-- About -->
+  <section id="about" class="about bg-grey">
+    <div class="container-fluid totalheight">
+      <div class="row totalheight" >
+        <div class="col-md-8 col-xs-12">
+          <div class="row totalheight" style="overflow:auto;">
+            <svg id="svgwell" class="well" style="width:100%; height: 100%; overflow-x:auto; z-index:1;position:relative;background-color:aliceblue">
+            </svg>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div class="row">
+            <div class="well" style="width:100%; height: 100%; overflow-x:auto; z-index:1;position:relative;">
+              <div id="textual" class="textual">
+                <h5>Paste your conll or edit this one and the results !</h5>
+                <label class="btn btn-primary btn-raised btn-xs">
+                    <i class="fa fa-upload fa-2x" aria-hidden="true"></i>
+                    <input type="file" id="fileToLoad" hidden>
+                </label>
+                <button class="btn btn-success btn-raised btn-xs" onclick="reverse();"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i></button>
+                <textarea name="conll" id="conllarea" rows="20" title="Here you can paste and edit CoNLL files with 4, 10 or 14 columns"
+                  style="width:100%; height:100%; "># conllu format using SpaceAfter=No
+# sent_id = P_ABJ_GWA_03_Cost.of.living.in.Abuja_PRO_4
+# sent_translation = # Hope sey you sleep well.
+# text = # hope sey [ you sleep well ] //
+1	#	_	PUNCT	_	startali=6436|endali=6791	2	punct	_	_
+2	hope	_	VERB	_	startali=6791|endali=6999	0	root	_	_
+3	sey	_	SCONJ	_	startali=6999|endali=7699	2	comp:obj	_	_
+4	[	_	PUNCT	_	startali=7699|endali=7729	6	punct	_	_
+5	you	_	PRON	_	Case=Nom|PronType=Prs|Person=2|Number=Sing|startali=7729|endali=7834	6	subj	_	_
+6	sleep	_	VERB	_	startali=7834|endali=8159	3	comp	_	_
+7	well	_	ADV	_	startali=8159|endali=8525	6	mod	_	_
+8	]	_	PUNCT	_	startali=8525|endali=8555	6	punct	_	_
+9	//	_	PUNCT	_	startali=8525|endali=8555	2	punct	_	_
+
+            </textarea>
+              </div>
+            </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+  </section>
+<!-- # sent_id = P_ABJ_GWA_03_Cost.of.living.in.Abuja_PRO_1
+# sent_translation = Good morning, my people!
+# text = good morning > my people //
+1	good	_	ADJ	_	startali=2092|endali=2251	2	dep	_	_
+2	morning	_	NOUN	_	startali=2251|endali=2553	0	root	_	_
+3	>	_	PUNCT	_	startali=2553|endali=2583	5	punct	_	_
+4	my	_	ADJ	_	PronType=Prs|Person=1|Number=Sing|Poss=Yes|startali=2583|endali=2751	5	dep	_	_
+5	people	_	NOUN	_	startali=2751|endali=3148	2	vocative	_	_
+6	//	_	PUNCT	_	startali=3148|endali=3178	2	punct	_	_     -->
+
+  <!-- # conllu format using SpaceAfter=No
+  1	Can	can	AUX	MD	VerbForm=Fin	3	aux	_	_
+  2	you	you	PRON	PRP	Case=Nom|Person=2|PronType=Prs	3	nsubj	_	_
+  3	use	use	VERB	VB	VerbForm=Inf	0	root	_	_
+  4	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_	_
+  5	'	'	PUNCT	``	_	6	punct	_	SpaceAfter=No
+  6	find	find	VERB	VB	VerbForm=Inf	10	compound	_	_
+  7	my	my	PRON	PRP$	Number=Sing|Person=1|Poss=Yes|PronType=Prs	8	nmod:poss	_	_
+  8	phone	phone	NOUN	NN	Number=Sing	6	dobj	_	SpaceAfter=No
+  9	'	'	PUNCT	''	_	6	punct	_	_
+  10	feature	feature	NOUN	NN	Number=Sing	3	dobj	_	_
+  11	to	to	PART	TO	_	12	mark	_	_
+  12	track	track	VERB	VB	VerbForm=Inf	3	advcl	_	_
+  13	someone	someone	NOUN	NN	Number=Sing	16	nmod:poss	_	_
+  14	else	else	ADJ	JJ	Degree=Pos	13	amod	_	SpaceAfter=No
+  15	's	's	PART	POS	_	13	case	_	_
+  16	phone	phone	NOUN	NN	Number=Sing	12	dobj	_	SpaceAfter=No
+  17	?	?	PUNCT	.	_	3	punct	_	_ -->
+
+
+  </br>
+  <!-- Footer -->
+  <!-- <footer class="bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 mx-auto text-center">
+            <hr class="small">
+            <p class="text-muted">Copyright &copy; Arborator 2010-2017</p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+
+  <a id="to-top" href="#top" class="btn btn-dark btn-lg js-scroll-trigger">
+        <i class="fa fa-chevron-up fa-fw fa-1x"></i>
+      </a>
+
+
+  <script>
+    var draft = new ArboratorDraft(1, false);
+
+    $("#conllarea").keyup(function () {
+      if ($(this).val()) {
+        draft.emptyThenRefresh($(this).val());
+      }
+    });
+
+    function reverse(){
+      draft.emptyThenRefresh($("#conllarea").val(), false, true);
+    }
+
+    function loadFileAsText(callback){
+      var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+      var fileReader = new FileReader();
+      fileReader.onload = function(fileLoadedEvent){
+          var textFromFileLoaded = fileLoadedEvent.target.result;
+          $('#conllarea').text(textFromFileLoaded).done(callback());
+      };
+
+
+      fileReader.readAsText(fileToLoad, "UTF-8");
+      return true;
+    }
+
+
+    document.getElementById("fileToLoad").onchange = function() {
+        loadFileAsText(function() {
+          draft.emptyThenRefresh($("#conllarea").val());
+        });
+    };
+
+
+  </script>
+
+</body>
+
+</html>
