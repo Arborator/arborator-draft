@@ -1,55 +1,72 @@
-# arborator-draft (work in progress)
+# Arborator-Draft
 
 Visualization tool for syntactic dependency trees.
 
-**WORK IN PROGRESS**
-
 ## Description
 
-Arborator Draft is a script to visualize your dependency trees in an html file. Written in javascript it uses [D3JS](https://d3js.org/) to create SVG trees.
+Arborator Draft makes it easy to add dependency trees to your webpage. 
+
+It's written in javascript and uses [D3JS](https://d3js.org/) to create SVG trees.
+
+Check out how it looks by downloading the whole folder and opening example_arborator-draft.html
+
+## Features 
+- Arborator Draft handles CoNLL-U files, including features and extended dependency relations.
+- The raw CoNLL data can be shown
+- Each dependency tree can be downloaded as svg or png image file.
+- Arborator Draft is used in the [Surface-Syntactic Universal Dependencies annotation guidelines](https://surfacesyntacticud.github.io/guidelines/u/)
 
 ## Usage 
 
-### Add the script at the bottom
+- Simply put the CoNLL-U data between &lt;conll&gt; tags where you want to show the dependency graph.
+- Import arborator-draft.css, arborator-draft.js, d3.js, and jquery, see details below how to do that.
+- Add this code at the end of your page:
 
 ```
-// d3js CDN
-<script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
-// Arborator Draft
+<script>
+new ArboratorDraft();
+</script>
+```
+That's it. All the CoNLL data appears nicely rendered as dependency graphs.
+
+### Details:
+
+To import the necessary scripts, put the files next to your page and add this to your webpage:
+
+```
+<link rel="stylesheet" href="arborator-draft.css" type="text/css" />
+
+<script src="d3.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
+
 <script language="JavaScript" type="text/javascript" src="arborator-draft.js"></script>
 ```
 
-### Initialize the script
+If you do not want to put the auxiliary scripts on your own server, you can use CDN:
 
 ```
-<script>
-new ArboratorDraft(); // Start
-</script>
+script language="JavaScript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 ```
 
-### Optional settings
+### Graphical options
+Graphical options are in arborator-draft.css and can easily be modified there.
+
+### Shown features
+If you want to modify which features are shown, modify these lines in the arborator-draft.js:
 
 ```
-<script>
-var options = {
-    labelColor:'#ea2929', // deprel color
-    arrowColor : '#000', // arrow color
-    wordColor : '#000', // words color
-    lemmaColor : '#006400', // color of lemmas
-    posColor : '#9e04de', // color of part-of-speech tags
-    pathColor : '#000', // color of paths
-    pathWidth : 1, // width of syntactic paths
-    pathHeight : 23, // height of syntactic paths
-    format : {sid : 0, id : 0, word : 1, lemma : 2, pos : 3, head : 6, deprel : 7} // entry format
-};
-new ArboratorDraft(options); // Start
-</script>
+shownfeatures=["FORM", "UPOS", "LEMMA", "MISC.Gloss"];
+shownmetas=['text_en'];
 ```
+
+### More
+Check out the example_arborator-draft.html where you can learn how to use this script to produce a big zip-file of svg and png files for a whole treebank at once.
 
 ## Credits
 
-Kim Gerdes, ILPGA, Sorbonne-Nouvelle
+Kim Gerdes: ILPGA, Sorbonne-Nouvelle & LPP, Cnrs & Almanach, Inria
 
-Gaël Guibon, LSIS, Aix-Marseille Université
+Gaël Guibon: Almanach, Inria
 
 This work is based on the work of [Herman Leung](http://linguistics.berkeley.edu/~herman/index.php) on the [Parallel Corpus Search Interface Project](http://greeknt.lt.cityu.edu.hk/parallel_web/search.php) and the [Arborator Quick Access](https://arborator.ilpga.fr/q.cgi) from [Kim Gerdes](https://gerdes.fr/).
