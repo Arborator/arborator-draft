@@ -54,9 +54,13 @@
                         <p><strong>Automatically, the CoNLL-U data will be transformed into beautiful dependency graphs!</strong></p>
 
                         <p>Graphical options are in arborator-draft.css</p>
-                        <p>If you want to modify which features are shown, modify these lines in the arborator-draft.js:</p>
+                        <p>If you want to generally modify which features are shown, modify these lines in the arborator-draft.js:</p>
                         <pre><code>    shownfeatures=["FORM", "UPOS", "LEMMA", "MISC.Gloss"];
     shownmetas=['text_en']</code></pre>
+        <p>If you want to temporarily modify which features are shown, add the shownfeatures attribute to the meta-features of the conll representations, and provide the list of features separated by commas. Morphosyntactic features must be prefixed by FEATS. and miscellaneous features by MISC. as in:</p>
+         <pre><code># shownfeatures = FORM, UPOS, LEMMA, MISC.Gloss, FEATS.ExtPos, FEATS.PhraseType, FEATS.InTitle
+</code></pre>
+
     <p>If you want to have a button to show the complete conll data (not only per tree), change <code>showAllConllButton</code> to true</p>
     <p>If you want to add those two blue buttons just below to your page, which allow to download the complete set of svg or png images in a zip, add <code>jszip.min.js</code> and <code>FileSaver.min.js</code> to the imports</p>
    
@@ -92,6 +96,7 @@
 # text = # how { di gene- || generation } go be ?//
 # text_en = How will the next gene… generation be?
 # text_ortho = How di gene-... generation go be?
+# shownfeatures = FORM, UPOS, LEMMA, MISC.Gloss, FEATS.PronType, FEATS.Aspect
 1	#	#	PUNCT	_	_	2	punct	_	AlignBegin=85160|AlignEnd=85800|Gloss=PUNCT
 2	how	how	ADV	_	PronType=Int	0	root	10:@mod	AlignBegin=85800|AlignEnd=86049|Gloss=how.Q
 3	{	{	PUNCT	_	_	5	punct	_	AlignBegin=86049|AlignEnd=86079|Gloss=PUNCT
