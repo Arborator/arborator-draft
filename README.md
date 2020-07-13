@@ -17,6 +17,7 @@ Check out how it looks by downloading the whole folder and opening example_arbor
 - Arborator Draft handles CoNLL-U files, including features and extended dependency relations.
 - The raw CoNLL data can be shown
 - Each dependency tree can be downloaded as svg or png image file.
+- You decide globally or on a per tree basis which features appear under the token. Simply add such metafeatures to your conll: # shownfeatures = FORM, UPOS, LEMMA, MISC.Gloss, FEATS.ExtPos
 - Arborator Draft is used in the [Surface-Syntactic Universal Dependencies annotation guidelines](https://surfacesyntacticud.github.io/guidelines/u/)
 
 ## Usage 
